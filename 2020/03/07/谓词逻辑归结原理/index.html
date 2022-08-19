@@ -18,12 +18,12 @@
   
   
   <title>谓词逻辑归结原理 | Hexo</title>
-  <meta name="description" content="归结法基本原理归结法的基本原理是采用反证法（也称反演推理法）将待证明的表达式（定理）转换成为逻辑公式（谓词公式），然后再进行归结，归结能够顺利完成，证明原公式（定理）是正确的。  $def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立    这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗">
+  <meta name="description" content="归结法基本原理归结法的基本原理是采用反证法（也称反演推理法）将待证明的表达式（定理）转换成为逻辑公式（谓词公式），然后再进行归结，归结能够顺利完成，证明原公式（定理）是正确的。  $def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立   这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗来">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谓词逻辑归结原理">
 <meta property="og:url" content="https://ccyh.xyz/2020/03/07/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="虚怀若谷">
-<meta property="og:description" content="归结法基本原理归结法的基本原理是采用反证法（也称反演推理法）将待证明的表达式（定理）转换成为逻辑公式（谓词公式），然后再进行归结，归结能够顺利完成，证明原公式（定理）是正确的。  $def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立    这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗">
+<meta property="og:description" content="归结法基本原理归结法的基本原理是采用反证法（也称反演推理法）将待证明的表达式（定理）转换成为逻辑公式（谓词公式），然后再进行归结，归结能够顺利完成，证明原公式（定理）是正确的。  $def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立   这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗来">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307122016949.png">
 <meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307040000676.png">
@@ -406,11 +406,12 @@
 <p>$def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立</p>
 </blockquote>
 <!-- more -->
-
 <p>这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗来讲，若要证明定理：张三是个好人。可以反向证明定理：张三不是个好人那是不可能的。</p>
 <p>用符号公式表示就是:</p>
 <blockquote>
-<p>待证定理：$P \Rightarrow Q$<br>置换转换为普通谓词公式:<br>$$<br>P \rightarrow Q \Leftrightarrow \neg P\vee Q<br>$$<br>再将其否定：$\neg(\neg P\vee Q) \Leftrightarrow P\wedge \neg Q$<br>即证明 $P\wedge \neg Q$ 为永假式</p>
+<p>待证定理：$P \Rightarrow Q$<br>置换转换为普通谓词公式:</p>
+<script type="math/tex; mode=display">
+P \rightarrow Q \Leftrightarrow \neg P\vee Q</script><p>再将其否定：$\neg(\neg P\vee Q) \Leftrightarrow P\wedge \neg Q$<br>即证明 $P\wedge \neg Q$ 为永假式</p>
 </blockquote>
 <p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307122016949.png" alt="归结演绎推理的思路"></p>
 <h2 id="子句集"><a href="#子句集" class="headerlink" title="子句集"></a>子句集</h2><p>为了描述子句集，先给出如下几个名词的定义：</p>
@@ -425,7 +426,9 @@
 <li>空子句：不包含任何文字的子句</li>
 <li>子句集：所有子句的集合</li>
 </ul>
-<p><strong>例1：</strong> 将下列谓词公式化为子句集<br>$$<br>\forall x (\forall yP(x,y) \rightarrow \neg \forall y(Q(x,y)\rightarrow R(x,y)))<br>$$<br>A. 利用一下公式消去谓词公式中的$\rightarrow$ 和 $\leftrightarrow$ 符号</p>
+<p><strong>例1：</strong> 将下列谓词公式化为子句集</p>
+<script type="math/tex; mode=display">
+\forall x (\forall yP(x,y) \rightarrow \neg \forall y(Q(x,y)\rightarrow R(x,y)))</script><p>A. 利用一下公式消去谓词公式中的$\rightarrow$ 和 $\leftrightarrow$ 符号</p>
 <blockquote>
 <p>$P\rightarrow Q\Leftrightarrow \neg P\vee Q,P\leftrightarrow Q\Leftrightarrow (P\wedge Q)\vee (\neg P\wedge \neg Q)$</p>
 </blockquote>
@@ -435,14 +438,14 @@
 </blockquote>
 <p>$\color{red}{\Longleftrightarrow} \forall x(\exists y\neg P(x,y)\vee \exists y(Q(x,y)\wedge \neg R(x,y)))$<br>C. 变量标准化(变元易名)</p>
 <blockquote>
-<p>$\exists xP(x) &#x3D; \exists yP(y),\forall xP(x) &#x3D; \forall yP(y)$</p>
+<p>$\exists xP(x) = \exists yP(y),\forall xP(x) = \forall yP(y)$</p>
 </blockquote>
 <p>$\color{red}{\Longleftrightarrow} \forall x(\exists y\neg P(x,y)\vee \exists \color{green}{z}(Q(x,\color{green}{z})\wedge \neg R(x,\color{green}{z})))$</p>
 <p>D. 消去存在量词（两种情况）</p>
 <blockquote>
-<p>$a.$ 存在量词不出现在全称量词的辖域内<br>$b.$ 存在量词出现在一个或者多个全称量词的辖域内<br>对于一般情况：<br>$\forall x_1(\forall x_2(\cdots \forall x_n(\exists yP(x_1,x_2,\cdots ,x_n,y)))\cdots)$<br>存在量词 $y$ 的Skolem函数为 $y&#x3D;f(x_1,x_2,\cdots ,x_n)$<br>Skolem化：用Slolem函数代替每个存在量词化的变量的过程</p>
+<p>$a.$ 存在量词不出现在全称量词的辖域内<br>$b.$ 存在量词出现在一个或者多个全称量词的辖域内<br>对于一般情况：<br>$\forall x_1(\forall x_2(\cdots \forall x_n(\exists yP(x_1,x_2,\cdots ,x_n,y)))\cdots)$<br>存在量词 $y$ 的Skolem函数为 $y=f(x_1,x_2,\cdots ,x_n)$<br>Skolem化：用Slolem函数代替每个存在量词化的变量的过程</p>
 </blockquote>
-<p>如本例中两个存在量词 $y,z$ 只收到全称量词 $x$ 的约束，因此可以令：$y &#x3D; f(x),z &#x3D; g(x)$<br>$\color{red}{\Longleftrightarrow} \forall x(\neg P(x,\color{green}{f(x)})\vee (Q(x,\color{green}{g(x)})\wedge \neg R(x,\color{green}{g(x)})))$</p>
+<p>如本例中两个存在量词 $y,z$ 只收到全称量词 $x$ 的约束，因此可以令：$y = f(x),z = g(x)$<br>$\color{red}{\Longleftrightarrow} \forall x(\neg P(x,\color{green}{f(x)})\vee (Q(x,\color{green}{g(x)})\wedge \neg R(x,\color{green}{g(x)})))$</p>
 <p>E. 化为前束范式（本例中到此式子已经满足前束范式标准了）</p>
 <p>$\color{red}{\Longleftrightarrow} \forall x(\neg P(x,\color{green}{f(x)})\vee (Q(x,\color{green}{g(x)})\wedge \neg R(x,\color{green}{g(x)})))$</p>
 <p>F. 化为 $Skolem$ 标准型</p>
@@ -451,8 +454,8 @@
 </blockquote>
 <p>$\color{red}{\Longleftrightarrow} \forall x((\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}))\wedge (\neg P(x,\color{green}{f(x)})\vee \neg R(x,\color{green}{g(x)})))$</p>
 <p>G. 略去全称量词<br>$\color{red}{\Longleftrightarrow} ((\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}))\wedge (\neg P(x,\color{green}{f(x)})\vee \neg R(x,\color{green}{g(x)})))$</p>
-<p>H. 消去合取词,成为一个子句集合（析取句的集合）<br>$\color{red}{\Longleftrightarrow} {(\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}), \neg P(x,\color{green}{f(x)})\vee \neg R(x,\color{green}{g(x)})}$</p>
-<p>I. 子句变量的标准化（不同子句用不同变元）<br>$\color{red}{\Longleftrightarrow} {(\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}), \neg P(y,\color{green}{f(y)})\vee \neg R(y,\color{green}{g(y)})}$</p>
+<p>H. 消去合取词,成为一个子句集合（析取句的集合）<br>$\color{red}{\Longleftrightarrow} \{(\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}), \neg P(x,\color{green}{f(x)})\vee \neg R(x,\color{green}{g(x)})\}$</p>
+<p>I. 子句变量的标准化（不同子句用不同变元）<br>$\color{red}{\Longleftrightarrow} \{(\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}), \neg P(y,\color{green}{f(y)})\vee \neg R(y,\color{green}{g(y)})\}$</p>
 <hr>
 <h2 id="鲁滨逊归结原理-判别子句集的不可满足性"><a href="#鲁滨逊归结原理-判别子句集的不可满足性" class="headerlink" title="鲁滨逊归结原理(判别子句集的不可满足性)"></a>鲁滨逊归结原理(判别子句集的不可满足性)</h2><blockquote>
 <p>出发点：由于子句集当中的子句之间的关系是合取关系，因此只要有一个子句不可满足，则整个子句集就不可满足。</p>
@@ -465,9 +468,11 @@
 </ul>
 <p><strong>命题逻辑中的归结原理：</strong><br>$Def:$ 归结指的是，设$C_1$与$C_2$是子句集中的任意两个句子，如果$C_1$中的文字$L_1$与$C_2$中的文字$L_2$互补(同一谓词的正负文字)，那么从$C_1$与$C_2$中分别消去$L_1$和$L_2$, 并将两个子句中余下的部分 <strong>析取</strong>，构成一个新的子句 $C12$。<br>$Def:$ 归结式$C12$是其亲本子句$C_1$和$C_2$的逻辑结论。即如果$C_1$与$C_2$为真，则$C12$为真。<br><strong>推论1：</strong> 由$C12$代替$C_1$和$C_2$后的新的子句集$S_1$的不可满足性也可代表原子句集的不可满足性（单向的）。<br><strong>推论2：</strong> 若不作代替，直接将$C12$加入原子句集$S$得到新的子句集$S_2$,则$S$与$S_2$在不可满足的意义上是等价的（双向的）。</p>
 <p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307040000676.png" alt="子句归结"></p>
-<h3 id="⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）"><a href="#⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）" class="headerlink" title="⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）"></a>⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）</h3><p>&amp;emsp;谓词逻辑的归结比命题逻辑的归结要复杂得多，其中一个原因就是谓词逻辑公式中含有个体变量与函数。因此寻找互补的子句的过程就比较复杂。例如：<br>$$<br>P(x)\vee Q(y)\qquad and \qquad \neg P(a)\vee R(z)<br>$$<br>就不易从直接比较中发现这两个子句中含有的互补对，但如果将$x$取值为$a$,这很显然这两个句子中有互补对。</p>
+<h3 id="⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）"><a href="#⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）" class="headerlink" title="⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）"></a>⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）</h3><p>&emsp;谓词逻辑的归结比命题逻辑的归结要复杂得多，其中一个原因就是谓词逻辑公式中含有个体变量与函数。因此寻找互补的子句的过程就比较复杂。例如：</p>
+<script type="math/tex; mode=display">
+P(x)\vee Q(y)\qquad and \qquad \neg P(a)\vee R(z)</script><p>就不易从直接比较中发现这两个子句中含有的互补对，但如果将$x$取值为$a$,这很显然这两个句子中有互补对。</p>
 <h4 id="置换与合一：（对个体变量做适当替换）"><a href="#置换与合一：（对个体变量做适当替换）" class="headerlink" title="置换与合一：（对个体变量做适当替换）"></a>置换与合一：（对个体变量做适当替换）</h4><p><strong>置换：</strong> 将子句中的变量做适当替换，可替换成常量、变量、Skolem函数。<br><strong>合一：</strong> 寻找相对变量的置换，使两个谓词公式一致</p>
-<p><strong>如：</strong> $C_1&#x3D;P(x)\vee Q(a), C_2&#x3D;\neg P(b)\vee R(x)$<br>解：<br>$\sigma &#x3D; f(a)&#x2F;x $; $x$ 用$f(a)$替换<br>$C_1\sigma &#x3D; P(f(a))\vee Q(f(a))$,<br>选互补对：$L_1&#x3D;P(f(a)),L_2&#x3D;\neg P(y), \sigma &#x3D;  f(a)&#x2F;y $<br>得归结式：$C_12&#x3D;R(b)\vee Q(f(a))$</p>
+<p><strong>如：</strong> $C_1=P(x)\vee Q(a), C_2=\neg P(b)\vee R(x)$<br>解：<br>$\sigma = f(a)/x $; $x$ 用$f(a)$替换<br>$C_1\sigma = P(f(a))\vee Q(f(a))$,<br>选互补对：$L_1=P(f(a)),L_2=\neg P(y), \sigma =  f(a)/y $<br>得归结式：$C_12=R(b)\vee Q(f(a))$</p>
 
       
     </div>
@@ -701,5 +706,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

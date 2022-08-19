@@ -406,47 +406,53 @@
 <li>$EG$(存在量词引入规则)：$A(c)\Rightarrow \exists xA(x)$</li>
 </ol>
 </blockquote>
-<p><strong>例1：</strong> 构造下列推理的证明<br>&lt;1&gt; 前提：$\forall x(F(x)\rightarrow G(x)),\forall xF(x)$<br>结论：$\forall xG(x)$</p>
+<p><strong>例1：</strong> 构造下列推理的证明</p>
+<p><1> 前提：$\forall x(F(x)\rightarrow G(x)),\forall xF(x)$<br>结论：$\forall xG(x)$</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">步骤</th>
-<th align="center">公式</th>
-<th align="left">理由</th>
+<th style="text-align:left">步骤</th>
+<th style="text-align:center">公式</th>
+<th style="text-align:left">理由</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">1</td>
-<td align="center">$\forall x(F(x)\rightarrow G(x))$</td>
-<td align="left">前提引入</td>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:center">$\forall x(F(x)\rightarrow G(x))$</td>
+<td style="text-align:left">前提引入</td>
 </tr>
 <tr>
-<td align="left">2</td>
-<td align="center">$F(c)\rightarrow G(c)$</td>
-<td align="left">1，$UI$</td>
+<td style="text-align:left">2</td>
+<td style="text-align:center">$F(c)\rightarrow G(c)$</td>
+<td style="text-align:left">1，$UI$</td>
 </tr>
 <tr>
-<td align="left">3</td>
-<td align="center">$\forall xF(x)$</td>
-<td align="left">前提引入</td>
+<td style="text-align:left">3</td>
+<td style="text-align:center">$\forall xF(x)$</td>
+<td style="text-align:left">前提引入</td>
 </tr>
 <tr>
-<td align="left">4</td>
-<td align="center">$F(c)$</td>
-<td align="left">3，$UI$</td>
+<td style="text-align:left">4</td>
+<td style="text-align:center">$F(c)$</td>
+<td style="text-align:left">3，$UI$</td>
 </tr>
 <tr>
-<td align="left">5</td>
-<td align="center">$G(c)$</td>
-<td align="left">2，4，假言推理</td>
+<td style="text-align:left">5</td>
+<td style="text-align:center">$G(c)$</td>
+<td style="text-align:left">2，4，假言推理</td>
 </tr>
 <tr>
-<td align="left">6</td>
-<td align="center">$\forall xG(x)$</td>
-<td align="left">5，$UG$</td>
+<td style="text-align:left">6</td>
+<td style="text-align:center">$\forall xG(x)$</td>
+<td style="text-align:left">5，$UG$</td>
 </tr>
-</tbody></table>
-<p>&lt;2&gt; 用归谬法(反证法)证明下列推理<br>前提：$\forall x(F(x)\vee G(x)),\neg \exists xG(x)$<br>结论：$\exists xF(x)$</p>
+</tbody>
+</table>
+</div>
+<p><2> 用归谬法(反证法)证明下列推理<br>前提：$\forall x(F(x)\vee G(x)),\neg \exists xG(x)$<br>结论：$\exists xF(x)$</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -455,7 +461,8 @@
 <th>理由</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>$\neg \exists xF(x)$</td>
 <td>附加前提引入，假设结论不成立</td>
@@ -505,7 +512,9 @@
 <td>$\neg F(c)\wedge F(c)$</td>
 <td>3，9 ，合取(出现矛盾，假设不成立❌)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <hr>
 <p><strong>例2：</strong> ⭐️证明下述论断的正确性</p>
 <ul>
@@ -520,6 +529,7 @@
 <li>$r(x)$: $x$ 是胎生动物</li>
 </ul>
 <p>前提：$\forall x(p(x)\rightarrow q(x)),\neg \forall x(p(x)\rightarrow r(x))$<br>结论：$\exists x(q(x)\wedge \neg r(x))$</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -528,7 +538,8 @@
 <th>理由</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>$\neg \forall x(p(x)\rightarrow r(x))$</td>
 <td>前提引入</td>
@@ -588,7 +599,9 @@
 <td>$\exists x(q(x)\wedge \neg r(x))$✔️</td>
 <td>11，$EG$存在量词引入</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -822,5 +835,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

@@ -18,20 +18,20 @@
   
   
   <title>【算法】全排列问题 | Hexo</title>
-  <meta name="description" content="算法思想： 设定一个数组p用来存放当前排列，并用一个数组Hash用来标记已填入p中的数字。按顺序将数字填入数组p中的第0位置第Max-1位，现在假设已经填好了p[0]p[index-1]，正准备将数字填入index位置，若index位置未及Max（数组边界），则枚举0Max-1；判断是否有数字未填入，若有则将其填入p中，同时在Hash中将该数字置为已填入。其后继续填入下一个位置index+1；当">
+  <meta name="description" content="算法思想： 设定一个数组p用来存放当前排列，并用一个数组Hash用来标记已填入p中的数字。按顺序将数字填入数组p中的第0位置第Max-1位，现在假设已经填好了p[0]~p[index-1]，正准备将数字填入index位置，若index位置未及Max（数组边界），则枚举0~Max-1；判断是否有数字未填入，若有则将其填入p中，同时在Hash中将该数字置为已填入。其后继续填入下一个位置index+1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【算法】全排列问题">
 <meta property="og:url" content="https://ccyh.xyz/2019/03/13/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%85%A8%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98(C++)/index.html">
 <meta property="og:site_name" content="虚怀若谷">
-<meta property="og:description" content="算法思想： 设定一个数组p用来存放当前排列，并用一个数组Hash用来标记已填入p中的数字。按顺序将数字填入数组p中的第0位置第Max-1位，现在假设已经填好了p[0]p[index-1]，正准备将数字填入index位置，若index位置未及Max（数组边界），则枚举0Max-1；判断是否有数字未填入，若有则将其填入p中，同时在Hash中将该数字置为已填入。其后继续填入下一个位置index+1；当">
+<meta property="og:description" content="算法思想： 设定一个数组p用来存放当前排列，并用一个数组Hash用来标记已填入p中的数字。按顺序将数字填入数组p中的第0位置第Max-1位，现在假设已经填好了p[0]~p[index-1]，正准备将数字填入index位置，若index位置未及Max（数组边界），则枚举0~Max-1；判断是否有数字未填入，若有则将其填入p中，同时在Hash中将该数字置为已填入。其后继续填入下一个位置index+1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://ccyh.xyz/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%85%A8%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98(C++)/20190313012239824.png">
+<meta property="og:image" content="https://ccyh.xyz/【算法】全排列问题(C++">
 <meta property="article:published_time" content="2019-03-13T04:32:26.000Z">
 <meta property="article:modified_time" content="2022-08-19T12:41:07.700Z">
 <meta property="article:author" content="Daniel Lin">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ccyh.xyz/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%85%A8%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98(C++)/20190313012239824.png">
+<meta name="twitter:image" content="https://ccyh.xyz/【算法】全排列问题(C++">
   <!-- Canonical links -->
   <link rel="canonical" href="https://ccyh.xyz/2019/03/13/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%85%A8%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98(C++)/index.html">
   
@@ -401,10 +401,10 @@
       
         <span id="more"></span>
 <h4 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h4><blockquote>
-<p>设定一个数组p用来存放当前排列，并用一个数组Hash用来标记已填入p中的数字。<br>按顺序将数字填入数组p中的第0位置第Max-1位，现在假设已经填好了p[0]<del>p[index-1]，正准备将数字填入index位置，若index位置未及Max（数组边界），则枚举0</del>Max-1；判断是否有数字未填入，若有则将其填入p中，同时在Hash中将该数字置为已填入。其后继续填入下一个位置index+1；当递归完成时，将Hash[i]还原为false（将i置为未填入）。</p>
+<p>设定一个数组p用来存放当前排列，并用一个数组Hash用来标记已填入p中的数字。<br>按顺序将数字填入数组p中的第0位置第Max-1位，现在假设已经填好了p[0]~p[index-1]，正准备将数字填入index位置，若index位置未及Max（数组边界），则枚举0~Max-1；判断是否有数字未填入，若有则将其填入p中，同时在Hash中将该数字置为已填入。其后继续填入下一个位置index+1；当递归完成时，将Hash[i]还原为false（将i置为未填入）。</p>
 </blockquote>
 <h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Max 10</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//列举从0到Max-1的全排列</span></span><br><span class="line"><span class="type">int</span> p[Max];<span class="comment">//保存当前排列</span></span><br><span class="line"><span class="type">bool</span> Hash[Max] = &#123;<span class="literal">false</span>&#125;;<span class="comment">//标记i是否已填入p中，是为真，否为假；</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">generate_x</span><span class="params">(<span class="type">int</span> index)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(index == Max)<span class="comment">//递归边界，已生成一种排列可能</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; Max;i++)<span class="comment">//输出该排列</span></span><br><span class="line">		&#123;</span><br><span class="line">			cout &lt;&lt; p[i] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; endl;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; Max;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(Hash[i] == <span class="literal">false</span>)<span class="comment">//判断i是否还未已填入p中</span></span><br><span class="line">		&#123;</span><br><span class="line">			p[index] = i;<span class="comment">//填入</span></span><br><span class="line">			Hash[i] = <span class="literal">true</span>;<span class="comment">//标记已填入</span></span><br><span class="line">			<span class="built_in">generate_x</span>(index+<span class="number">1</span>);<span class="comment">//填写下一个数</span></span><br><span class="line">			Hash[i] = <span class="literal">false</span>;<span class="comment">//处理完P[index] = i 的子问题，还原状态</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">generate_x</span>(<span class="number">0</span>);<span class="comment">//从0开始填入</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h4><p><img src="/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%85%A8%E6%8E%92%E5%88%97%E9%97%AE%E9%A2%98(C++)/20190313012239824.png"></p>
+<h4 id="输出结果："><a href="#输出结果：" class="headerlink" title="输出结果："></a>输出结果：</h4><p><img src="/【算法】全排列问题(C++" alt="">/20190313012239824.png)</p>
 
       
     </div>
@@ -638,5 +638,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

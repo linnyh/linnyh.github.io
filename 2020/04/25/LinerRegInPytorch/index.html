@@ -18,12 +18,12 @@
   
   
   <title>【Pytorch基础】Pytorch实现线性模型 | Hexo</title>
-  <meta name="description" content="回顾&amp;emsp;之前我们用纯python实现了一个线性模型。现在，以第一篇文章的例子来，试着用 Pytorch 提供的工具来实现一个线性模型。  Pytorch 写神经网络的套路 准备数据集 设计模型类（用来计算 $\hat{y}$） 构造损失函数和优化器（optmizer） 训练模型： 前馈计算Loss 反向传播Loss （梯度下降算法） 更新    开始1.准备数据集： &amp;">
+  <meta name="description" content="回顾&amp;emsp;之前我们用纯python实现了一个线性模型。现在，以第一篇文章的例子来，试着用 Pytorch 提供的工具来实现一个线性模型。  Pytorch 写神经网络的套路 准备数据集 设计模型类（用来计算 $\hat{y}$） 构造损失函数和优化器（optmizer） 训练模型： 前馈计算Loss 反向传播Loss （梯度下降算法） 更新    开始1.准备数据集： &amp;emsp;在pyt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Pytorch基础】Pytorch实现线性模型">
 <meta property="og:url" content="https://ccyh.xyz/2020/04/25/LinerRegInPytorch/index.html">
 <meta property="og:site_name" content="虚怀若谷">
-<meta property="og:description" content="回顾&amp;emsp;之前我们用纯python实现了一个线性模型。现在，以第一篇文章的例子来，试着用 Pytorch 提供的工具来实现一个线性模型。  Pytorch 写神经网络的套路 准备数据集 设计模型类（用来计算 $\hat{y}$） 构造损失函数和优化器（optmizer） 训练模型： 前馈计算Loss 反向传播Loss （梯度下降算法） 更新    开始1.准备数据集： &amp;">
+<meta property="og:description" content="回顾&amp;emsp;之前我们用纯python实现了一个线性模型。现在，以第一篇文章的例子来，试着用 Pytorch 提供的工具来实现一个线性模型。  Pytorch 写神经网络的套路 准备数据集 设计模型类（用来计算 $\hat{y}$） 构造损失函数和优化器（optmizer） 训练模型： 前馈计算Loss 反向传播Loss （梯度下降算法） 更新    开始1.准备数据集： &amp;emsp;在pyt">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425055900575.png">
 <meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425081758930.png">
@@ -393,9 +393,8 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <span id="more"></span>
-
-<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>&amp;emsp;之前我们用纯python实现了一个线性模型。现在，以第一篇文章的例子来，试着用 Pytorch 提供的工具来实现一个线性模型。</p>
-<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425055900575.png"></p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>&emsp;之前我们用纯python实现了一个线性模型。现在，以第一篇文章的例子来，试着用 Pytorch 提供的工具来实现一个线性模型。</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425055900575.png" alt=""></p>
 <h2 id="Pytorch-写神经网络的套路"><a href="#Pytorch-写神经网络的套路" class="headerlink" title="Pytorch 写神经网络的套路"></a>Pytorch 写神经网络的套路</h2><ul>
 <li>准备数据集</li>
 <li>设计模型类（用来计算 $\hat{y}$）</li>
@@ -408,29 +407,22 @@
 </li>
 </ul>
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p><strong>1.准备数据集：</strong></p>
-<p>&amp;emsp;在pytorch中，采用的是小批量地图下降算法，因此，$X$ 和 $\hat{Y}$ 是一个多维的 Tensor. 展开后的模型为：</p>
-<p>$$\begin{bmatrix} \hat{y}_1 \ \hat{y}_2 \ \hat{y}_3 \ \dots \ \end{bmatrix} &#x3D; w \cdot \begin{bmatrix} x_1 \ x_2 \ x_3 \ \dots \ \end{bmatrix} + b$$</p>
-<p>上式的” $\cdot$ “ 表示的是数乘，要与矩阵乘法 “ $\times$ “ 区分开来。$w \cdot \begin{bmatrix} x_1 \ x_2 \ x_3 \ \dots \ \end{bmatrix}$会触发广播机制:</p>
-<p>$$w \Rightarrow \begin{bmatrix} w \ w \ w \ \dots \ \end{bmatrix}$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> th</span><br><span class="line">x_data = th.Tensor([[<span class="number">1.0</span>],[<span class="number">2.0</span>],[<span class="number">3.0</span>]]) <span class="comment"># 3 * 1 矩阵</span></span><br><span class="line">y_data = th.Tensor([[<span class="number">2.0</span>],[<span class="number">4.0</span>],[<span class="number">6.0</span>]])</span><br></pre></td></tr></table></figure>
-
+<p>&emsp;在pytorch中，采用的是小批量地图下降算法，因此，$X$ 和 $\hat{Y}$ 是一个多维的 Tensor. 展开后的模型为：</p>
+<script type="math/tex; mode=display">\begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \hat{y}_3 \\ \dots \\ \end{bmatrix} = w \cdot \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ \dots \\ \end{bmatrix} + b</script><p>上式的” $\cdot$ “ 表示的是数乘，要与矩阵乘法 “ $\times$ “ 区分开来。$w \cdot \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ \dots \\ \end{bmatrix}$会触发广播机制:</p>
+<script type="math/tex; mode=display">w \Rightarrow \begin{bmatrix} w \\ w \\ w \\ \dots \\ \end{bmatrix}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch <span class="keyword">as</span> th</span><br><span class="line">x_data = th.Tensor([[<span class="number">1.0</span>],[<span class="number">2.0</span>],[<span class="number">3.0</span>]]) <span class="comment"># 3 * 1 矩阵</span></span><br><span class="line">y_data = th.Tensor([[<span class="number">2.0</span>],[<span class="number">4.0</span>],[<span class="number">6.0</span>]])</span><br></pre></td></tr></table></figure>
 <p><strong>2. 定义模型类：</strong></p>
-<p>&amp;emsp;模型类中 <strong>init</strong> 函数与 forward 函数时必须实现的。反而 backward 函数无需定义，因为torch会根据计算图自动计算梯度。但是如果你认为默认的梯度计算性能不佳可以自己对torch内的Function类中实现的反向传播功能进行重载。</p>
+<p>&emsp;模型类中 <strong>init</strong> 函数与 forward 函数时必须实现的。反而 backward 函数无需定义，因为torch会根据计算图自动计算梯度。但是如果你认为默认的梯度计算性能不佳可以自己对torch内的Function类中实现的反向传播功能进行重载。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LinearModel</span>(th.nn.Module): <span class="comment"># 必须继承自torch自带的模型基类nn.Module （nn == neural netword）</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>): <span class="comment"># 构造函数</span></span><br><span class="line">        <span class="built_in">super</span>(LinearModel, self).__init__() <span class="comment"># 调用父类的构造函数</span></span><br><span class="line">        self.linear = th.nn.Linear(<span class="number">1</span>,<span class="number">1</span>) <span class="comment"># 构造一个th.nn.Linear 类（同样继承自Module,是内置的线性单元Linear Unit）的对象，该类包含了权重和偏置两个Tensor</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>): <span class="comment"># 重载模型函数，必须要叫 forward, 用于前馈计算</span></span><br><span class="line">        y_pred = self.linear(x) <span class="comment"># linear 为一个可调用callable对象，他在类内实现了 __call__(self, *args, **kwargs) 函数， 实现前馈计算</span></span><br><span class="line">        <span class="keyword">return</span> y_pred</span><br><span class="line">    </span><br><span class="line">model = LinearModel() <span class="comment"># 创建实例，model 也是一个可调用对象</span></span><br></pre></td></tr></table></figure>
-
 <p>model 对象大致结构如下：</p>
-<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425081758930.png"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425081758930.png" alt=""></p>
 <p>文档：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/nn.html?highlight=torch%20nn%20linear#torch.nn.Linear">torch.nn.Linear</a></li>
 </ul>
 <p><strong>3. 构造损失函数和优化器：</strong></p>
-<p>&amp;emsp;当我们计算得到预测值 $\begin{bmatrix} \hat{y}_1 \ \hat{y}_2 \ \hat{y}_3 \ \dots \ \end{bmatrix}$ 后, 根据$Loss &#x3D; (\hat{Y}- Y)^2$得损失为：</p>
-<p>$$ \begin{bmatrix} loss_1 \ loss_2 \ loss_3 \ \dots \ \end{bmatrix} &#x3D; \left( \begin{bmatrix} \hat{y}_1 \ \hat{y}_2 \ \hat{y}_3 \ \dots \ \end{bmatrix} - \begin{bmatrix} y_1 \ y_2 \ y_3 \ \dots \ \end{bmatrix} \right) ** 2 ,\text{（点方）}$$</p>
-<p>又因为之后必须对Loss求导，故Loss值不能是一个矩阵向量，要将其内所有元素进行累加求和求均值成为一个标量:</p>
-<p>$$Loss &#x3D; \frac{1}{N} \sum \left( \begin{bmatrix} loss_1 \ loss_2 \ loss_3 \ \dots \ \end{bmatrix} \right)$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构造损失函数和优化器</span></span><br><span class="line"><span class="comment"># 损失函数用MSELoss类（继承自Module），得到一个损失向量，需要再求和取平均（这里不求均值）得到Loss标量值</span></span><br><span class="line">criterion = th.nn.MSELoss(reduction=<span class="string">&#x27;sum&#x27;</span>) </span><br><span class="line"><span class="comment"># 随机梯度下降算法，实例化SGD类，其中model.paramenters 会调用 model.linear.paramaters 来告诉优化器应该调整的权重；lr 为学习率</span></span><br><span class="line">optimizer = th.optim.SGD(model.parameters(), lr = <span class="number">0.01</span>) </span><br></pre></td></tr></table></figure>
-
+<p>&emsp;当我们计算得到预测值 $\begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \hat{y}_3 \\ \dots \\ \end{bmatrix}$ 后, 根据$Loss = (\hat{Y}- Y)^2$得损失为：</p>
+<script type="math/tex; mode=display">\begin{bmatrix} loss_1 \\ loss_2 \\ loss_3 \\ \dots \\ \end{bmatrix} = \left( \begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \hat{y}_3 \\ \dots \\ \end{bmatrix} - \begin{bmatrix} y_1 \\ y_2 \\ y_3 \\ \dots \\ \end{bmatrix} \right) ** 2 ,\text{（点方）}</script><p>又因为之后必须对Loss求导，故Loss值不能是一个矩阵向量，要将其内所有元素进行累加求和求均值成为一个标量:</p>
+<script type="math/tex; mode=display">Loss = \frac{1}{N} \sum \left( \begin{bmatrix} loss_1 \\ loss_2 \\ loss_3 \\ \dots \\ \end{bmatrix} \right)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构造损失函数和优化器</span></span><br><span class="line"><span class="comment"># 损失函数用MSELoss类（继承自Module），得到一个损失向量，需要再求和取平均（这里不求均值）得到Loss标量值</span></span><br><span class="line">criterion = th.nn.MSELoss(reduction=<span class="string">&#x27;sum&#x27;</span>) </span><br><span class="line"><span class="comment"># 随机梯度下降算法，实例化SGD类，其中model.paramenters 会调用 model.linear.paramaters 来告诉优化器应该调整的权重；lr 为学习率</span></span><br><span class="line">optimizer = th.optim.SGD(model.parameters(), lr = <span class="number">0.01</span>) </span><br></pre></td></tr></table></figure>
 <p><strong>Pytorch中其他的优化器：</strong></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/optim.html?highlight=torch%20optim%20adagrad#torch.optim.Adagrad">torch.optim.Adagrad</a></li>
@@ -448,14 +440,11 @@
 </ul>
 <p><strong>4. 模型训练：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">w_list = []</span><br><span class="line">loss_list = []</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    y_pred = model(x_data) <span class="comment"># 计算预测值</span></span><br><span class="line">    loss = criterion(y_pred,y_data) <span class="comment"># 计算损失值（标量对象）</span></span><br><span class="line">    <span class="built_in">print</span>(epoch,loss) <span class="comment"># 打印loss对象会自动调用loss.__str__(),就不会产生一个计算图</span></span><br><span class="line">    </span><br><span class="line">    w_list.append(model.linear.weight.item())</span><br><span class="line">    loss_list.append(<span class="built_in">float</span>(loss))</span><br><span class="line">    </span><br><span class="line">    optimizer.zero_grad() <span class="comment"># 梯度归零</span></span><br><span class="line">    loss.backward() <span class="comment"># 反向传播</span></span><br><span class="line">    optimizer.step() <span class="comment"># 更新参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练后的参数值</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;w = &#x27;</span>,model.linear.weight.item())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;b = &#x27;</span>,model.linear.bias.item())</span><br><span class="line"><span class="comment"># 训练后预测</span></span><br><span class="line">x_test = th.Tensor([[<span class="number">4.0</span>]])</span><br><span class="line">y_test = model(x_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;y_pred = &#x27;</span>,y_test.data.item())</span><br></pre></td></tr></table></figure>
-
 <p>最终预测：</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">w</span> <span class="string">=</span>  <span class="number">1.9994629621505737</span></span><br><span class="line"><span class="string">b</span> <span class="string">=</span>  <span class="number">0.0012208453845232725</span></span><br><span class="line"><span class="string">y_pred</span> <span class="string">=</span>  <span class="number">7.999072551727295</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>5. 打印查看收敛过程：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘图(权重与平均损失的关系)</span></span><br><span class="line">plt.plot(w_list, loss_list)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;cost&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;W&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425090416601.png"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/LinerRegInPytorch/20200425090416601.png" alt=""></p>
 
       
     </div>
@@ -681,5 +670,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

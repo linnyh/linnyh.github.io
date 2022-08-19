@@ -408,62 +408,89 @@
 <p><strong>方法贡献：</strong></p>
 <ul>
 <li>提出了一种有效的<strong>上下文层次注意网络</strong>，以充分利用对话历史中的相关上下文，并采用<strong>状态转换预测</strong>任务来进一步增强它。</li>
-<li>设计了一个<strong>自适应的目标</strong>来动态地调整每个槽的权重解决槽不平衡问题，并且该方法是第一个解决DST中的槽不平衡问题的方法。<!-- more --></li>
+<li>设计了一个<strong>自适应的目标</strong>来动态地调整每个槽的权重解决槽不平衡问题，并且该方法是第一个解决DST中的槽不平衡问题的方法。<!-- more -->
+</li>
 </ul>
 <h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.02002">2017-IEEE-Focal loss for dense object detection</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/D18-1299/">2018-EMNLP-Towards universal dialogue state tracking.</a></li>
 </ul>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085554562.png"></p>
-<h3 id="Contextual-Hierarchical-Attention-Network"><a href="#Contextual-Hierarchical-Attention-Network" class="headerlink" title="Contextual Hierarchical Attention Network"></a><strong>Contextual Hierarchical Attention Network</strong></h3><h4 id="Sentence-Encoder"><a href="#Sentence-Encoder" class="headerlink" title="Sentence Encoder"></a>Sentence Encoder</h4><p>&amp;emsp;利用Bert来编码句子表示 $h_t$:<br>$$<br>h_t &#x3D; BERT_{finetune}([R_t;U_t])<br>$$<br>对于槽$s$和值$v_t$，用另外一个Bert来将他们分别编码为两个上下文语义向量$h^s,h_t^v$, 并使用特殊标记[CLS]的输出向量来获得整个句子的表示形式：<br>$$<br>h^s &#x3D; BERT_{fixed}(s) \<br>h_t^v &#x3D; BERT_{fixed}(v_t)<br>$$</p>
-<h4 id="Slot-Word-Attention"><a href="#Slot-Word-Attention" class="headerlink" title="Slot - Word Attention"></a>Slot - Word Attention</h4><p>&amp;emsp;一个多头注意力模块$MultiHead(Q,K,V)$，对于每个槽，将每个回合$t$的字级槽相关信息汇总为$d$维向量$c_{s,t}^{word}$，其确定如下：<br>$$<br>c_{s,t}^{word} &#x3D; MultiHead(h^s,h_t,h_t)<br>$$</p>
-<h4 id="Context-Encoder"><a href="#Context-Encoder" class="headerlink" title="Context Encoder"></a>Context Encoder</h4><p>&amp;emsp;一个单向Transformer编码器，被用来对${1,…,t}$回合中已经被提取的字级槽相关信息的上下文关系进行建模。它堆叠了$N$个相同的层，如下图所示：</p>
-<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085731746.png"></p>
-<p>首先是一个多头注意力层$MultiHead(Q,K,V)$且令$Q &#x3D; K &#x3D; V$, 然后是一个全连接前馈网络层$FNN$，它由两个线性层组成，激活函数为$ReLU$：<br>$$<br>FNN(x) &#x3D; max(0,xW_1 + b_1)W_2 + b_2<br>$$<br>因此，上下文编码层输出$c_{s,\le t}^{ctx}$的计算过程如下：<br>$$<br>m^n &#x3D; FNN(MultiHead(m^{n-1},m^{n-1},m^{n-1})) \<br>m^0 &#x3D; [c_{s,1}^{word}+PE(1),…,c_{s,t}^{word}+PE(t)] \<br>c_{s,\le t}^{ctx} &#x3D; m^N<br>$$</p>
-<blockquote>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085554562.png" alt=""></p>
+<h3 id="Contextual-Hierarchical-Attention-Network"><a href="#Contextual-Hierarchical-Attention-Network" class="headerlink" title="Contextual Hierarchical Attention Network"></a><strong>Contextual Hierarchical Attention Network</strong></h3><h4 id="Sentence-Encoder"><a href="#Sentence-Encoder" class="headerlink" title="Sentence Encoder"></a>Sentence Encoder</h4><p>&emsp;利用Bert来编码句子表示 $h_t$:</p>
+<script type="math/tex; mode=display">
+h_t = BERT_{finetune}([R_t;U_t])</script><p>对于槽$s$和值$v_t$，用另外一个Bert来将他们分别编码为两个上下文语义向量$h^s,h_t^v$, 并使用特殊标记[CLS]的输出向量来获得整个句子的表示形式：</p>
+<script type="math/tex; mode=display">
+h^s = BERT_{fixed}(s) \\
+h_t^v = BERT_{fixed}(v_t)</script><h4 id="Slot-Word-Attention"><a href="#Slot-Word-Attention" class="headerlink" title="Slot - Word Attention"></a>Slot - Word Attention</h4><p>&emsp;一个多头注意力模块$MultiHead(Q,K,V)$，对于每个槽，将每个回合$t$的字级槽相关信息汇总为$d$维向量$c_{s,t}^{word}$，其确定如下：</p>
+<script type="math/tex; mode=display">
+c_{s,t}^{word} = MultiHead(h^s,h_t,h_t)</script><h4 id="Context-Encoder"><a href="#Context-Encoder" class="headerlink" title="Context Encoder"></a>Context Encoder</h4><p>&emsp;一个单向Transformer编码器，被用来对$\{1,…,t\}$回合中已经被提取的字级槽相关信息的上下文关系进行建模。它堆叠了$N$个相同的层，如下图所示：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085731746.png" alt=""></p>
+<p>首先是一个多头注意力层$MultiHead(Q,K,V)$且令$Q = K = V$, 然后是一个全连接前馈网络层$FNN$，它由两个线性层组成，激活函数为$ReLU$：</p>
+<script type="math/tex; mode=display">
+FNN(x) = max(0,xW_1 + b_1)W_2 + b_2</script><p>因此，上下文编码层输出$c_{s,\le t}^{ctx}$的计算过程如下：</p>
+<script type="math/tex; mode=display">
+m^n = FNN(MultiHead(m^{n-1},m^{n-1},m^{n-1})) \\
+m^0 = [c_{s,1}^{word}+PE(1),...,c_{s,t}^{word}+PE(t)] \\
+c_{s,\le t}^{ctx} = m^N</script><blockquote>
 <p>$m^n$: 第$n$层的输出</p>
 <p>$PE(\cdot)$: 位置嵌入</p>
 <p>$\color{red}{Note}$: 上述公式中省略了残差连接和归一化</p>
 </blockquote>
-<h4 id="Slot-Turn-Attention"><a href="#Slot-Turn-Attention" class="headerlink" title="Slot - Turn Attention"></a>Slot - Turn Attention</h4><p>&amp;emsp;也是一个多头注意力层，被用来从上下文表示中提取出回合级别的相关信息，其计算过程如下：<br>$$<br>c_{s,t}^{turn} &#x3D; MultiHead(h^s,c_{s,\le t}^{ctx},c_{s,\le t}^{ctx})<br>$$<br>因此，该模型可以从历史对话中获取字级和回合级的相关信息。</p>
-<h4 id="Global-Local-Fusion-Gate"><a href="#Global-Local-Fusion-Gate" class="headerlink" title="Global-Local Fusion Gate"></a>Global-Local Fusion Gate</h4><p>&amp;emsp;为了平衡全局上下文和局部话语的信息，本文建议动态控制<strong>上下文信息</strong>和<strong>当前回合信息</strong>的比例，这样模型不仅能从相关上下文中获益，还能在<strong>全局和局部表示之间保持平衡</strong>。利用融合门机制，该机制计算权重，根据$c_{s,t}^{word}$和$c_{s,t}^{turn}$决定应该<strong>组合</strong>多少全局和局部信息。其定义如下：<br>$$<br>g_{s,t} &#x3D; \sigma (W_g \odot [c_{s,t}^{word};c_{s,t}^{turn}]) \<br>c_{s,t}^{gate} &#x3D; g_{s,t} \otimes c_{s,t}^{word} + (1 - g_s,t) \otimes c_{s,t}^{turn}<br>$$</p>
-<blockquote>
+<h4 id="Slot-Turn-Attention"><a href="#Slot-Turn-Attention" class="headerlink" title="Slot - Turn Attention"></a>Slot - Turn Attention</h4><p>&emsp;也是一个多头注意力层，被用来从上下文表示中提取出回合级别的相关信息，其计算过程如下：</p>
+<script type="math/tex; mode=display">
+c_{s,t}^{turn} = MultiHead(h^s,c_{s,\le t}^{ctx},c_{s,\le t}^{ctx})</script><p>因此，该模型可以从历史对话中获取字级和回合级的相关信息。</p>
+<h4 id="Global-Local-Fusion-Gate"><a href="#Global-Local-Fusion-Gate" class="headerlink" title="Global-Local Fusion Gate"></a>Global-Local Fusion Gate</h4><p>&emsp;为了平衡全局上下文和局部话语的信息，本文建议动态控制<strong>上下文信息</strong>和<strong>当前回合信息</strong>的比例，这样模型不仅能从相关上下文中获益，还能在<strong>全局和局部表示之间保持平衡</strong>。利用融合门机制，该机制计算权重，根据$c_{s,t}^{word}$和$c_{s,t}^{turn}$决定应该<strong>组合</strong>多少全局和局部信息。其定义如下：</p>
+<script type="math/tex; mode=display">
+g_{s,t} = \sigma (W_g \odot [c_{s,t}^{word};c_{s,t}^{turn}]) \\
+c_{s,t}^{gate} = g_{s,t} \otimes c_{s,t}^{word} + (1 - g_s,t) \otimes c_{s,t}^{turn}</script><blockquote>
 <p>$W_g\in \R^{2d\times d}$：权重矩阵</p>
 </blockquote>
-<p>最终，将其经过Dropout再用一个线性层投影并经过归一化后获得最终输出：<br>$$<br>o_{s,t} &#x3D; LayerNorm(Linear(Dropout(c_{s,t}^{gate})))<br>$$</p>
-<p>槽值$v_t$的概率分布和训练目标定义为：<br>$$<br>p(v_t|U_{\le t},U&#x3D;R_{\le t},s) &#x3D; \frac{exp(-||o_{s,t}-h_t^v||<em>2)}{\sum</em>{v^{‘}\in \nu_s}exp(-||o_{s,t}-h_t^{v^{‘}}||<em>2)} \<br>\mathcal{L}</em>{dst} &#x3D; \sum_{s\in \mathcal{S}}\sum_{t &#x3D; 1}^{T} - \log(p(v_t|U_{\le t},U&#x3D;R_{\le t},s))<br>$$</p>
-<blockquote>
+<p>最终，将其经过Dropout再用一个线性层投影并经过归一化后获得最终输出：</p>
+<script type="math/tex; mode=display">
+o_{s,t} = LayerNorm(Linear(Dropout(c_{s,t}^{gate})))</script><p>槽值$v_t$的概率分布和训练目标定义为：</p>
+<script type="math/tex; mode=display">
+p(v_t|U_{\le t},U=R_{\le t},s) = \frac{exp(-||o_{s,t}-h_t^v||_2)}{\sum_{v^{'}\in \nu_s}exp(-||o_{s,t}-h_t^{v^{'}}||_2)} \\
+\mathcal{L}_{dst} = \sum_{s\in \mathcal{S}}\sum_{t = 1}^{T} - \log(p(v_t|U_{\le t},U=R_{\le t},s))</script><blockquote>
 <p>$\nu_s$: 槽 $s$ 的候选值集合</p>
 <p>$\hat{v_t} \in \nu_s$: 槽 $s$ 的真实值</p>
 <p>$||\cdot||_2$: $L2$ 距离</p>
 </blockquote>
-<h3 id="State-Transition-Prediction"><a href="#State-Transition-Prediction" class="headerlink" title="State Transition Prediction"></a>State Transition Prediction</h3><p>&amp;emsp;为了更好地捕获相关的上下文，进一步引入了一个辅助的<strong>二进制分类任务（DST: 状态转移预测）</strong>来与DST<strong>联合训练</strong>。该任务预测插槽的值是否更新，该模型以$c_{s,t-1}^{gate}$和$c_{s,t}^{gate}$作为输入，转移概率的计算公式如下：<br>$$<br>c_{s,t}^{stp} &#x3D; tanh(W_c \odot c_{s,t}^{gate}) \<br>p_{s,t}^{stp} &#x3D; \sigma(W_p \odot [c_{s,t}^{stp};c_{s,t-1}^{stp}])<br>$$</p>
-<blockquote>
+<h3 id="State-Transition-Prediction"><a href="#State-Transition-Prediction" class="headerlink" title="State Transition Prediction"></a>State Transition Prediction</h3><p>&emsp;为了更好地捕获相关的上下文，进一步引入了一个辅助的<strong>二进制分类任务（DST: 状态转移预测）</strong>来与DST<strong>联合训练</strong>。该任务预测插槽的值是否更新，该模型以$c_{s,t-1}^{gate}$和$c_{s,t}^{gate}$作为输入，转移概率的计算公式如下：</p>
+<script type="math/tex; mode=display">
+c_{s,t}^{stp} = tanh(W_c \odot c_{s,t}^{gate}) \\ 
+p_{s,t}^{stp} = \sigma(W_p \odot [c_{s,t}^{stp};c_{s,t-1}^{stp}])</script><blockquote>
 <p>$W_c \in \R^{d\times d}, W_p \in \R^{2d}$: 参数矩阵</p>
-<p>$\color{red}{Note}$: 当 $t&#x3D;1$时，$c_{s,t-1}^{stp}$ 为 零向量</p>
+<p>$\color{red}{Note}$: 当 $t=1$时，$c_{s,t-1}^{stp}$ 为 零向量</p>
 </blockquote>
-<p>该任务的训练目标函数：<br>$$<br>\mathcal{L}<em>{stp} &#x3D; \sum</em>{s\in \mathcal{S}}\sum_{t&#x3D;1}^T -y_{s,t}^{stp} \cdot \log(p_{s,t}^{stp})<br>$$</p>
-<h3 id="Adaptive-Objective"><a href="#Adaptive-Objective" class="headerlink" title="Adaptive Objective"></a>Adaptive Objective</h3><p>&amp;emsp;从本质上说，槽不平衡问题可以看作是一种类别不平衡，因为不同槽和不同样本之间都存在不平衡。与其不加区分地处理所有插槽，不如平衡不同插槽的学习权重。<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.02002">2017-IEEE-Focal loss for dense object detection</a>提出了一种叫做<strong>焦点损失</strong>的软采样方法以重新计算不同类别的损失。根据他们的工作，本文设计了一个新的自适应目标，评估验证集上每一个插槽的精度差异，并在优化期间自适应地调整每个插槽的权重。</p>
-<p>&amp;emsp;定义槽$s$的精度为$acc_s^{val}$, 该自适应目标遵循下面的直觉：</p>
+<p>该任务的训练目标函数：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{stp} = \sum_{s\in \mathcal{S}}\sum_{t=1}^T -y_{s,t}^{stp} \cdot \log(p_{s,t}^{stp})</script><h3 id="Adaptive-Objective"><a href="#Adaptive-Objective" class="headerlink" title="Adaptive Objective"></a>Adaptive Objective</h3><p>&emsp;从本质上说，槽不平衡问题可以看作是一种类别不平衡，因为不同槽和不同样本之间都存在不平衡。与其不加区分地处理所有插槽，不如平衡不同插槽的学习权重。<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.02002">2017-IEEE-Focal loss for dense object detection</a>提出了一种叫做<strong>焦点损失</strong>的软采样方法以重新计算不同类别的损失。根据他们的工作，本文设计了一个新的自适应目标，评估验证集上每一个插槽的精度差异，并在优化期间自适应地调整每个插槽的权重。</p>
+<p>&emsp;定义槽$s$的精度为$acc_s^{val}$, 该自适应目标遵循下面的直觉：</p>
 <ul>
-<li><p>(1) 如果$acc_{s}^{val} \le acc_{s^{‘}}^{val}$；这时候称槽$s$的处境比$s^{‘}$要困难，假设槽级别的困难度用$\alpha_s$表示：<br>$$<br>\alpha_s &#x3D; \frac{1-acc_s^{val}}{\sum_{s^{‘}\in \mathcal{S}} 1 - acc_{s^{‘}}^{val}} \cdot |\mathcal{S}|<br>$$</p>
-</li>
-<li><p>(2) 假设两个样本${ (U_t,R_t),(s,v_t) }$和${ (U_{t^{‘}},R_{t^{‘}}),(s^{‘},v_{t^{‘}}) }$，如果前者的置信度低于后者，那么称前者比后者更困难，样本级别的困难度用$\beta$表示：</p>
+<li><p>(1) 如果$acc_{s}^{val} \le acc_{s^{‘}}^{val}$；这时候称槽$s$的处境比$s^{‘}$要困难，假设槽级别的困难度用$\alpha_s$表示：</p>
+<script type="math/tex; mode=display">
+\alpha_s = \frac{1-acc_s^{val}}{\sum_{s^{'}\in \mathcal{S}} 1 - acc_{s^{'}}^{val}} \cdot |\mathcal{S}|</script></li>
+<li><p>(2) 假设两个样本$\{ (U_t,R_t),(s,v_t) \}$和$\{ (U_{t^{‘}},R_{t^{‘}}),(s^{‘},v_{t^{‘}}) \}$，如果前者的置信度低于后者，那么称前者比后者更困难，样本级别的困难度用$\beta$表示：</p>
 </li>
 </ul>
-<p>$$<br>\beta(s,v_t) &#x3D; (1 - p(s,v_t))^{\gamma}<br>$$</p>
-<blockquote>
-<p>$p(s,v_t)$:  ${ (U_t,R_t),(s,v_t) }$的信心</p>
+<script type="math/tex; mode=display">
+\beta(s,v_t) = (1 - p(s,v_t))^{\gamma}</script><blockquote>
+<p>$p(s,v_t)$:  $\{ (U_t,R_t),(s,v_t) \}$的信心</p>
 <p>$\gamma$: 超参数</p>
 </blockquote>
-<p>因此，自适应目标函数为：<br>$$<br>\mathcal{L}_{adapt}(s,v_t) &#x3D; -\alpha_s \beta(s,v_t) log(p(s,v_t))<br>$$<br>焦点损失在插槽上分配静态学习权重，并且在整个训练过程中<strong>不再改变它们</strong>。与焦点损失相比，我们的自适应目标可以通过动态地评估困难，然后自适应地控制不同插槽的学习权重来更好地适应数据，这在实验中得到了证明。如果插槽的困难度大于所有插槽的平均难度，$\alpha_s$将增加并增加$s$的损失(表示模型对其更加敏感)。同样，置信度低的样本损失将促进优化。<strong>当一个世代结束时，自适应目标会重新评估每个插槽的困难度值，并更新$\alpha_s$。</strong>因此，它<strong>不仅可以促进对这些插槽和样本的优化，而且还可以平衡所有插槽的学习</strong>。</p>
-<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><p><strong>联合训练损失函数：</strong><br>$$<br>\mathcal{L}<em>{joint} &#x3D; \mathcal{L}</em>{dst} + \mathcal{L}<em>{stp}<br>$$<br>在微调阶段，我们采用自适应目标来微调DST任务如下：<br>$$<br>\mathcal{L}</em>{finetune} &#x3D; \sum_{s\in \mathcal{S}}\sum_{t&#x3D;1}^{T} \mathcal{L}_{adapt}(s,\hat{v}_t)<br>$$</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085759042.png"></p>
-<p>&amp;emsp;使用联合精度和插槽精度作为评估指标。联合精度是指每个回合的对话状态的准确性，只有在正确预测插槽的所有值时，才会正确地评估一个对话状态。插槽精度只考虑单个插槽级的精度。</p>
-<h3 id="主要结果"><a href="#主要结果" class="headerlink" title="主要结果"></a>主要结果</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085814270.png"></p>
-<h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085834440.png"></p>
-<h3 id="注意力可视化"><a href="#注意力可视化" class="headerlink" title="注意力可视化"></a>注意力可视化</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085850708.png"></p>
-<h3 id="自适应目标对插槽精度的影响"><a href="#自适应目标对插槽精度的影响" class="headerlink" title="自适应目标对插槽精度的影响"></a>自适应目标对插槽精度的影响</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085903674.png"></p>
+<p>因此，自适应目标函数为：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{adapt}(s,v_t) = -\alpha_s \beta(s,v_t) log(p(s,v_t))</script><p>焦点损失在插槽上分配静态学习权重，并且在整个训练过程中<strong>不再改变它们</strong>。与焦点损失相比，我们的自适应目标可以通过动态地评估困难，然后自适应地控制不同插槽的学习权重来更好地适应数据，这在实验中得到了证明。如果插槽的困难度大于所有插槽的平均难度，$\alpha_s$将增加并增加$s$的损失(表示模型对其更加敏感)。同样，置信度低的样本损失将促进优化。<strong>当一个世代结束时，自适应目标会重新评估每个插槽的困难度值，并更新$\alpha_s$。</strong>因此，它<strong>不仅可以促进对这些插槽和样本的优化，而且还可以平衡所有插槽的学习</strong>。</p>
+<h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><p><strong>联合训练损失函数：</strong></p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{joint} = \mathcal{L}_{dst} + \mathcal{L}_{stp}</script><p>在微调阶段，我们采用自适应目标来微调DST任务如下：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{finetune} = \sum_{s\in \mathcal{S}}\sum_{t=1}^{T} \mathcal{L}_{adapt}(s,\hat{v}_t)</script><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085759042.png" alt=""></p>
+<p>&emsp;使用联合精度和插槽精度作为评估指标。联合精度是指每个回合的对话状态的准确性，只有在正确预测插槽的所有值时，才会正确地评估一个对话状态。插槽精度只考虑单个插槽级的精度。</p>
+<h3 id="主要结果"><a href="#主要结果" class="headerlink" title="主要结果"></a>主要结果</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085814270.png" alt=""></p>
+<h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085834440.png" alt=""></p>
+<h3 id="注意力可视化"><a href="#注意力可视化" class="headerlink" title="注意力可视化"></a>注意力可视化</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085850708.png" alt=""></p>
+<h3 id="自适应目标对插槽精度的影响"><a href="#自适应目标对插槽精度的影响" class="headerlink" title="自适应目标对插槽精度的影响"></a>自适应目标对插槽精度的影响</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/20210417085903674.png" alt=""></p>
 
       
     </div>
@@ -685,5 +712,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

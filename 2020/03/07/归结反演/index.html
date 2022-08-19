@@ -18,12 +18,12 @@
   
   
   <title>归结反演 | Hexo</title>
-  <meta name="description" content="应用归结原理证明定理步骤：  将一直前提表示为谓词公式 $F$。 将待证明的结论表示为谓词公式 $Q$， 并否定得到 $\neg Q$。 把谓词公式集 {$F,\neg Q$} 化为子句集 $S$。 应用归结原理对子句集 $S$ 中的子句进行归结，并把每次归结得到的归结式都并入到 $S$ 中。如此反复进行，若出现了空子句，则停止归结，此时就证明了结论 $Q$ 为真。  例1： 某公司招聘工作人">
+  <meta name="description" content="应用归结原理证明定理步骤：  将一直前提表示为谓词公式 $F$。 将待证明的结论表示为谓词公式 $Q$， 并否定得到 $\neg Q$。 把谓词公式集 {$F,\neg Q$} 化为子句集 $S$。 应用归结原理对子句集 $S$ 中的子句进行归结，并把每次归结得到的归结式都并入到 $S$ 中。如此反复进行，若出现了空子句，则停止归结，此时就证明了结论 $Q$ 为真。  例1： 某公司招聘工作人员">
 <meta property="og:type" content="article">
 <meta property="og:title" content="归结反演">
 <meta property="og:url" content="https://ccyh.xyz/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/index.html">
 <meta property="og:site_name" content="虚怀若谷">
-<meta property="og:description" content="应用归结原理证明定理步骤：  将一直前提表示为谓词公式 $F$。 将待证明的结论表示为谓词公式 $Q$， 并否定得到 $\neg Q$。 把谓词公式集 {$F,\neg Q$} 化为子句集 $S$。 应用归结原理对子句集 $S$ 中的子句进行归结，并把每次归结得到的归结式都并入到 $S$ 中。如此反复进行，若出现了空子句，则停止归结，此时就证明了结论 $Q$ 为真。  例1： 某公司招聘工作人">
+<meta property="og:description" content="应用归结原理证明定理步骤：  将一直前提表示为谓词公式 $F$。 将待证明的结论表示为谓词公式 $Q$， 并否定得到 $\neg Q$。 把谓词公式集 {$F,\neg Q$} 化为子句集 $S$。 应用归结原理对子句集 $S$ 中的子句进行归结，并把每次归结得到的归结式都并入到 $S$ 中。如此反复进行，若出现了空子句，则停止归结，此时就证明了结论 $Q$ 为真。  例1： 某公司招聘工作人员">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/20200307084330368.png">
 <meta property="article:published_time" content="2020-03-07T12:11:26.000Z">
@@ -400,7 +400,6 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <span id="more"></span>
-
 <h2 id="应用归结原理证明定理"><a href="#应用归结原理证明定理" class="headerlink" title="应用归结原理证明定理"></a>应用归结原理证明定理</h2><p><strong>步骤：</strong></p>
 <ol>
 <li>将一直前提表示为谓词公式 $F$。</li>
@@ -422,13 +421,13 @@
 <li>$P(B) \rightarrow P(C)$</li>
 </ul>
 <p>待证结论：$P(C)$</p>
-<p>(2) 将待证结论否定得：$\neg P(C)$<br>(3) 将谓词公式集 {$P(A) \vee P(B)\vee P(C),P(A) \wedge \neg P(B) \rightarrow P(C),P(B) \rightarrow P(C)$}化成子句集：<br>$S&#x3D;${$P(A) \vee P(B)\vee P(C),\neg P(A) \vee P(B) \vee P(C),\neg P(B) \vee P(C),\neg P(C)$}<br>(4) 应用归结原理进行归结<br>$C_1&#x3D;P(A) \vee P(B)\vee P(C)$,<br>$C_2&#x3D;\neg P(A) \vee P(B) \vee P(C)$,<br>$C_3&#x3D;\neg P(B) \vee P(C)$,<br>$C_4&#x3D;\neg P(C)$<br>归结：<br>$C_1 \otimes C_2 &#x3D; C_12&#x3D;P(B)\vee P(C)$<br>$C_3 \otimes C_12 &#x3D; C_123 &#x3D; P(C)$<br>$C_4 \otimes C_123 &#x3D; C_1234 &#x3D; NIL$ 空子句<br>结论得证。</p>
-<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/20200307084330368.png"></p>
+<p>(2) 将待证结论否定得：$\neg P(C)$<br>(3) 将谓词公式集 {$P(A) \vee P(B)\vee P(C),P(A) \wedge \neg P(B) \rightarrow P(C),P(B) \rightarrow P(C)$}化成子句集：<br>$S=${$P(A) \vee P(B)\vee P(C),\neg P(A) \vee P(B) \vee P(C),\neg P(B) \vee P(C),\neg P(C)$}<br>(4) 应用归结原理进行归结<br>$C_1=P(A) \vee P(B)\vee P(C)$,<br>$C_2=\neg P(A) \vee P(B) \vee P(C)$,<br>$C_3=\neg P(B) \vee P(C)$,<br>$C_4=\neg P(C)$<br>归结：<br>$C_1 \otimes C_2 = C_12=P(B)\vee P(C)$<br>$C_3 \otimes C_12 = C_123 = P(C)$<br>$C_4 \otimes C_123 = C_1234 = NIL$ 空子句<br>结论得证。</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/20200307084330368.png" alt=""></p>
 <p><strong>例2：</strong> 已知：<br>规则1：任何人的兄弟不是女性<br>规则2：任何人的姐妹必是女性<br>事实：Mary 是 Bill 的姐妹<br>求证：Mary 不是 Tom 的兄弟</p>
 <p>(1) 谓词表示：<br>$brother(x,y):$ $x$ 是 $y$ 的兄弟<br>$sister(x,y):$ $x$ 是 $y$ 的姐妹<br>$woman(x):$ $x$ 是女性</p>
 <p>规则1：$\forall x \forall y(brother(x,y)\rightarrow \neg woman(x))$<br>规则2：$\forall x\forall y(sister(x,y)\rightarrow woman(x))$<br>事实：$sister(Mary,Bill)$<br>待证结论：$\neg brother(Mary,Tom)$</p>
-<p>(2) 将待证结论否定得：$brother(Mary,Tom)$<br>(3) 谓词公式集 {$\forall x \forall y(brother(x,y)\rightarrow \neg woman(x))$,$\forall x\forall y(sister(x,y)\rightarrow woman(x))$,$sister(Mary,Bill)$,$\neg brother(Mary,Tom)$}化成子句集：<br>$S&#x3D; ${<br>$C_1&#x3D;\neg brother(x,y)\vee \neg woman(x)$,<br>$C_2&#x3D;\neg sister(x,y)\vee woman(x)$,<br>$C_3&#x3D;sister(Mary,Bill)$,<br>$C_4&#x3D;brother(Mary,Tom)$<br>}</p>
-<p>(4) 应用归结原理进行归结：<br>$C_23&#x3D;woman(Mary)$<br>$C_123&#x3D;\neg brother(Mary,y)$<br>$C_1234&#x3D;NIL$ 空子句<br>结论得证。</p>
+<p>(2) 将待证结论否定得：$brother(Mary,Tom)$<br>(3) 谓词公式集 {$\forall x \forall y(brother(x,y)\rightarrow \neg woman(x))$,$\forall x\forall y(sister(x,y)\rightarrow woman(x))$,$sister(Mary,Bill)$,$\neg brother(Mary,Tom)$}化成子句集：<br>$S= ${<br>$C_1=\neg brother(x,y)\vee \neg woman(x)$,<br>$C_2=\neg sister(x,y)\vee woman(x)$,<br>$C_3=sister(Mary,Bill)$,<br>$C_4=brother(Mary,Tom)$<br>}</p>
+<p>(4) 应用归结原理进行归结：<br>$C_23=woman(Mary)$<br>$C_123=\neg brother(Mary,y)$<br>$C_1234=NIL$ 空子句<br>结论得证。</p>
 
       
     </div>
@@ -662,5 +661,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

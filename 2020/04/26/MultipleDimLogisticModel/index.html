@@ -18,12 +18,12 @@
   
   
   <title>【Pytorch基础】处理多维特征的输入 | Hexo</title>
-  <meta name="description" content="回顾&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。 关于糖尿病的二分类问题1. 准备数据集 上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。 123456789import numpy as npimport torchxy &#x3D; np.loadtxt(&amp;#x27;h">
+  <meta name="description" content="回顾&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。 关于糖尿病的二分类问题1. 准备数据集 上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。 123456789import numpy as npimport torchxy &#x3D; np.loadtxt(&amp;#x27;https:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Pytorch基础】处理多维特征的输入">
 <meta property="og:url" content="https://ccyh.xyz/2020/04/26/MultipleDimLogisticModel/index.html">
 <meta property="og:site_name" content="虚怀若谷">
-<meta property="og:description" content="回顾&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。 关于糖尿病的二分类问题1. 准备数据集 上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。 123456789import numpy as npimport torchxy &#x3D; np.loadtxt(&amp;#x27;h">
+<meta property="og:description" content="回顾&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。 关于糖尿病的二分类问题1. 准备数据集 上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。 123456789import numpy as npimport torchxy &#x3D; np.loadtxt(&amp;#x27;https:">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426044132660.png">
 <meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060736716.png">
@@ -395,48 +395,30 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <span id="more"></span>
-
-<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。</p>
-<h2 id="关于糖尿病的二分类问题"><a href="#关于糖尿病的二分类问题" class="headerlink" title="关于糖尿病的二分类问题"></a>关于糖尿病的二分类问题</h2><h3 id="1-准备数据集"><a href="#1-准备数据集" class="headerlink" title="1. 准备数据集"></a>1. 准备数据集</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426044132660.png"></p>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>&emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。</p>
+<h2 id="关于糖尿病的二分类问题"><a href="#关于糖尿病的二分类问题" class="headerlink" title="关于糖尿病的二分类问题"></a>关于糖尿病的二分类问题</h2><h3 id="1-准备数据集"><a href="#1-准备数据集" class="headerlink" title="1. 准备数据集"></a>1. 准备数据集</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426044132660.png" alt=""></p>
 <p>上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">xy = np.loadtxt(<span class="string">&#x27;https://project-preview-1257022783.cos.ap-chengdu.myqcloud.com/diabetes.csv.gz&#x27;</span>,delimiter=<span class="string">&#x27;,&#x27;</span>,dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建tensor</span></span><br><span class="line">x_data = torch.from_numpy(xy[:,:-<span class="number">1</span>]) <span class="comment"># 所有行，最后一列不要</span></span><br><span class="line">y_data = torch.from_numpy(xy[:,[-<span class="number">1</span>]]) <span class="comment"># 所有行，只要最后一列，-1加[]表示拿出来一个矩阵，而不是向量</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="多维度输入的逻辑回归模型"><a href="#多维度输入的逻辑回归模型" class="headerlink" title="多维度输入的逻辑回归模型"></a>多维度输入的逻辑回归模型</h2><p>&amp;emsp;上述数据集的输入不再是一个简单的实数，而是一个8维向量$x^{(i)}$,对于单个样本其模型为:</p>
-<p>$$\hat{y}^{(i)} &#x3D; \sigma (w^T \times x^{(i)} + b)$$</p>
-<p>$$\Leftrightarrow \sigma (\sum_{n&#x3D;1}^{8} x_{n}^{(i)} \cdot w_n + b)$$</p>
-<p>$$\Leftrightarrow \sigma( (w^T \times x^{(i)})^T + b)  \text{  标量的转置还是该标量}$$</p>
-<p>$$\Leftrightarrow \sigma \left( \begin{bmatrix} x_1 &amp; x_2 &amp; x_3 &amp; x_4 &amp; x_5 &amp; x_6 &amp; x_7 &amp; x_8  \end{bmatrix} \times \begin{bmatrix} w_1 \ w_2 \ w_3 \ w_4 \ w_5 \ w_6 \ w_7 \ w_8  \end{bmatrix} + b \right) &#x3D; \sigma(z^{(i)})$$</p>
-<p>上述操作得到一个标量 $\hat{y}^{(i)}$, $\sigma$ 为 Logistic 函数。</p>
-<h2 id="Mini-Batch-N-samples-情况下"><a href="#Mini-Batch-N-samples-情况下" class="headerlink" title="Mini-Batch(N samples) 情况下"></a>Mini-Batch(N samples) 情况下</h2><p>&amp;emsp; Mini_Batch 的大小为$N$,即每次更新都根据$N$个样本来计算损失，其模型为：</p>
-<p>$$\begin{bmatrix} \hat{y}^{(1)} \ \vdots \ \hat{y}^{(N)} \end{bmatrix} &#x3D; \begin{bmatrix} \sigma(z^{(1)}) \ \vdots \ \sigma(z^{(N)}) \end{bmatrix} &#x3D; \sigma(\begin{bmatrix} z^{(1)} \ \vdots \ z^{(N)} \end{bmatrix})$$</p>
-<p>其中：</p>
-<p>$$z^{(1)} &#x3D; \begin{bmatrix} x_{1}^{(1)} &amp; \cdots &amp;  x_{8}^{(1)} \end{bmatrix} \times \begin{bmatrix} w_1 \ \vdots \ w_8 \end{bmatrix} + b$$</p>
-<p>$$z^{(N)} &#x3D; \begin{bmatrix} x_{1}^{(N)} &amp; \cdots &amp;  x_{8}^{(N)} \end{bmatrix} \times \begin{bmatrix} w_1 \ \vdots \ w_8 \end{bmatrix} + b$$</p>
-<p>即：</p>
-<p>$$\begin{bmatrix} z^{(1)} \ \vdots \ z^{(N)} \end{bmatrix}<em>{N\times 1} &#x3D; \begin{bmatrix} x</em>{1}^{(1)} &amp; \cdots &amp;  x_{8}^{(1)} \ \vdots &amp; \ddots &amp; \vdots \ x_{1}^{(N)} &amp; \cdots &amp;  x_{8}^{(N)} \end{bmatrix}<em>{N\times 8} \begin{bmatrix} w_1 \ \vdots \ w_8 \end{bmatrix}</em>{8\times 1} + \begin{bmatrix} b \ \vdots \ b \end{bmatrix}_{N\times 1}$$</p>
-<h2 id="构造多层神经网络"><a href="#构造多层神经网络" class="headerlink" title="构造多层神经网络"></a>构造多层神经网络</h2><blockquote>
-<p><strong>先导知识：</strong><br>对于矩阵运算 $y &#x3D; A \times x$</p>
+<h2 id="多维度输入的逻辑回归模型"><a href="#多维度输入的逻辑回归模型" class="headerlink" title="多维度输入的逻辑回归模型"></a>多维度输入的逻辑回归模型</h2><p>&emsp;上述数据集的输入不再是一个简单的实数，而是一个8维向量$x^{(i)}$,对于单个样本其模型为:</p>
+<script type="math/tex; mode=display">\hat{y}^{(i)} = \sigma (w^T \times x^{(i)} + b)</script><script type="math/tex; mode=display">\Leftrightarrow \sigma (\sum_{n=1}^{8} x_{n}^{(i)} \cdot w_n + b)</script><script type="math/tex; mode=display">\Leftrightarrow \sigma( (w^T \times x^{(i)})^T + b)  \text{  标量的转置还是该标量}</script><script type="math/tex; mode=display">\Leftrightarrow \sigma \left( \begin{bmatrix} x_1 & x_2 & x_3 & x_4 & x_5 & x_6 & x_7 & x_8  \end{bmatrix} \times \begin{bmatrix} w_1 \\ w_2 \\ w_3 \\ w_4 \\ w_5 \\ w_6 \\ w_7 \\ w_8  \end{bmatrix} + b \right) = \sigma(z^{(i)})</script><p>上述操作得到一个标量 $\hat{y}^{(i)}$, $\sigma$ 为 Logistic 函数。</p>
+<h2 id="Mini-Batch-N-samples-情况下"><a href="#Mini-Batch-N-samples-情况下" class="headerlink" title="Mini-Batch(N samples) 情况下"></a>Mini-Batch(N samples) 情况下</h2><p>&emsp; Mini_Batch 的大小为$N$,即每次更新都根据$N$个样本来计算损失，其模型为：</p>
+<script type="math/tex; mode=display">\begin{bmatrix} \hat{y}^{(1)} \\ \vdots \\ \hat{y}^{(N)} \end{bmatrix} = \begin{bmatrix} \sigma(z^{(1)}) \\ \vdots \\ \sigma(z^{(N)}) \end{bmatrix} = \sigma(\begin{bmatrix} z^{(1)} \\ \vdots \\ z^{(N)} \end{bmatrix})</script><p>其中：</p>
+<script type="math/tex; mode=display">z^{(1)} = \begin{bmatrix} x_{1}^{(1)} & \cdots &  x_{8}^{(1)} \end{bmatrix} \times \begin{bmatrix} w_1 \\ \vdots \\ w_8 \end{bmatrix} + b</script><script type="math/tex; mode=display">z^{(N)} = \begin{bmatrix} x_{1}^{(N)} & \cdots &  x_{8}^{(N)} \end{bmatrix} \times \begin{bmatrix} w_1 \\ \vdots \\ w_8 \end{bmatrix} + b</script><p>即：</p>
+<script type="math/tex; mode=display">\begin{bmatrix} z^{(1)} \\ \vdots \\ z^{(N)} \end{bmatrix}_{N\times 1} = \begin{bmatrix} x_{1}^{(1)} & \cdots &  x_{8}^{(1)} \\ \vdots & \ddots & \vdots \\ x_{1}^{(N)} & \cdots &  x_{8}^{(N)} \end{bmatrix}_{N\times 8} \begin{bmatrix} w_1 \\ \vdots \\ w_8 \end{bmatrix}_{8\times 1} + \begin{bmatrix} b \\ \vdots \\ b \end{bmatrix}_{N\times 1}</script><h2 id="构造多层神经网络"><a href="#构造多层神经网络" class="headerlink" title="构造多层神经网络"></a>构造多层神经网络</h2><blockquote>
+<p><strong>先导知识：</strong><br>对于矩阵运算 $y = A \times x$</p>
+<p>其中 <script type="math/tex">y_{m \times 1},A_{m \times n},x_{n \times 1}</script></p>
+<p>那么，上式表示为将$n$维空间映射到$m$维空间的一个线性变换。<br>因此，可以将矩阵看成一种空间变换的函数。<br>所以，self.linear = torch.nn.Linear(8,6) 就可以看做将一个 8 维空间经过线性变换映射到一个 6 维空间上。<br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060736716.png" alt=""><br>但是，若我们在每一次线性变换后加入了非线性函数 $\sigma$ ，就可以实现非线性变换，使得模型可以拟合非线性问题。</p>
 </blockquote>
-<blockquote>
-<p>其中 $$ y_{m \times 1},A_{m \times n},x_{n \times 1} $$</p>
-</blockquote>
-<blockquote>
-<p>那么，上式表示为将$n$维空间映射到$m$维空间的一个线性变换。<br>因此，可以将矩阵看成一种空间变换的函数。<br>所以，self.linear &#x3D; torch.nn.Linear(8,6) 就可以看做将一个 8 维空间经过线性变换映射到一个 6 维空间上。<br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060736716.png"><br>但是，若我们在每一次线性变换后加入了非线性函数 $\sigma$ ，就可以实现非线性变换，使得模型可以拟合非线性问题。</p>
-</blockquote>
-<p>&amp;emsp;多层神经网络，就是通过拼接多次变换得到的：</p>
-<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060804635.png"><br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060832917.png"></p>
+<p>&emsp;多层神经网络，就是通过拼接多次变换得到的：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060804635.png" alt=""><br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060832917.png" alt=""></p>
 <blockquote>
 <p>注意：理论上，隐层数量越多模型的学习能力就越强。但是，太强的学习能力会导致模型连数据中的噪声都学习到了（过拟合）反而适得其反。一个号的模型应该要具有一定的泛化能力，不能去死扣细节而去抓住问题的主要矛盾。因此，层数的多少应该根据实际情况适当尝试调整，而不是一味地求多。</p>
 </blockquote>
 <h1 id="定义多层神经网络"><a href="#定义多层神经网络" class="headerlink" title="定义多层神经网络"></a>定义多层神经网络</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Model</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Model,self).__init__()</span><br><span class="line">        self.linear1 = torch.nn.Linear(<span class="number">8</span>,<span class="number">6</span>) <span class="comment"># 输入维度为 8</span></span><br><span class="line">        self.linear2 = torch.nn.Linear(<span class="number">6</span>,<span class="number">4</span>)</span><br><span class="line">        self.linear3 = torch.nn.Linear(<span class="number">4</span>,<span class="number">1</span>)</span><br><span class="line">        self.activate = torch.nn.Sigmoid() <span class="comment"># 激活函数</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x = self.activate(self.linear1(x))</span><br><span class="line">        x = self.activate(self.linear2(x))</span><br><span class="line">        x = self.activate(self.linear3(x))</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    </span><br><span class="line">model = Model()</span><br></pre></td></tr></table></figure>
-
 <h1 id="损失函数和优化器"><a href="#损失函数和优化器" class="headerlink" title="损失函数和优化器"></a>损失函数和优化器</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">criterion = torch.nn.BCELoss(reduction=<span class="string">&quot;mean&quot;</span>)</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(),lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
-
 <h1 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">h_list = []</span><br><span class="line">l_list = []</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">    <span class="comment"># 前馈计算</span></span><br><span class="line">    y_pred = model(x_data)</span><br><span class="line">    loss = criterion(y_pred,y_data)</span><br><span class="line">    <span class="built_in">print</span>(epoch, loss.item())</span><br><span class="line">    h_list.append(epoch)</span><br><span class="line">    l_list.append(loss.item())</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 反向传播</span></span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    loss.backward()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 更新参数</span></span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
-
 <h2 id="绘制收敛图"><a href="#绘制收敛图" class="headerlink" title="绘制收敛图"></a>绘制收敛图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.plot(h_list, l_list)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;loss&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;epoch&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426080306413.png"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426080306413.png" alt=""></p>
 <blockquote>
 <ul>
 <li>参考：</li>
@@ -668,5 +650,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
