@@ -468,7 +468,7 @@
 <li><p>量词分配律<br>$\color{red}{\forall} x(A(x)\color{red}{\wedge} B) \Leftrightarrow \forall xA(x) \wedge \forall x B(x)$<br>$\color{green}{\exists} x(A(x)\color{green}{\vee} B) \Leftrightarrow \exists xA(x) \vee \exists x B(x)$<br>⚠️这里要注意的是只有当全称量词与合取符号，存在量词与析取符号两种情况时分配律才有效。</p>
 </li>
 </ol>
-<p><strong>例3：</strong> 设个体域 $D = \{ a,b,c \}$, 消去谓词公式中的量词</p>
+<p><strong>例3：</strong> 设个体域 $D = { a,b,c }$, 消去谓词公式中的量词</p>
 <p><1> $\exists xF(x) \rightarrow \forall yG(y)$<br>消去后：$F(a)\vee F(b)\vee F(c) \rightarrow G(a)\wedge G(b) \wedge G(c)$</p>
 <p><2> $\forall x\forall y(F(x)\rightarrow G(y))$<br>$\Leftrightarrow \forall x(F(x)\rightarrow \forall yG(y))$<br>$\Leftrightarrow \forall x(\neg F(x) \vee \forall y G(y))$<br>$\Leftrightarrow \forall x\neg F(x) \vee \forall yG(y)$; (x 辖域收缩)<br>$\Leftrightarrow \neg \exists xF(x)\vee \forall yG(y)$;(量词否定转换)<br>$\Leftrightarrow \exists xF(x)\rightarrow \forall yG(y)$;(等价式)<br>$\Leftrightarrow (F(a)\vee F(b)\vee F(c))\rightarrow (G(a)\wedge G(b)\wedge G(c))$</p>
 <h3 id="前束范式"><a href="#前束范式" class="headerlink" title="前束范式"></a>前束范式</h3><blockquote>

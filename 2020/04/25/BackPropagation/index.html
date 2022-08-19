@@ -409,7 +409,7 @@
 <h2 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h2><p>先把模型看成一个图，考虑数据在图内的传播算法。</p>
 <p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/BackPropagation/20200425102408151.png" alt=""><br>&emsp;对于上图所示的模型，是一个两层(单隐层)的神经网络。假设其输入$X$的维度为$n$，隐层（中间层）输出$H$的维度为$m$,输出层$O$的维度为$n$其结构如下：</p>
 <p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/BackPropagation/20200425103341047.png" alt=""></p>
-<p>那么，对应的两个权重矩阵为$W_{1 (m\times n)},W_{2 (n\times m)}$。<br>$b_1,b_2$ 称为偏置。</p>
+<p>那么，对应的两个权重矩阵为$W<em>{1 (m\times n)},W</em>{2 (n\times m)}$。<br>$b_1,b_2$ 称为偏置。</p>
 <h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>如果对上述模型进行变形可以发现，无论它有多少层，最终都会被简化为单层。</p>
 <p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/BackPropagation/20200425104849445.png" alt=""></p>
 <p>这样一来，意味着层数（权重数量）的增加对模型的效果没有起到积极意义。因此，我们要将每一层的输出作用于一个非线性的变化函数（如$Sigmoid(x_i)=\frac{1}{1+e^{-x_i}}$函数）。如此一来，就无法再对模型进行简化了。</p>
