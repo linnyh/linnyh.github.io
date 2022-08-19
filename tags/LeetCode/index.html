@@ -351,17 +351,17 @@
           
           <li><a href="/tags/Tree/">Tree</a></li>
           
-          <li><a href="/tags/discretemathematics/">discretemathematics</a></li>
-          
           <li><a href="/tags/ML/">ML</a></li>
           
-          <li><a href="/tags/并查集/">并查集</a></li>
+          <li><a href="/tags/discretemathematics/">discretemathematics</a></li>
           
-          <li><a href="/tags/Hexo/">Hexo</a></li>
+          <li><a href="/tags/并查集/">并查集</a></li>
           
           <li><a href="/tags/Tools/">Tools</a></li>
           
           <li><a href="/tags/Blog/">Blog</a></li>
+          
+          <li><a href="/tags/Hexo/">Hexo</a></li>
           
           <li><a href="/tags/LeetCode/">LeetCode</a></li>
           
@@ -369,13 +369,13 @@
           
           <li><a href="/tags/List/">List</a></li>
           
-          <li><a href="/tags/String/">String</a></li>
-          
           <li><a href="/tags/Algorithm/">Algorithm</a></li>
           
-          <li><a href="/tags/Array/">Array</a></li>
+          <li><a href="/tags/String/">String</a></li>
           
           <li><a href="/tags/AI/">AI</a></li>
+          
+          <li><a href="/tags/Array/">Array</a></li>
           
           <li><a href="/tags/C/">C</a></li>
           
@@ -383,13 +383,13 @@
           
           <li><a href="/tags/algorithm/">algorithm</a></li>
           
-          <li><a href="/tags/DST/">DST</a></li>
-          
           <li><a href="/tags/Graph/">Graph</a></li>
           
-          <li><a href="/tags/Math/">Math</a></li>
+          <li><a href="/tags/DST/">DST</a></li>
           
           <li><a href="/tags/Encrypted/">Encrypted</a></li>
+          
+          <li><a href="/tags/Math/">Math</a></li>
           
           <li><a href="/tags/QuickSort/">QuickSort</a></li>
           
@@ -545,5 +545,21 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 </body>
 </html>
