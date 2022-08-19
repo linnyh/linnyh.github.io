@@ -17,18 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Repositories | Hexo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Repositories">
-<meta property="og:url" content="https://ccyh.xyz/repository/index.html">
+  <title>归结反演 | Hexo</title>
+  <meta name="description" content="应用归结原理证明定理步骤：  将一直前提表示为谓词公式 $F$。 将待证明的结论表示为谓词公式 $Q$， 并否定得到 $\neg Q$。 把谓词公式集 {$F,\neg Q$} 化为子句集 $S$。 应用归结原理对子句集 $S$ 中的子句进行归结，并把每次归结得到的归结式都并入到 $S$ 中。如此反复进行，若出现了空子句，则停止归结，此时就证明了结论 $Q$ 为真。  例1： 某公司招聘工作人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="归结反演">
+<meta property="og:url" content="https://ccyh.xyz/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/index.html">
 <meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="应用归结原理证明定理步骤：  将一直前提表示为谓词公式 $F$。 将待证明的结论表示为谓词公式 $Q$， 并否定得到 $\neg Q$。 把谓词公式集 {$F,\neg Q$} 化为子句集 $S$。 应用归结原理对子句集 $S$ 中的子句进行归结，并把每次归结得到的归结式都并入到 $S$ 中。如此反复进行，若出现了空子句，则停止归结，此时就证明了结论 $Q$ 为真。  例1： 某公司招聘工作人">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-19T11:08:39.982Z">
-<meta property="article:modified_time" content="2022-08-19T11:08:39.982Z">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/20200307084330368.png">
+<meta property="article:published_time" content="2020-03-07T12:11:26.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:52:43.931Z">
 <meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/20200307084330368.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://ccyh.xyz/repository/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -45,7 +50,7 @@
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 
-<body class="main-center no-sidebar" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -342,48 +347,223 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="article article-repository article-type-list" itemscope="">
-  <header class="article-header">
-    <h1 itemprop="title">Repositories</h1>
-    <p class="text-muted">I have <span id="repo-count">0</span> projects on <span id="repo-platform">Github</span></p>
-  </header>
-  <div class="article-body">
-    <div class="repo-content">
-      <div class="blankslate">
-        <p>正在加载...</p>
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86%E8%AF%81%E6%98%8E%E5%AE%9A%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">应用归结原理证明定理</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-归结反演" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      归结反演
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/" class="article-date">
+	  <time datetime="2020-03-07T12:11:26.000Z" itemprop="datePublished">2020-03-07</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/AI/" rel="tag">AI</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/#comments" class="article-comment-link">评论</a></span>
+        
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h2 id="应用归结原理证明定理"><a href="#应用归结原理证明定理" class="headerlink" title="应用归结原理证明定理"></a>应用归结原理证明定理</h2><p><strong>步骤：</strong></p>
+<ol>
+<li>将一直前提表示为谓词公式 $F$。</li>
+<li>将待证明的结论表示为谓词公式 $Q$， 并否定得到 $\neg Q$。</li>
+<li>把谓词公式集 {$F,\neg Q$} 化为子句集 $S$。</li>
+<li>应用归结原理对子句集 $S$ 中的子句进行归结，并把每次归结得到的归结式都并入到 $S$ 中。如此反复进行，若出现了空子句，则停止归结，此时就证明了结论 $Q$ 为真。</li>
+</ol>
+<p><strong>例1：</strong> 某公司招聘工作人员，$A,B,C$ 三人应试，经面试后公司表示如下想法：</p>
+<ul>
+<li>三人中至少录取一人。</li>
+<li>如果录取$A$而不录取$B$,则一定录取$C$。</li>
+<li>如果录取$B$,则一定录取$C$.</li>
+</ul>
+<p>求证：公司一定录取 $C$。</p>
+<p>$Proof:$<br>(1) 将公司想法用谓词公式表示：$P(x):$ 录取 $x$<br>前提：</p>
+<ul>
+<li>$P(A) \vee P(B)\vee P(C)$</li>
+<li>$P(A) \wedge \neg P(B) \rightarrow P(C)$</li>
+<li>$P(B) \rightarrow P(C)$</li>
+</ul>
+<p>待证结论：$P(C)$</p>
+<p>(2) 将待证结论否定得：$\neg P(C)$<br>(3) 将谓词公式集 {$P(A) \vee P(B)\vee P(C),P(A) \wedge \neg P(B) \rightarrow P(C),P(B) \rightarrow P(C)$}化成子句集：<br>$S&#x3D;${$P(A) \vee P(B)\vee P(C),\neg P(A) \vee P(B) \vee P(C),\neg P(B) \vee P(C),\neg P(C)$}<br>(4) 应用归结原理进行归结<br>$C_1&#x3D;P(A) \vee P(B)\vee P(C)$,<br>$C_2&#x3D;\neg P(A) \vee P(B) \vee P(C)$,<br>$C_3&#x3D;\neg P(B) \vee P(C)$,<br>$C_4&#x3D;\neg P(C)$<br>归结：<br>$C_1 \otimes C_2 &#x3D; C_12&#x3D;P(B)\vee P(C)$<br>$C_3 \otimes C_12 &#x3D; C_123 &#x3D; P(C)$<br>$C_4 \otimes C_123 &#x3D; C_1234 &#x3D; NIL$ 空子句<br>结论得证。</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/20200307084330368.png"></p>
+<p><strong>例2：</strong> 已知：<br>规则1：任何人的兄弟不是女性<br>规则2：任何人的姐妹必是女性<br>事实：Mary 是 Bill 的姐妹<br>求证：Mary 不是 Tom 的兄弟</p>
+<p>(1) 谓词表示：<br>$brother(x,y):$ $x$ 是 $y$ 的兄弟<br>$sister(x,y):$ $x$ 是 $y$ 的姐妹<br>$woman(x):$ $x$ 是女性</p>
+<p>规则1：$\forall x \forall y(brother(x,y)\rightarrow \neg woman(x))$<br>规则2：$\forall x\forall y(sister(x,y)\rightarrow woman(x))$<br>事实：$sister(Mary,Bill)$<br>待证结论：$\neg brother(Mary,Tom)$</p>
+<p>(2) 将待证结论否定得：$brother(Mary,Tom)$<br>(3) 谓词公式集 {$\forall x \forall y(brother(x,y)\rightarrow \neg woman(x))$,$\forall x\forall y(sister(x,y)\rightarrow woman(x))$,$sister(Mary,Bill)$,$\neg brother(Mary,Tom)$}化成子句集：<br>$S&#x3D; ${<br>$C_1&#x3D;\neg brother(x,y)\vee \neg woman(x)$,<br>$C_2&#x3D;\neg sister(x,y)\vee woman(x)$,<br>$C_3&#x3D;sister(Mary,Bill)$,<br>$C_4&#x3D;brother(Mary,Tom)$<br>}</p>
+<p>(4) 应用归结原理进行归结：<br>$C_23&#x3D;woman(Mary)$<br>$C_123&#x3D;\neg brother(Mary,y)$<br>$C_1234&#x3D;NIL$ 空子句<br>结论得证。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/" title="归结反演" target="_blank" rel="external">https://ccyh.xyz/2020/03/07/归结反演/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
-</article>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
 
 
   
+</div>
 
-
-
-<!--项模版-->
-<script type="text/template" id="list-template">
-  <li class="col-sm-6 col-md-6 col-lg-4">
-    <div class="repo hover-shadow hover-grow">
-      <div class="repo-image geopattern" data-pattern-id="{%=name%}"></div>
-      <h3 class="repo-title"><a href="{%=clone_url%}" target="_blank" rel="external nofollow noopener noreferrer">{%=full_name%}</a></h3>
-      <p class="repo-body">{%=description%}</p>
-      <div class="repo-meta">
-        <span class="meta meta-type pull-left" aria-label="{%=language%} project">{%=language%}</span>
-        <span class="meta meta-star" aria-label="{%=stargazers_count%} stars"><i class="icon icon-star-fill"></i> {%=stargazers_count%}</span>
-        <span class="meta meta-fork" aria-label="{%=forks_count%} forks"><i class="icon icon-code-fork"></i> {%=forks_count%}</span>
-        <span class="meta meta-last-updated" aria-label="最后更新时间：{%=updated_at%}">
-        <i class="icon icon-clock"></i> <time datetime="{%=updated_at%}">{%=updated_at%}</time></span>
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/03/08/lygjylqjwt/" title="利用归结原理求解问题"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/03/07/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/" title="谓词逻辑归结原理"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </li>
-</script>
+  </div>
+</div>
 
-<!--获取失败模版-->
-<script type="text/template" id="error-template">
-  <h3>加载失败</h3><p>请刷新或稍后再试...</p>
-</script>
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -443,73 +623,38 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
    
-  
+
+
+
+
+   
     
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
   <script type="text/javascript">
-    var open = function () {
-      var baiduTpl = new Object();
-      var handleTpl = function () {
-        baiduTpl.list = baidu.template("list-template");
-        baiduTpl.error = baidu.template("error-template");
-      };
-
-      var handleRepo = function () {
-        var repoContainer = $('.repo-content');
-        var errorContainer = repoContainer.find(".blankslate");
-        var countContainer = $("#repo-count");
-        var platformContainer = $("#repo-platform");
-
-        platformContainer.text("Github");
-
-        url = "https://api.github.com/users/cofess/repos";
-
-        $.get(url, function (result) {
-          if (result) {
-            errorContainer.remove();
-            countContainer.text(result.length);
-            var ul = $("<ul class='repo-list row clearfix'></ul>");
-            result.sort(function (a, b) {
-              return new Date(b.updated_at) - new Date(a.updated_at);
-            }).sort(function (a, b) {
-              var a_start = a.stargazers_count;
-              var b_start = b.stargazers_count;
-              if (a.fork) a_start * 0.5;
-              if (b.fork) b_start * 0.5;
-              return b_start - a_start;
-            }).map(function (repo) {
-              if (!repo.description) {
-                repo.description = "";
-              }
-              repo.updated_at = repo.updated_at.substring(0, repo.updated_at.lastIndexOf("T"));
-              var html = baiduTpl.list(repo);
-              ul.append(html);
-            });
-
-            repoContainer.append(ul);
-            $(".geopattern").each(function () {
-              $(this).geopattern($(this).data('pattern-id'));
-            });
-          } else {
-            errorContainer.append(baiduTpl.error());
-          }
-        });
-      };
-
-      return {
-        init: function () {
-          handleTpl();
-          handleRepo();
-        }
-      }
-    };
-    $(open().init);
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
   </script>
 
-  
-
-
-
+     
 
 
 

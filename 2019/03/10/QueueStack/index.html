@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>【数据结构】栈与队列 | Hexo</title>
+  <meta name="description" content="栈和队列的基本概念 栈的基本概念 栈的定义   只能在一端（栈顶Top）进行插入和删除操作的线性表 栈顶由一个称为栈顶指针的位置指示器top来指示，它是动态变化的 表的另一端栈底是固定不变的   栈的特点   先进先出（ＦＩＬＯ） 栈就如同一个狭窄的死胡同，最先进去的人（元素）只能够最后出来   栈的存储结构   可以用顺序表或者链表来存储栈：  a) 顺序栈  b) 链式栈4. *栈的数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】栈与队列">
+<meta property="og:url" content="https://ccyh.xyz/2019/03/10/QueueStack/index.html">
+<meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="栈和队列的基本概念 栈的基本概念 栈的定义   只能在一端（栈顶Top）进行插入和删除操作的线性表 栈顶由一个称为栈顶指针的位置指示器top来指示，它是动态变化的 表的另一端栈底是固定不变的   栈的特点   先进先出（ＦＩＬＯ） 栈就如同一个狭窄的死胡同，最先进去的人（元素）只能够最后出来   栈的存储结构   可以用顺序表或者链表来存储栈：  a) 顺序栈  b) 链式栈4. *栈的数学">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-10T10:46:04.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:51:13.751Z">
+<meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="List">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ccyh.xyz/2019/03/10/QueueStack/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E7%96%AF%E5%B8%9D/">闲疯帝</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Borring/" rel="tag">Borring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DST/" rel="tag">DST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Encrypted/" rel="tag">Encrypted</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knapsack/" rel="tag">Knapsack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/" rel="tag">List</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickSort/" rel="tag">QuickSort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discretemathematics/" rel="tag">discretemathematics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.6px;">AI</a> <a href="/tags/Algorithm/" style="font-size: 13.8px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 13px;">Array</a> <a href="/tags/Blog/" style="font-size: 13px;">Blog</a> <a href="/tags/Borring/" style="font-size: 13px;">Borring</a> <a href="/tags/C/" style="font-size: 13px;">C</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/DST/" style="font-size: 13px;">DST</a> <a href="/tags/Encrypted/" style="font-size: 13px;">Encrypted</a> <a href="/tags/Graph/" style="font-size: 13px;">Graph</a> <a href="/tags/Hexo/" style="font-size: 13.4px;">Hexo</a> <a href="/tags/Knapsack/" style="font-size: 13px;">Knapsack</a> <a href="/tags/LeetCode/" style="font-size: 13.4px;">LeetCode</a> <a href="/tags/List/" style="font-size: 13.2px;">List</a> <a href="/tags/ML/" style="font-size: 14px;">ML</a> <a href="/tags/Math/" style="font-size: 13.4px;">Math</a> <a href="/tags/QuickSort/" style="font-size: 13px;">QuickSort</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/Tree/" style="font-size: 13.6px;">Tree</a> <a href="/tags/algorithm/" style="font-size: 13px;">algorithm</a> <a href="/tags/discretemathematics/" style="font-size: 13px;">discretemathematics</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/" class="title">【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/30/ResidualNetwork/" class="title">【Pytorch基础】深度残差神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-30T14:36:33.000Z" itemprop="datePublished">2020-04-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/FashionMnistCNN/" class="title">FashionMnist数据集卷积神经网络实战</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T15:58:02.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/CNN/" class="title">【Pytorch基础】卷积神经网络基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T03:05:13.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/28/Softmax/" class="title">【Pytorch基础】多分类问题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-28T09:49:35.000Z" itemprop="datePublished">2020-04-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">栈和队列的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">栈的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.</span> <span class="toc-text">队列的基本概念</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E3%80%81%E7%AE%97%E6%B3%95%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">栈和队列的存储结构、算法与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%A0%88"><span class="toc-number">3.</span> <span class="toc-text">顺序栈</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%A0%88%E7%9A%84%E5%87%A0%E4%B8%AA%E5%85%B3%E9%94%AE%E8%A6%81%E7%B4%A0%EF%BC%9A"><span class="toc-number">3.0.1.</span> <span class="toc-text">顺序栈的几个关键要素：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%A0%88%EF%BC%9A"><span class="toc-number">3.0.2.</span> <span class="toc-text">初始化栈：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%A0%88%E7%A9%BA%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">3.0.3.</span> <span class="toc-text">判断栈空代码：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9B%E6%A0%88%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">3.0.4.</span> <span class="toc-text">进栈代码：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%87%BA%E6%A0%88%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">3.0.5.</span> <span class="toc-text">出栈代码：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%A0%88"><span class="toc-number">4.</span> <span class="toc-text">链栈</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BB%A5%E4%B8%8B%E9%93%BE%E6%A0%88%E9%83%BD%E7%94%B1%E5%B8%A6%E5%A4%B4%E7%BB%93%E7%82%B9%E7%9A%84%E9%93%BE%E8%A1%A8%E8%A1%A8%E7%A4%BA"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">以下链栈都由带头结点的链表表示</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%A0%88%E7%9A%84%E5%87%A0%E4%B8%AA%E5%85%B3%E9%94%AE%E8%A6%81%E7%B4%A0%EF%BC%9A-1"><span class="toc-number">4.0.1.</span> <span class="toc-text">顺序栈的几个关键要素：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E6%A0%88%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="toc-number">4.1.</span> <span class="toc-text">链栈的初始化代码：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%A0%88%E7%A9%BA%E4%BB%A3%E7%A0%81%EF%BC%9A-1"><span class="toc-number">4.2.</span> <span class="toc-text">判断栈空代码：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E6%A0%88%E4%BB%A3%E7%A0%81%EF%BC%9A-1"><span class="toc-number">4.3.</span> <span class="toc-text">进栈代码：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BA%E6%A0%88%E4%BB%A3%E7%A0%81%EF%BC%9A-1"><span class="toc-number">4.4.</span> <span class="toc-text">出栈代码：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">栈的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E4%B8%BB%E8%A6%81%E5%BA%94%E7%94%A8%E6%9C%89%EF%BC%9A"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">栈的主要应用有：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D"><span class="toc-number">5.1.</span> <span class="toc-text">括号匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%9A"><span class="toc-number">5.1.1.</span> <span class="toc-text">算法思想：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC"><span class="toc-number">5.2.</span> <span class="toc-text">表达式求值</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%9A-1"><span class="toc-number">5.2.1.</span> <span class="toc-text">算法思想：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%86%E6%B3%A2%E5%85%B0%E8%BD%AC%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="toc-number">5.3.</span> <span class="toc-text">逆波兰转换算法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3%EF%BC%9A-2"><span class="toc-number">5.3.1.</span> <span class="toc-text">算法思想：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E9%98%9F"><span class="toc-number">6.</span> <span class="toc-text">顺序队</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="toc-number">6.1.</span> <span class="toc-text">循环队列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%B4%A0"><span class="toc-number">6.1.1.</span> <span class="toc-text">循环队列的基本要素</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0"><span class="toc-number">6.2.</span> <span class="toc-text">循环队列的基本操作实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E9%98%9F"><span class="toc-number">7.</span> <span class="toc-text">链队</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%87%E7%94%A8%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F%E6%9D%A5%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97%EF%BC%8C%E7%89%B9%E7%82%B9%E6%98%AF%E5%81%87%E8%AE%BE%E5%86%85%E5%AD%98%E6%97%A0%E9%99%90%E5%A4%A7%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E4%B8%8D%E5%AD%98%E5%9C%A8%E9%98%9F%E6%BB%A1%E4%B8%8A%E9%99%90"><span class="toc-number">7.0.0.1.</span> <span class="toc-text">采用链式存储方式来实现队列，特点是假设内存无限大的情况下不存在队满上限</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%93%BE%E9%98%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%B4%A0"><span class="toc-number">7.0.1.</span> <span class="toc-text">链队的基本要素</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E9%98%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E5%AE%9E%E7%8E%B0"><span class="toc-number">7.1.</span> <span class="toc-text">链队的基本操作实现</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-QueueStack" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【数据结构】栈与队列
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/10/QueueStack/" class="article-date">
+	  <time datetime="2019-03-10T10:46:04.000Z" itemprop="datePublished">2019-03-10</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/List/" rel="tag">List</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/10/QueueStack/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<hr>
+<h3 id="栈和队列的基本概念"><a href="#栈和队列的基本概念" class="headerlink" title="栈和队列的基本概念"></a>栈和队列的基本概念</h3><hr>
+<h4 id="栈的基本概念"><a href="#栈的基本概念" class="headerlink" title="栈的基本概念"></a>栈的基本概念</h4><ol>
+<li><em>栈的定义</em></li>
+</ol>
+<ul>
+<li>只能在一端（栈顶Top）进行插入和删除操作的线性表</li>
+<li>栈顶由一个称为栈顶指针的位置指示器top来指示，它是动态变化的</li>
+<li>表的另一端栈底是固定不变的</li>
+</ul>
+<ol>
+<li><em>栈的特点</em></li>
+</ol>
+<ul>
+<li>先进先出（ＦＩＬＯ）</li>
+<li>栈就如同一个狭窄的死胡同，最先进去的人（元素）只能够最后出来</li>
+</ul>
+<ol start="3">
+<li><em>栈的存储结构</em></li>
+</ol>
+<ul>
+<li>可以用顺序表或者链表来存储栈：<br>  a) 顺序栈<br>  b) 链式栈<!-- more -->4. *栈的数学性质*</li>
+<li>当ｎ个元素以某种顺序进栈，并且可以在任何时候出栈（在满足先进后出的前提下）时，所获得的元素排列的数目Ｎ恰好满足函数 Catalan() 的计算，即：<br>                              $$<br>                              N &#x3D; { \dfrac{1} {n+1} }×C\binom{n} {2n}<br>                              $$</li>
+</ul>
+<hr>
+<h4 id="队列的基本概念"><a href="#队列的基本概念" class="headerlink" title="队列的基本概念"></a>队列的基本概念</h4><hr>
+<ol>
+<li><em>队列的定义</em></li>
+</ol>
+<ul>
+<li>是一种操作受限的线性表，且只允许在表的一端进行插入，在另一端进行删除操作。</li>
+<li>可以插入的一端称为队尾（ｒｅａｒ），可以删除的一端称为队头（ｆｒｏｎｔ）</li>
+<li>插入元素称为进队，删除元素称为出队</li>
+</ul>
+<ol start="2">
+<li><em>队列的特点</em></li>
+</ol>
+<ul>
+<li>先进先出（ＦＩＦＯ），就像食堂打饭要排队一样，先来的人先有饭吃</li>
+</ul>
+<ol start="3">
+<li><em>队列的存储结构</em></li>
+</ol>
+<ul>
+<li>可用线性表或者链表来存储队列：<br>  a) 顺序队<br>  b) 链队</li>
+</ul>
+<hr>
+<h3 id="栈和队列的存储结构、算法与应用"><a href="#栈和队列的存储结构、算法与应用" class="headerlink" title="栈和队列的存储结构、算法与应用"></a>栈和队列的存储结构、算法与应用</h3><hr>
+<ol>
+<li><strong>顺序栈的定义</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">SqStack</span> &#123;</span><br><span class="line">  <span class="type">int</span> data[Maxsize]; <span class="comment">//一维数组用来存储数据</span></span><br><span class="line">  <span class="type">int</span> top;　<span class="comment">// ｔｏｐ指针用来指向栈顶元素,规定top=-1　为栈空，top=Maxsize-1 为栈满</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>链栈结点的定义</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LNode</span> &#123;</span><br><span class="line">  <span class="type">int</span> data; <span class="comment">// 数据域</span></span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">LNode</span> *next;　<span class="comment">// 指针域</span></span><br><span class="line">&#125;LNode;</span><br></pre></td></tr></table></figure></li>
+<li><strong>顺序队列的定义</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">SqQueue</span> &#123;</span><br><span class="line">  <span class="type">int</span> data[Maxsize]; <span class="comment">//数组存放数据</span></span><br><span class="line">  <span class="type">int</span> front;　　<span class="comment">// 队首指针</span></span><br><span class="line">  <span class="type">int</span> rear;　　<span class="comment">// 队尾指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>链队的定义</strong><br>  a) 链队结点定义：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LQNode</span>&#123;</span><br><span class="line">      <span class="type">int</span> date; <span class="comment">//数据域</span></span><br><span class="line">      <span class="keyword">struct</span> <span class="title class_">LQNode</span> *next; <span class="comment">//指针域</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+b) 链队类型定义：   <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个只包含两个指针域的结点来存放队头与队尾指针</span></span><br><span class="line">    <span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LiQueue</span>&#123;</span><br><span class="line">      <span class="keyword">struct</span> <span class="title class_">LQNode</span> *front; <span class="comment">// 队首指针</span></span><br><span class="line">      <span class="keyword">struct</span> <span class="title class_">LQNode</span> *rear;  <span class="comment">//　队尾指针</span></span><br><span class="line">    &#125;　<span class="comment">// 链队类型定义</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="顺序栈"><a href="#顺序栈" class="headerlink" title="顺序栈"></a>顺序栈</h3><hr>
+<h5 id="顺序栈的几个关键要素："><a href="#顺序栈的几个关键要素：" class="headerlink" title="顺序栈的几个关键要素："></a>顺序栈的几个关键要素：</h5><ol>
+<li><strong>三个状态</strong></li>
+</ol>
+<ul>
+<li>栈空状态：<strong>st.top &#x3D; -1</strong>;</li>
+<li>栈满状态：<strong>st.top &#x3D; Maxsize - 1</strong>;</li>
+<li>非法状态：栈满却继续入栈发生<strong>上溢</strong>；栈空继续出栈发生<strong>下溢</strong>；</li>
+</ul>
+<ol start="2">
+<li><strong>两个操作</strong></li>
+</ol>
+<ul>
+<li>元素进栈：++(st.top); st.data[st.top]&#x3D;x;</li>
+<li>元素出栈：x&#x3D;st.data[st.top]; –(st.top);</li>
+</ul>
+<hr>
+<h5 id="初始化栈："><a href="#初始化栈：" class="headerlink" title="初始化栈："></a>初始化栈：</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化一个栈，只需将栈顶指针置为－１即可</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">initStack</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> top = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="判断栈空代码："><a href="#判断栈空代码：" class="headerlink" title="判断栈空代码："></a>判断栈空代码：</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">EmptyStack</span><span class="params">(SqStack ss)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (ss.top == <span class="number">-1</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 栈空返回１；</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;　<span class="comment">// 栈非空返回０；</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="进栈代码："><a href="#进栈代码：" class="headerlink" title="进栈代码："></a>进栈代码：</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#defined Error 0</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">push</span><span class="params">(SqStack &amp;ss, <span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (ss.top == <span class="number">-1</span>) <span class="keyword">return</span> Error; <span class="comment">// 栈满时返回错误，无法入栈</span></span><br><span class="line">  ss.top++;</span><br><span class="line">  ss.data[ss.top] = x;</span><br><span class="line">  <span class="comment">// 也可一句话解决：　ss.data[++ss.top] = x;</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;　<span class="comment">//入栈成功返回１</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="出栈代码："><a href="#出栈代码：" class="headerlink" title="出栈代码："></a>出栈代码：</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">pop</span><span class="params">(SqStack &amp;ss,<span class="type">int</span> e)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (ss.top == <span class="number">-1</span>) <span class="keyword">return</span> Error; <span class="comment">// 栈空不能出栈</span></span><br><span class="line">  e = ss.data[ss.top];</span><br><span class="line">  --ss.top;</span><br><span class="line">  <span class="comment">//　也可一句话解决：　e = ss.data[ss.top--];</span></span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【注】:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对于自增操作，入++a;总是比a++;的执行效率要高一些，因此在使用二者都可以的情况下优先选择++a;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="链栈"><a href="#链栈" class="headerlink" title="链栈"></a>链栈</h3><hr>
+<h6 id="以下链栈都由带头结点的链表表示"><a href="#以下链栈都由带头结点的链表表示" class="headerlink" title="以下链栈都由带头结点的链表表示"></a>以下链栈都由带头结点的链表表示</h6><hr>
+<h5 id="顺序栈的几个关键要素：-1"><a href="#顺序栈的几个关键要素：-1" class="headerlink" title="顺序栈的几个关键要素："></a>顺序栈的几个关键要素：</h5><ol>
+<li>两个状态</li>
+</ol>
+<ul>
+<li>栈空状态：lst –&gt; next &#x3D; NULL;</li>
+<li>栈满状态：不存在栈满状态，因为单链表的内存空间是动态分配的</li>
+</ul>
+<ol start="2">
+<li>两个操作</li>
+</ol>
+<ul>
+<li>元素（由指针ｐ所指）的进栈操作：p -&gt; next &#x3D; lst -&gt; next; lst -&gt; next &#x3D; p;&#x2F;&#x2F;其实     就是头插法建立单链表的操作</li>
+<li>出栈操作：s &#x3D; lst -&gt; next; x &#x3D; s -&gt; data; lst -&gt; next &#x3D; s -&gt; next;           free(s); &#x2F;&#x2F;其实就是单链表的删除操作</li>
+</ul>
+<hr>
+<h4 id="链栈的初始化代码："><a href="#链栈的初始化代码：" class="headerlink" title="链栈的初始化代码："></a>链栈的初始化代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实际上，链栈的初始化与单链表的初始化并无不同</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">initLStack</span><span class="params">(LNode *&amp;lst)</span></span>&#123;</span><br><span class="line">  lst = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode)); <span class="comment">//制造一个头结点</span></span><br><span class="line">  lst -&gt; next = <span class="literal">NULL</span>;　<span class="comment">// 将链栈滞空</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="判断栈空代码：-1"><a href="#判断栈空代码：-1" class="headerlink" title="判断栈空代码："></a>判断栈空代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">isEmpty</span><span class="params">(LNode lst)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (lst -&gt; next == <span class="literal">NULL</span>) </span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//栈空返回１；</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;　<span class="comment">// 栈不空返回０；</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="进栈代码：-1"><a href="#进栈代码：-1" class="headerlink" title="进栈代码："></a>进栈代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">push</span><span class="params">(LNode &amp;lst,<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">  LNode s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">  s -&gt; data = x;</span><br><span class="line">  s -&gt; next = lst -&gt; next;</span><br><span class="line">  lst -&gt; next = s;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="出栈代码：-1"><a href="#出栈代码：-1" class="headerlink" title="出栈代码："></a>出栈代码：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">pop</span><span class="params">(LNode &amp;lst, <span class="type">int</span> &amp;e)</span></span>&#123; <span class="comment">// 用e返回出栈元素的值</span></span><br><span class="line">  <span class="keyword">if</span> (lst -&gt; next == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  e = lst -&gt; next -&gt; data;</span><br><span class="line">  LNode *s = lst -&gt; next;</span><br><span class="line">  lst -&gt; next = s -&gt; next;</span><br><span class="line">  <span class="built_in">free</span>(s);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h3><hr>
+<h6 id="栈的主要应用有："><a href="#栈的主要应用有：" class="headerlink" title="栈的主要应用有："></a>栈的主要应用有：</h6><ol>
+<li>括号匹配</li>
+<li>表达式求值</li>
+<li>逆波兰转换算法</li>
+</ol>
+<hr>
+<h4 id="括号匹配"><a href="#括号匹配" class="headerlink" title="括号匹配"></a>括号匹配</h4><hr>
+<h5 id="算法思想："><a href="#算法思想：" class="headerlink" title="算法思想："></a>算法思想：</h5><ul>
+<li>扫描整个表达式，判断当前符号是否为括号</li>
+<li>如果不是，继续扫描下一个字符</li>
+<li>如果是，判断是左括号还是右括号，是左括号将其入栈，是右括号就判断栈是否为空</li>
+<li>若栈为空，说明此表达式的右括号多与左夸号</li>
+<li>若栈不空则判断当前操作符是否和栈顶操作符匹配，若不匹配说明左右括号不匹配，若匹配则继续判断     下一个操作符。最后，判断栈是否为空，若不空则说明左括号多余右括     号，栈为空说明匹配成功。</li>
+</ul>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">initStack</span>(Stack stack)&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i ;i&lt;<span class="built_in">strlen</span>(str);i++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (str[i]==<span class="string">&#x27;&#123;&#x27;</span> || str[i]==<span class="string">&#x27;[&#x27;</span> || str[i]==<span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">      <span class="built_in">push</span>(stack,str[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (str[i]==<span class="string">&#x27;&#123;&#x27;</span> &amp;&amp; <span class="built_in">getTopStack</span>(stack) == <span class="string">&#x27;&#125;&#x27;</span>)</span><br><span class="line">          <span class="built_in">pop</span>(stack);</span><br><span class="line">      <span class="keyword">if</span> (str[i]==<span class="string">&#x27;[&#x27;</span> &amp;&amp; <span class="built_in">getToPStack</span>(stack) == <span class="string">&#x27;]&#x27;</span>)</span><br><span class="line">          <span class="built_in">pop</span>(stack);</span><br><span class="line">      <span class="keyword">if</span> (str[i]==<span class="string">&#x27;(&#x27;</span> &amp;&amp; <span class="built_in">getTopStack</span>(stack) == <span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">          <span class="built_in">pop</span>(stack);</span><br><span class="line">    &#125; </span><br><span class="line">      </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 最后，若栈空则匹配成功，否则失败</span></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">isEmpty</span>() == <span class="literal">true</span>)&#123;</span><br><span class="line">      cout &lt;&lt; <span class="string">&quot;括号匹配成功　！！！&quot;</span>　&lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;匹配失败　！！！&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="表达式求值"><a href="#表达式求值" class="headerlink" title="表达式求值"></a>表达式求值</h4><hr>
+<h5 id="算法思想：-1"><a href="#算法思想：-1" class="headerlink" title="算法思想："></a>算法思想：</h5><ul>
+<li>扫描表达式，当扫描到数时将其推入栈中，当扫描到一个运算符时，将该运算符作用于位于栈顶的两个数上，并将所得结果推入栈中</li>
+<li>以下将给出后缀表达式的求值程序</li>
+</ul>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">calcExp</span><span class="params">(<span class="type">char</span>* exp , Stack s)</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (exp[i] != <span class="string">&#x27;\0&#x27;</span>)&#123; <span class="comment">//</span></span><br><span class="line">      <span class="keyword">if</span> (exp[i]&gt;=<span class="string">&#x27;0&#x27;</span> &amp;&amp; exp[i]&lt;=<span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">        s.<span class="built_in">push</span>(s , exp[i]-<span class="string">&#x27;0&#x27;</span>); <span class="comment">//　若为数字，推入栈中</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(exp[i] == <span class="string">&#x27;运算符&#x27;</span>)&#123;</span><br><span class="line">          <span class="type">int</span> m = s.<span class="built_in">gettop</span>(); <span class="comment">//　取栈顶元素后将其出栈</span></span><br><span class="line">          s.<span class="built_in">pop</span>();</span><br><span class="line">          <span class="type">int</span> n = s.<span class="built_in">gettop</span>(); <span class="comment">//　取栈顶元素后将其出栈</span></span><br><span class="line">          s.pop;</span><br><span class="line">          s.<span class="built_in">push</span>(s, n[运算符]m); <span class="comment">//　将运算结果推入栈中</span></span><br><span class="line">      &#125; </span><br><span class="line">      i++; <span class="comment">// 继续遍历</span></span><br><span class="line">  &#125;</span><br><span class="line">      <span class="keyword">return</span> s.top;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="逆波兰转换算法"><a href="#逆波兰转换算法" class="headerlink" title="逆波兰转换算法"></a>逆波兰转换算法</h4><hr>
+<h5 id="算法思想：-2"><a href="#算法思想：-2" class="headerlink" title="算法思想："></a>算法思想：</h5><ul>
+<li>设立一个栈，存放运算符，初始栈为空，编译程序从左往右扫描中缀表达式，若遇到数字，直接输出，并输出一个空格为两个操作数之间的分隔符；</li>
+<li>若遇到运算符，则与栈顶比较，若运算符级别比栈顶级别高则进栈，否则退出栈顶元素并输出，之后输出一个空额作分隔符</li>
+<li>所遇到左括号，紧张；</li>
+<li>若遇到右括号，则一直退栈粗出知道退出第一个左括号为止</li>
+<li>当栈为空时，输出的结果即为<strong>后缀表达式</strong></li>
+</ul>
+<hr>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">tranfExp</span> <span class="params">(<span class="type">char</span>* exp , Stack s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (exp[i] != <span class="string">&#x27;\0&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (exp[i] &gt;= <span class="string">&#x27;0&#x27;</span> &amp;&amp; exp[i] &lt;= <span class="string">&#x27;9&#x27;</span>)&#123;</span><br><span class="line">            <span class="comment">//　若为数字，直接输出</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (exp[i] == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">            <span class="comment">//　若为左括号，进栈</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (exp[i] == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">            <span class="comment">//　若为右括号，出栈直至第一个左括号</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (exp[i] == <span class="string">&#x27;运算符&#x27;</span>)&#123;</span><br><span class="line">            <span class="comment">//　判断与栈顶元素的优先级大小</span></span><br><span class="line">            <span class="keyword">if</span> (exp[i] &gt; s.<span class="built_in">gettop</span>())</span><br><span class="line">                s.<span class="built_in">push</span>(exp[i]);  <span class="comment">// 优先级大于栈顶运算符，将该运算符进栈</span></span><br><span class="line">            <span class="keyword">else</span>  <span class="comment">//　优先级小于栈顶运算符，退出栈顶元素并且输出</span></span><br><span class="line">    <span class="keyword">while</span> (s.<span class="built_in">isEmpty</span>() == <span class="literal">false</span>)</span><br><span class="line">        <span class="built_in">pop</span>();<span class="comment">//　把栈中剩余元素全部退出并输出</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<h3 id="顺序队"><a href="#顺序队" class="headerlink" title="顺序队"></a>顺序队</h3><hr>
+<h4 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h4><hr>
+<h5 id="循环队列的基本要素"><a href="#循环队列的基本要素" class="headerlink" title="循环队列的基本要素"></a>循环队列的基本要素</h5><ol>
+<li>两个状态：</li>
+</ol>
+<ul>
+<li>队空状态：qu.rear &#x3D; qu.front;</li>
+<li>队满状态：(qu.rear+1)%front &#x3D;&#x3D; qu.front ;</li>
+</ul>
+<ol start="2">
+<li>两个操作：</li>
+</ol>
+<ul>
+<li>元素x进队操作：qu.rear &#x3D; (qu.rear+1)%MaxSize; qu.data[qu.rear] &#x3D; x;</li>
+<li>出队操作：qu.front &#x3D; (qu.front+1)%MaxSize; elem &#x3D; qu.data[qu.front];&#x2F;&#x2F;elem 保     存出队的元素</li>
+</ul>
+<hr>
+<h4 id="循环队列的基本操作实现"><a href="#循环队列的基本操作实现" class="headerlink" title="循环队列的基本操作实现"></a>循环队列的基本操作实现</h4><ol>
+<li>初始化队列算法：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">initQueue</span><span class="params">(Queue &amp;qu)</span></span>&#123;</span><br><span class="line">  qu.front = <span class="number">0</span>; </span><br><span class="line">  qu.rear = <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>判断队空算法：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">isQEmpty</span><span class="params">(Queue qu)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (qu.front == qu.rear)&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>进队算法：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">enterQueue</span><span class="params">(Queue &amp;qu , <span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> ((qu.rear+<span class="number">1</span>)%MaxSize == front)&#123;</span><br><span class="line">      cout &lt;&lt; <span class="string">&quot;队列已满&quot;</span> &lt;&lt; endl;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  qu.rear = (qu.rear+<span class="number">1</span>)%MaxSize;</span><br><span class="line">  qu.data[qu.rear] = x;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>出队算法：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">outQueue</span><span class="params">(Queue &amp;qu , <span class="type">int</span> e)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (qu.rear == qu.front)&#123;</span><br><span class="line">      cout &lt;&lt; <span class="string">&quot;队空无法出队&quot;</span> &lt;&lt; endl;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  qu.front = (qu.front+<span class="number">1</span>)%MaxSize;</span><br><span class="line">  e = qu.data[qu.front];</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<hr>
+<h3 id="链队"><a href="#链队" class="headerlink" title="链队"></a>链队</h3><h6 id="采用链式存储方式来实现队列，特点是假设内存无限大的情况下不存在队满上限"><a href="#采用链式存储方式来实现队列，特点是假设内存无限大的情况下不存在队满上限" class="headerlink" title="采用链式存储方式来实现队列，特点是假设内存无限大的情况下不存在队满上限"></a>采用链式存储方式来实现队列，特点是假设内存无限大的情况下不存在队满上限</h6><hr>
+<h5 id="链队的基本要素"><a href="#链队的基本要素" class="headerlink" title="链队的基本要素"></a>链队的基本要素</h5><ol>
+<li>两个状态：</li>
+</ol>
+<ul>
+<li>队满状态： 不存在队满状态</li>
+<li>队空状态：que.rear &#x3D; NULL || que.front &#x3D; NULL (两个满足一个即可)</li>
+</ul>
+<ol start="2">
+<li>两个操作：</li>
+</ol>
+<ul>
+<li>元素q进队操作：　分两种情况<br>      1. 当前队为空：que –&gt; rear &#x3D; que –&gt; front &#x3D; q;<br>      2. 当前队不空：que –&gt; rear –&gt; next &#x3D; p;que –&gt; rear &#x3D; p;</li>
+<li>元素出队操作： s &#x3D; que –&gt; front;  que –&gt; front &#x3D; s –&gt; next;elem &#x3D; s –&gt;                      data; free(s);</li>
+</ul>
+<hr>
+<h4 id="链队的基本操作实现"><a href="#链队的基本操作实现" class="headerlink" title="链队的基本操作实现"></a>链队的基本操作实现</h4><p>1.初始化链队算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">initLiQueue</span><span class="params">(LiQueue *&amp;que)</span></span>&#123;</span><br><span class="line">    que = (LiQueue*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LiQueue));</span><br><span class="line">    que -&gt; rear = <span class="literal">NULL</span>;</span><br><span class="line">    que -&gt; front = <span class="literal">NULL</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.判断队空算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">isEmpty</span><span class="params">(LiQueue que)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (que.rear = <span class="literal">NULL</span> || que.front = <span class="literal">NULL</span>)&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;队列为空&quot;</span>　&lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3.入队算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">enterLiQueue</span><span class="params">(LiQueue &amp;que ， <span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">    LQNode* s = (LQNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LQNode));</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isEmpty</span>(que))&#123;  <span class="comment">// 若队列为空，进队操作比较特别</span></span><br><span class="line">        que -&gt; front = que -&gt; rear = s;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        que -&gt; rear -&gt; next = s;</span><br><span class="line">        que -&gt; rear = s;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.出队算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">outLiQueue</span><span class="params">(LiQueue &amp;que , <span class="type">int</span> &amp;elem)</span></span>&#123;</span><br><span class="line">    LQNode* s = que -&gt; front;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">isEmpty</span>())&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;队为空，无法出队&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (que -&gt; front == que -&gt; rear)&#123; <span class="comment">// 若队列只有一个元素，出队操作比较特别</span></span><br><span class="line">        que -&gt; front = <span class="literal">NULL</span>;</span><br><span class="line">        que -&gt; rear = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    que -&gt; front = s -&gt; next;</span><br><span class="line">    elem = s -&gt; data;</span><br><span class="line">    <span class="built_in">free</span>(s);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2019/03/10/QueueStack/" title="【数据结构】栈与队列" target="_blank" rel="external">https://ccyh.xyz/2019/03/10/QueueStack/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/11/String/" title="【数据结构】 字符串"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/06/linearList/" title="【数据结构】线性表"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

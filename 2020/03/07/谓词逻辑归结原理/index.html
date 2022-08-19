@@ -17,18 +17,24 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Repositories | Hexo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Repositories">
-<meta property="og:url" content="https://ccyh.xyz/repository/index.html">
+  <title>谓词逻辑归结原理 | Hexo</title>
+  <meta name="description" content="归结法基本原理归结法的基本原理是采用反证法（也称反演推理法）将待证明的表达式（定理）转换成为逻辑公式（谓词公式），然后再进行归结，归结能够顺利完成，证明原公式（定理）是正确的。  $def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立    这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谓词逻辑归结原理">
+<meta property="og:url" content="https://ccyh.xyz/2020/03/07/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="归结法基本原理归结法的基本原理是采用反证法（也称反演推理法）将待证明的表达式（定理）转换成为逻辑公式（谓词公式），然后再进行归结，归结能够顺利完成，证明原公式（定理）是正确的。  $def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立    这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-19T11:08:39.982Z">
-<meta property="article:modified_time" content="2022-08-19T11:08:39.982Z">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307122016949.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307040000676.png">
+<meta property="article:published_time" content="2020-03-07T03:37:40.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:45:25.948Z">
 <meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307122016949.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://ccyh.xyz/repository/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2020/03/07/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -45,7 +51,7 @@
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 
-<body class="main-center no-sidebar" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -342,48 +348,261 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="article article-repository article-type-list" itemscope="">
-  <header class="article-header">
-    <h1 itemprop="title">Repositories</h1>
-    <p class="text-muted">I have <span id="repo-count">0</span> projects on <span id="repo-platform">Github</span></p>
-  </header>
-  <div class="article-body">
-    <div class="repo-content">
-      <div class="blankslate">
-        <p>正在加载...</p>
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%92%E7%BB%93%E6%B3%95%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">归结法基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%8F%A5%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text">子句集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%B2%81%E6%BB%A8%E9%80%8A%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86-%E5%88%A4%E5%88%AB%E5%AD%90%E5%8F%A5%E9%9B%86%E7%9A%84%E4%B8%8D%E5%8F%AF%E6%BB%A1%E8%B6%B3%E6%80%A7"><span class="toc-number">3.</span> <span class="toc-text">鲁滨逊归结原理(判别子句集的不可满足性)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%AD%90%EF%B8%8F%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E4%B8%AD%E7%9A%84%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86%EF%BC%9A%EF%BC%88%E5%90%AB%E6%9C%89%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%90%E5%8F%A5%E7%9A%84%E5%BD%92%E7%BB%93%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%AE%E6%8D%A2%E4%B8%8E%E5%90%88%E4%B8%80%EF%BC%9A%EF%BC%88%E5%AF%B9%E4%B8%AA%E4%BD%93%E5%8F%98%E9%87%8F%E5%81%9A%E9%80%82%E5%BD%93%E6%9B%BF%E6%8D%A2%EF%BC%89"><span class="toc-number">3.1.1.</span> <span class="toc-text">置换与合一：（对个体变量做适当替换）</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-谓词逻辑归结原理" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      谓词逻辑归结原理
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/03/07/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/" class="article-date">
+	  <time datetime="2020-03-07T03:37:40.000Z" itemprop="datePublished">2020-03-07</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/AI/" rel="tag">AI</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/07/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/#comments" class="article-comment-link">评论</a></span>
+        
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h2 id="归结法基本原理"><a href="#归结法基本原理" class="headerlink" title="归结法基本原理"></a>归结法基本原理</h2><p>归结法的基本原理是采用反证法（也称反演推理法）将待证明的表达式（定理）转换成为逻辑公式（谓词公式），然后再进行归结，归结能够顺利完成，证明原公式（定理）是正确的。</p>
+<blockquote>
+<p>$def:$ $Q$ 为 $P_1,P_2, \cdots ,P_n$ 的逻辑结论，当且仅当 $P\wedge \neg Q$ 是不可满足的，结论才成立</p>
+</blockquote>
+<!-- more -->
+
+<p>这样做的原因是证明不可满足性要比证明可满足性简单得多。通俗来讲，若要证明定理：张三是个好人。可以反向证明定理：张三不是个好人那是不可能的。</p>
+<p>用符号公式表示就是:</p>
+<blockquote>
+<p>待证定理：$P \Rightarrow Q$<br>置换转换为普通谓词公式:<br>$$<br>P \rightarrow Q \Leftrightarrow \neg P\vee Q<br>$$<br>再将其否定：$\neg(\neg P\vee Q) \Leftrightarrow P\wedge \neg Q$<br>即证明 $P\wedge \neg Q$ 为永假式</p>
+</blockquote>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307122016949.png" alt="归结演绎推理的思路"></p>
+<h2 id="子句集"><a href="#子句集" class="headerlink" title="子句集"></a>子句集</h2><p>为了描述子句集，先给出如下几个名词的定义：</p>
+<ul>
+<li>原子谓词公式：一个不能再分解的命题</li>
+<li>文字：原子谓词公司及其否定<ul>
+<li>$P$: 正文字</li>
+<li>$\neg P$: 负文字</li>
+</ul>
+</li>
+<li>子句：任何文字的<strong>析取式</strong>，任何文字本身也都是句子。</li>
+<li>空子句：不包含任何文字的子句</li>
+<li>子句集：所有子句的集合</li>
+</ul>
+<p><strong>例1：</strong> 将下列谓词公式化为子句集<br>$$<br>\forall x (\forall yP(x,y) \rightarrow \neg \forall y(Q(x,y)\rightarrow R(x,y)))<br>$$<br>A. 利用一下公式消去谓词公式中的$\rightarrow$ 和 $\leftrightarrow$ 符号</p>
+<blockquote>
+<p>$P\rightarrow Q\Leftrightarrow \neg P\vee Q,P\leftrightarrow Q\Leftrightarrow (P\wedge Q)\vee (\neg P\wedge \neg Q)$</p>
+</blockquote>
+<p>$\color{red}{\Longleftrightarrow} \forall x (\neg \forall yP(x,y) \vee \neg \forall y(\neg Q(x,y)\vee R(x,y)))$<br>B. 利用下列公式把否定符号 $\neg$ 移到紧靠谓词的位置上</p>
+<blockquote>
+<p>双重否定律：$\neg (\neg P)\Leftrightarrow P$<br>摩根律：$\neg (p\wedge q)\Leftrightarrow \neg p\vee \neg q$<br>量词否定转换率：$\neg \exists xP\Leftrightarrow \forall x\neg P,\neg \forall xP\Leftrightarrow \exists x \neg P$</p>
+</blockquote>
+<p>$\color{red}{\Longleftrightarrow} \forall x(\exists y\neg P(x,y)\vee \exists y(Q(x,y)\wedge \neg R(x,y)))$<br>C. 变量标准化(变元易名)</p>
+<blockquote>
+<p>$\exists xP(x) &#x3D; \exists yP(y),\forall xP(x) &#x3D; \forall yP(y)$</p>
+</blockquote>
+<p>$\color{red}{\Longleftrightarrow} \forall x(\exists y\neg P(x,y)\vee \exists \color{green}{z}(Q(x,\color{green}{z})\wedge \neg R(x,\color{green}{z})))$</p>
+<p>D. 消去存在量词（两种情况）</p>
+<blockquote>
+<p>$a.$ 存在量词不出现在全称量词的辖域内<br>$b.$ 存在量词出现在一个或者多个全称量词的辖域内<br>对于一般情况：<br>$\forall x_1(\forall x_2(\cdots \forall x_n(\exists yP(x_1,x_2,\cdots ,x_n,y)))\cdots)$<br>存在量词 $y$ 的Skolem函数为 $y&#x3D;f(x_1,x_2,\cdots ,x_n)$<br>Skolem化：用Slolem函数代替每个存在量词化的变量的过程</p>
+</blockquote>
+<p>如本例中两个存在量词 $y,z$ 只收到全称量词 $x$ 的约束，因此可以令：$y &#x3D; f(x),z &#x3D; g(x)$<br>$\color{red}{\Longleftrightarrow} \forall x(\neg P(x,\color{green}{f(x)})\vee (Q(x,\color{green}{g(x)})\wedge \neg R(x,\color{green}{g(x)})))$</p>
+<p>E. 化为前束范式（本例中到此式子已经满足前束范式标准了）</p>
+<p>$\color{red}{\Longleftrightarrow} \forall x(\neg P(x,\color{green}{f(x)})\vee (Q(x,\color{green}{g(x)})\wedge \neg R(x,\color{green}{g(x)})))$</p>
+<p>F. 化为 $Skolem$ 标准型</p>
+<blockquote>
+<p>$Skolem$ 标准型：<br>$M:$ 子句的合取式，称为Skolem标准型的母式，即去掉所有量词的前束范式。<br>利用分配律：<br>$p\vee(q\wedge r)\Leftrightarrow (p\vee q)\wedge (p\vee r)$<br>$p\wedge(q\vee r)\Leftrightarrow (p\wedge q)\vee (p\wedge r)$</p>
+</blockquote>
+<p>$\color{red}{\Longleftrightarrow} \forall x((\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}))\wedge (\neg P(x,\color{green}{f(x)})\vee \neg R(x,\color{green}{g(x)})))$</p>
+<p>G. 略去全称量词<br>$\color{red}{\Longleftrightarrow} ((\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}))\wedge (\neg P(x,\color{green}{f(x)})\vee \neg R(x,\color{green}{g(x)})))$</p>
+<p>H. 消去合取词,成为一个子句集合（析取句的集合）<br>$\color{red}{\Longleftrightarrow} {(\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}), \neg P(x,\color{green}{f(x)})\vee \neg R(x,\color{green}{g(x)})}$</p>
+<p>I. 子句变量的标准化（不同子句用不同变元）<br>$\color{red}{\Longleftrightarrow} {(\neg P(x,\color{green}{f(x)})\vee Q(x,\color{green}{g(x)}), \neg P(y,\color{green}{f(y)})\vee \neg R(y,\color{green}{g(y)})}$</p>
+<hr>
+<h2 id="鲁滨逊归结原理-判别子句集的不可满足性"><a href="#鲁滨逊归结原理-判别子句集的不可满足性" class="headerlink" title="鲁滨逊归结原理(判别子句集的不可满足性)"></a>鲁滨逊归结原理(判别子句集的不可满足性)</h2><blockquote>
+<p>出发点：由于子句集当中的子句之间的关系是合取关系，因此只要有一个子句不可满足，则整个子句集就不可满足。</p>
+</blockquote>
+<p><strong>⭐️鲁滨逊归结原理的基本思想：</strong></p>
+<ul>
+<li>检查子句集 $S$ 中是否包含 <strong>空子句</strong> ，若包含，则不可满足。</li>
+<li>若不包含空子句，在 $S$ 中选择合适的子句进行归结，一旦归结出空子句，就说明 $S$ 是不可满足的。</li>
+<li>另外需注意的是，对于鲁滨逊归结原理，如果在归结过程中出现空子句则可说明子句集的不可满足性；但若无法归结出空子句也无法说明该子句集可满足，也就是说鲁滨逊归结原理只能用来证伪。</li>
+</ul>
+<p><strong>命题逻辑中的归结原理：</strong><br>$Def:$ 归结指的是，设$C_1$与$C_2$是子句集中的任意两个句子，如果$C_1$中的文字$L_1$与$C_2$中的文字$L_2$互补(同一谓词的正负文字)，那么从$C_1$与$C_2$中分别消去$L_1$和$L_2$, 并将两个子句中余下的部分 <strong>析取</strong>，构成一个新的子句 $C12$。<br>$Def:$ 归结式$C12$是其亲本子句$C_1$和$C_2$的逻辑结论。即如果$C_1$与$C_2$为真，则$C12$为真。<br><strong>推论1：</strong> 由$C12$代替$C_1$和$C_2$后的新的子句集$S_1$的不可满足性也可代表原子句集的不可满足性（单向的）。<br><strong>推论2：</strong> 若不作代替，直接将$C12$加入原子句集$S$得到新的子句集$S_2$,则$S$与$S_2$在不可满足的意义上是等价的（双向的）。</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/20200307040000676.png" alt="子句归结"></p>
+<h3 id="⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）"><a href="#⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）" class="headerlink" title="⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）"></a>⭐️谓词逻辑中的归结原理：（含有变量的子句的归结）</h3><p>&amp;emsp;谓词逻辑的归结比命题逻辑的归结要复杂得多，其中一个原因就是谓词逻辑公式中含有个体变量与函数。因此寻找互补的子句的过程就比较复杂。例如：<br>$$<br>P(x)\vee Q(y)\qquad and \qquad \neg P(a)\vee R(z)<br>$$<br>就不易从直接比较中发现这两个子句中含有的互补对，但如果将$x$取值为$a$,这很显然这两个句子中有互补对。</p>
+<h4 id="置换与合一：（对个体变量做适当替换）"><a href="#置换与合一：（对个体变量做适当替换）" class="headerlink" title="置换与合一：（对个体变量做适当替换）"></a>置换与合一：（对个体变量做适当替换）</h4><p><strong>置换：</strong> 将子句中的变量做适当替换，可替换成常量、变量、Skolem函数。<br><strong>合一：</strong> 寻找相对变量的置换，使两个谓词公式一致</p>
+<p><strong>如：</strong> $C_1&#x3D;P(x)\vee Q(a), C_2&#x3D;\neg P(b)\vee R(x)$<br>解：<br>$\sigma &#x3D; f(a)&#x2F;x $; $x$ 用$f(a)$替换<br>$C_1\sigma &#x3D; P(f(a))\vee Q(f(a))$,<br>选互补对：$L_1&#x3D;P(f(a)),L_2&#x3D;\neg P(y), \sigma &#x3D;  f(a)&#x2F;y $<br>得归结式：$C_12&#x3D;R(b)\vee Q(f(a))$</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2020/03/07/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86/" title="谓词逻辑归结原理" target="_blank" rel="external">https://ccyh.xyz/2020/03/07/谓词逻辑归结原理/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
-</article>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
 
 
   
+</div>
 
-
-
-<!--项模版-->
-<script type="text/template" id="list-template">
-  <li class="col-sm-6 col-md-6 col-lg-4">
-    <div class="repo hover-shadow hover-grow">
-      <div class="repo-image geopattern" data-pattern-id="{%=name%}"></div>
-      <h3 class="repo-title"><a href="{%=clone_url%}" target="_blank" rel="external nofollow noopener noreferrer">{%=full_name%}</a></h3>
-      <p class="repo-body">{%=description%}</p>
-      <div class="repo-meta">
-        <span class="meta meta-type pull-left" aria-label="{%=language%} project">{%=language%}</span>
-        <span class="meta meta-star" aria-label="{%=stargazers_count%} stars"><i class="icon icon-star-fill"></i> {%=stargazers_count%}</span>
-        <span class="meta meta-fork" aria-label="{%=forks_count%} forks"><i class="icon icon-code-fork"></i> {%=forks_count%}</span>
-        <span class="meta meta-last-updated" aria-label="最后更新时间：{%=updated_at%}">
-        <i class="icon icon-clock"></i> <time datetime="{%=updated_at%}">{%=updated_at%}</time></span>
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/" title="归结反演"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/03/06/%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA/" title="谓词演算的推理理论"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </li>
-</script>
+  </div>
+</div>
 
-<!--获取失败模版-->
-<script type="text/template" id="error-template">
-  <h3>加载失败</h3><p>请刷新或稍后再试...</p>
-</script>
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -443,73 +662,38 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
    
-  
+
+
+
+
+   
     
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
   <script type="text/javascript">
-    var open = function () {
-      var baiduTpl = new Object();
-      var handleTpl = function () {
-        baiduTpl.list = baidu.template("list-template");
-        baiduTpl.error = baidu.template("error-template");
-      };
-
-      var handleRepo = function () {
-        var repoContainer = $('.repo-content');
-        var errorContainer = repoContainer.find(".blankslate");
-        var countContainer = $("#repo-count");
-        var platformContainer = $("#repo-platform");
-
-        platformContainer.text("Github");
-
-        url = "https://api.github.com/users/cofess/repos";
-
-        $.get(url, function (result) {
-          if (result) {
-            errorContainer.remove();
-            countContainer.text(result.length);
-            var ul = $("<ul class='repo-list row clearfix'></ul>");
-            result.sort(function (a, b) {
-              return new Date(b.updated_at) - new Date(a.updated_at);
-            }).sort(function (a, b) {
-              var a_start = a.stargazers_count;
-              var b_start = b.stargazers_count;
-              if (a.fork) a_start * 0.5;
-              if (b.fork) b_start * 0.5;
-              return b_start - a_start;
-            }).map(function (repo) {
-              if (!repo.description) {
-                repo.description = "";
-              }
-              repo.updated_at = repo.updated_at.substring(0, repo.updated_at.lastIndexOf("T"));
-              var html = baiduTpl.list(repo);
-              ul.append(html);
-            });
-
-            repoContainer.append(ul);
-            $(".geopattern").each(function () {
-              $(this).geopattern($(this).data('pattern-id'));
-            });
-          } else {
-            errorContainer.append(baiduTpl.error());
-          }
-        });
-      };
-
-      return {
-        init: function () {
-          handleTpl();
-          handleRepo();
-        }
-      }
-    };
-    $(open().init);
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
   </script>
 
-  
-
-
-
+     
 
 
 

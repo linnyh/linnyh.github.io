@@ -17,18 +17,27 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Repositories | Hexo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Repositories">
-<meta property="og:url" content="https://ccyh.xyz/repository/index.html">
+  <title>【Pytorch基础】处理多维特征的输入 | Hexo</title>
+  <meta name="description" content="回顾&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。 关于糖尿病的二分类问题1. 准备数据集 上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。 123456789import numpy as npimport torchxy &#x3D; np.loadtxt(&amp;#x27;h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Pytorch基础】处理多维特征的输入">
+<meta property="og:url" content="https://ccyh.xyz/2020/04/26/MultipleDimLogisticModel/index.html">
 <meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="回顾&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。 关于糖尿病的二分类问题1. 准备数据集 上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。 123456789import numpy as npimport torchxy &#x3D; np.loadtxt(&amp;#x27;h">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-19T11:08:39.982Z">
-<meta property="article:modified_time" content="2022-08-19T11:08:39.982Z">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426044132660.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060736716.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060804635.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060832917.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426080306413.png">
+<meta property="article:published_time" content="2020-04-26T08:40:47.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:51:07.035Z">
 <meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426044132660.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://ccyh.xyz/repository/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2020/04/26/MultipleDimLogisticModel/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -45,7 +54,7 @@
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 
-<body class="main-center no-sidebar" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -342,48 +351,225 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="article article-repository article-type-list" itemscope="">
-  <header class="article-header">
-    <h1 itemprop="title">Repositories</h1>
-    <p class="text-muted">I have <span id="repo-count">0</span> projects on <span id="repo-platform">Github</span></p>
-  </header>
-  <div class="article-body">
-    <div class="repo-content">
-      <div class="blankslate">
-        <p>正在加载...</p>
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-MultipleDimLogisticModel" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【Pytorch基础】处理多维特征的输入
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/26/MultipleDimLogisticModel/" class="article-date">
+	  <time datetime="2020-04-26T08:40:47.000Z" itemprop="datePublished">2020-04-26</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/ML/" rel="tag">ML</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/26/MultipleDimLogisticModel/#comments" class="article-comment-link">评论</a></span>
+        
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>&amp;emsp;到目前为止，我们讨论的都是只有一个实数输入的模型。但实际情况要复杂的多，因此，如何处理多维输入是个非常重要的问题。</p>
+<h2 id="关于糖尿病的二分类问题"><a href="#关于糖尿病的二分类问题" class="headerlink" title="关于糖尿病的二分类问题"></a>关于糖尿病的二分类问题</h2><h3 id="1-准备数据集"><a href="#1-准备数据集" class="headerlink" title="1. 准备数据集"></a>1. 准备数据集</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426044132660.png"></p>
+<p>上述样本的输入为 8 个指标，输出为两个类别（病情未来会加重 1、病情未来不会加重 0）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">xy = np.loadtxt(<span class="string">&#x27;https://project-preview-1257022783.cos.ap-chengdu.myqcloud.com/diabetes.csv.gz&#x27;</span>,delimiter=<span class="string">&#x27;,&#x27;</span>,dtype=np.float32)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建tensor</span></span><br><span class="line">x_data = torch.from_numpy(xy[:,:-<span class="number">1</span>]) <span class="comment"># 所有行，最后一列不要</span></span><br><span class="line">y_data = torch.from_numpy(xy[:,[-<span class="number">1</span>]]) <span class="comment"># 所有行，只要最后一列，-1加[]表示拿出来一个矩阵，而不是向量</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="多维度输入的逻辑回归模型"><a href="#多维度输入的逻辑回归模型" class="headerlink" title="多维度输入的逻辑回归模型"></a>多维度输入的逻辑回归模型</h2><p>&amp;emsp;上述数据集的输入不再是一个简单的实数，而是一个8维向量$x^{(i)}$,对于单个样本其模型为:</p>
+<p>$$\hat{y}^{(i)} &#x3D; \sigma (w^T \times x^{(i)} + b)$$</p>
+<p>$$\Leftrightarrow \sigma (\sum_{n&#x3D;1}^{8} x_{n}^{(i)} \cdot w_n + b)$$</p>
+<p>$$\Leftrightarrow \sigma( (w^T \times x^{(i)})^T + b)  \text{  标量的转置还是该标量}$$</p>
+<p>$$\Leftrightarrow \sigma \left( \begin{bmatrix} x_1 &amp; x_2 &amp; x_3 &amp; x_4 &amp; x_5 &amp; x_6 &amp; x_7 &amp; x_8  \end{bmatrix} \times \begin{bmatrix} w_1 \ w_2 \ w_3 \ w_4 \ w_5 \ w_6 \ w_7 \ w_8  \end{bmatrix} + b \right) &#x3D; \sigma(z^{(i)})$$</p>
+<p>上述操作得到一个标量 $\hat{y}^{(i)}$, $\sigma$ 为 Logistic 函数。</p>
+<h2 id="Mini-Batch-N-samples-情况下"><a href="#Mini-Batch-N-samples-情况下" class="headerlink" title="Mini-Batch(N samples) 情况下"></a>Mini-Batch(N samples) 情况下</h2><p>&amp;emsp; Mini_Batch 的大小为$N$,即每次更新都根据$N$个样本来计算损失，其模型为：</p>
+<p>$$\begin{bmatrix} \hat{y}^{(1)} \ \vdots \ \hat{y}^{(N)} \end{bmatrix} &#x3D; \begin{bmatrix} \sigma(z^{(1)}) \ \vdots \ \sigma(z^{(N)}) \end{bmatrix} &#x3D; \sigma(\begin{bmatrix} z^{(1)} \ \vdots \ z^{(N)} \end{bmatrix})$$</p>
+<p>其中：</p>
+<p>$$z^{(1)} &#x3D; \begin{bmatrix} x_{1}^{(1)} &amp; \cdots &amp;  x_{8}^{(1)} \end{bmatrix} \times \begin{bmatrix} w_1 \ \vdots \ w_8 \end{bmatrix} + b$$</p>
+<p>$$z^{(N)} &#x3D; \begin{bmatrix} x_{1}^{(N)} &amp; \cdots &amp;  x_{8}^{(N)} \end{bmatrix} \times \begin{bmatrix} w_1 \ \vdots \ w_8 \end{bmatrix} + b$$</p>
+<p>即：</p>
+<p>$$\begin{bmatrix} z^{(1)} \ \vdots \ z^{(N)} \end{bmatrix}<em>{N\times 1} &#x3D; \begin{bmatrix} x</em>{1}^{(1)} &amp; \cdots &amp;  x_{8}^{(1)} \ \vdots &amp; \ddots &amp; \vdots \ x_{1}^{(N)} &amp; \cdots &amp;  x_{8}^{(N)} \end{bmatrix}<em>{N\times 8} \begin{bmatrix} w_1 \ \vdots \ w_8 \end{bmatrix}</em>{8\times 1} + \begin{bmatrix} b \ \vdots \ b \end{bmatrix}_{N\times 1}$$</p>
+<h2 id="构造多层神经网络"><a href="#构造多层神经网络" class="headerlink" title="构造多层神经网络"></a>构造多层神经网络</h2><blockquote>
+<p><strong>先导知识：</strong><br>对于矩阵运算 $y &#x3D; A \times x$</p>
+</blockquote>
+<blockquote>
+<p>其中 $$ y_{m \times 1},A_{m \times n},x_{n \times 1} $$</p>
+</blockquote>
+<blockquote>
+<p>那么，上式表示为将$n$维空间映射到$m$维空间的一个线性变换。<br>因此，可以将矩阵看成一种空间变换的函数。<br>所以，self.linear &#x3D; torch.nn.Linear(8,6) 就可以看做将一个 8 维空间经过线性变换映射到一个 6 维空间上。<br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060736716.png"><br>但是，若我们在每一次线性变换后加入了非线性函数 $\sigma$ ，就可以实现非线性变换，使得模型可以拟合非线性问题。</p>
+</blockquote>
+<p>&amp;emsp;多层神经网络，就是通过拼接多次变换得到的：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060804635.png"><br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426060832917.png"></p>
+<blockquote>
+<p>注意：理论上，隐层数量越多模型的学习能力就越强。但是，太强的学习能力会导致模型连数据中的噪声都学习到了（过拟合）反而适得其反。一个号的模型应该要具有一定的泛化能力，不能去死扣细节而去抓住问题的主要矛盾。因此，层数的多少应该根据实际情况适当尝试调整，而不是一味地求多。</p>
+</blockquote>
+<h1 id="定义多层神经网络"><a href="#定义多层神经网络" class="headerlink" title="定义多层神经网络"></a>定义多层神经网络</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Model</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(Model,self).__init__()</span><br><span class="line">        self.linear1 = torch.nn.Linear(<span class="number">8</span>,<span class="number">6</span>) <span class="comment"># 输入维度为 8</span></span><br><span class="line">        self.linear2 = torch.nn.Linear(<span class="number">6</span>,<span class="number">4</span>)</span><br><span class="line">        self.linear3 = torch.nn.Linear(<span class="number">4</span>,<span class="number">1</span>)</span><br><span class="line">        self.activate = torch.nn.Sigmoid() <span class="comment"># 激活函数</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        x = self.activate(self.linear1(x))</span><br><span class="line">        x = self.activate(self.linear2(x))</span><br><span class="line">        x = self.activate(self.linear3(x))</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    </span><br><span class="line">model = Model()</span><br></pre></td></tr></table></figure>
+
+<h1 id="损失函数和优化器"><a href="#损失函数和优化器" class="headerlink" title="损失函数和优化器"></a>损失函数和优化器</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">criterion = torch.nn.BCELoss(reduction=<span class="string">&quot;mean&quot;</span>)</span><br><span class="line">optimizer = torch.optim.SGD(model.parameters(),lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">h_list = []</span><br><span class="line">l_list = []</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10000</span>):</span><br><span class="line">    <span class="comment"># 前馈计算</span></span><br><span class="line">    y_pred = model(x_data)</span><br><span class="line">    loss = criterion(y_pred,y_data)</span><br><span class="line">    <span class="built_in">print</span>(epoch, loss.item())</span><br><span class="line">    h_list.append(epoch)</span><br><span class="line">    l_list.append(loss.item())</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 反向传播</span></span><br><span class="line">    optimizer.zero_grad()</span><br><span class="line">    loss.backward()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 更新参数</span></span><br><span class="line">    optimizer.step()</span><br></pre></td></tr></table></figure>
+
+<h2 id="绘制收敛图"><a href="#绘制收敛图" class="headerlink" title="绘制收敛图"></a>绘制收敛图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">plt.plot(h_list, l_list)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;loss&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;epoch&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/MultipleDimLogisticModel/20200426080306413.png"></p>
+<blockquote>
+<ul>
+<li>参考：</li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Y7411d7Ys?p=1">《Pytorch深度学习实践》</a></li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2020/04/26/MultipleDimLogisticModel/" title="【Pytorch基础】处理多维特征的输入" target="_blank" rel="external">https://ccyh.xyz/2020/04/26/MultipleDimLogisticModel/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
-</article>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
 
 
   
+</div>
 
-
-
-<!--项模版-->
-<script type="text/template" id="list-template">
-  <li class="col-sm-6 col-md-6 col-lg-4">
-    <div class="repo hover-shadow hover-grow">
-      <div class="repo-image geopattern" data-pattern-id="{%=name%}"></div>
-      <h3 class="repo-title"><a href="{%=clone_url%}" target="_blank" rel="external nofollow noopener noreferrer">{%=full_name%}</a></h3>
-      <p class="repo-body">{%=description%}</p>
-      <div class="repo-meta">
-        <span class="meta meta-type pull-left" aria-label="{%=language%} project">{%=language%}</span>
-        <span class="meta meta-star" aria-label="{%=stargazers_count%} stars"><i class="icon icon-star-fill"></i> {%=stargazers_count%}</span>
-        <span class="meta meta-fork" aria-label="{%=forks_count%} forks"><i class="icon icon-code-fork"></i> {%=forks_count%}</span>
-        <span class="meta meta-last-updated" aria-label="最后更新时间：{%=updated_at%}">
-        <i class="icon icon-clock"></i> <time datetime="{%=updated_at%}">{%=updated_at%}</time></span>
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/27/DataLoaderandDataset/" title="【Pytorch基础】加载数据集"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/26/Logistic/" title="【Pytorch基础】逻辑回归"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </li>
-</script>
+  </div>
+</div>
 
-<!--获取失败模版-->
-<script type="text/template" id="error-template">
-  <h3>加载失败</h3><p>请刷新或稍后再试...</p>
-</script>
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -443,73 +629,38 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
    
-  
+
+
+
+
+   
     
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
   <script type="text/javascript">
-    var open = function () {
-      var baiduTpl = new Object();
-      var handleTpl = function () {
-        baiduTpl.list = baidu.template("list-template");
-        baiduTpl.error = baidu.template("error-template");
-      };
-
-      var handleRepo = function () {
-        var repoContainer = $('.repo-content');
-        var errorContainer = repoContainer.find(".blankslate");
-        var countContainer = $("#repo-count");
-        var platformContainer = $("#repo-platform");
-
-        platformContainer.text("Github");
-
-        url = "https://api.github.com/users/cofess/repos";
-
-        $.get(url, function (result) {
-          if (result) {
-            errorContainer.remove();
-            countContainer.text(result.length);
-            var ul = $("<ul class='repo-list row clearfix'></ul>");
-            result.sort(function (a, b) {
-              return new Date(b.updated_at) - new Date(a.updated_at);
-            }).sort(function (a, b) {
-              var a_start = a.stargazers_count;
-              var b_start = b.stargazers_count;
-              if (a.fork) a_start * 0.5;
-              if (b.fork) b_start * 0.5;
-              return b_start - a_start;
-            }).map(function (repo) {
-              if (!repo.description) {
-                repo.description = "";
-              }
-              repo.updated_at = repo.updated_at.substring(0, repo.updated_at.lastIndexOf("T"));
-              var html = baiduTpl.list(repo);
-              ul.append(html);
-            });
-
-            repoContainer.append(ul);
-            $(".geopattern").each(function () {
-              $(this).geopattern($(this).data('pattern-id'));
-            });
-          } else {
-            errorContainer.append(baiduTpl.error());
-          }
-        });
-      };
-
-      return {
-        init: function () {
-          handleTpl();
-          handleRepo();
-        }
-      }
-    };
-    $(open().init);
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
   </script>
 
-  
-
-
-
+     
 
 
 

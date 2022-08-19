@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>【数据结构】 字符串 | Hexo</title>
+  <meta name="description" content="串的定义1234&#x2F;&#x2F; 通常用一个字符数组来表示char str[] &#x3D; &quot;hello&quot;;&#x2F;&#x2F; 数组str内存储的字符为&amp;#123;&amp;#x27;h&amp;#x27;,&amp;#x27;e&amp;#x27;,&amp;#x27;l&amp;#x27;,&amp;#x27;l&amp;#x27;,&amp;#x27;o&amp;#x27;,&amp;#x27;\0&amp;#x27;&amp;#125; ,故有6个数组元素，其中&amp;#x27;\0&amp;#x27;是串的结束标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】 字符串">
+<meta property="og:url" content="https://ccyh.xyz/2019/03/11/String/index.html">
+<meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="串的定义1234&#x2F;&#x2F; 通常用一个字符数组来表示char str[] &#x3D; &quot;hello&quot;;&#x2F;&#x2F; 数组str内存储的字符为&amp;#123;&amp;#x27;h&amp;#x27;,&amp;#x27;e&amp;#x27;,&amp;#x27;l&amp;#x27;,&amp;#x27;l&amp;#x27;,&amp;#x27;o&amp;#x27;,&amp;#x27;\0&amp;#x27;&amp;#125; ,故有6个数组元素，其中&amp;#x27;\0&amp;#x27;是串的结束标">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-11T10:46:04.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:51:56.296Z">
+<meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="String">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ccyh.xyz/2019/03/11/String/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E7%96%AF%E5%B8%9D/">闲疯帝</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Borring/" rel="tag">Borring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DST/" rel="tag">DST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Encrypted/" rel="tag">Encrypted</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knapsack/" rel="tag">Knapsack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/" rel="tag">List</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickSort/" rel="tag">QuickSort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discretemathematics/" rel="tag">discretemathematics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.6px;">AI</a> <a href="/tags/Algorithm/" style="font-size: 13.8px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 13px;">Array</a> <a href="/tags/Blog/" style="font-size: 13px;">Blog</a> <a href="/tags/Borring/" style="font-size: 13px;">Borring</a> <a href="/tags/C/" style="font-size: 13px;">C</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/DST/" style="font-size: 13px;">DST</a> <a href="/tags/Encrypted/" style="font-size: 13px;">Encrypted</a> <a href="/tags/Graph/" style="font-size: 13px;">Graph</a> <a href="/tags/Hexo/" style="font-size: 13.4px;">Hexo</a> <a href="/tags/Knapsack/" style="font-size: 13px;">Knapsack</a> <a href="/tags/LeetCode/" style="font-size: 13.4px;">LeetCode</a> <a href="/tags/List/" style="font-size: 13.2px;">List</a> <a href="/tags/ML/" style="font-size: 14px;">ML</a> <a href="/tags/Math/" style="font-size: 13.4px;">Math</a> <a href="/tags/QuickSort/" style="font-size: 13px;">QuickSort</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/Tree/" style="font-size: 13.6px;">Tree</a> <a href="/tags/algorithm/" style="font-size: 13px;">algorithm</a> <a href="/tags/discretemathematics/" style="font-size: 13px;">discretemathematics</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/" class="title">【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/30/ResidualNetwork/" class="title">【Pytorch基础】深度残差神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-30T14:36:33.000Z" itemprop="datePublished">2020-04-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/FashionMnistCNN/" class="title">FashionMnist数据集卷积神经网络实战</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T15:58:02.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/CNN/" class="title">【Pytorch基础】卷积神经网络基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T03:05:13.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/28/Softmax/" class="title">【Pytorch基础】多分类问题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-28T09:49:35.000Z" itemprop="datePublished">2020-04-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">串的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">串的存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">串的基本操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95-%E9%87%8D%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">串的模式匹配算法(重点)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BD%95%E4%B8%BA%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%EF%BC%9A"><span class="toc-number">4.0.1.</span> <span class="toc-text">何为模式匹配：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%B2%E7%9A%84%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95%E5%88%86%E4%B8%BA%EF%BC%9A"><span class="toc-number">4.0.2.</span> <span class="toc-text">串的模式匹配算法分为：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#KMP-%E7%AE%97%E6%B3%95%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="toc-number">5.</span> <span class="toc-text">KMP 算法的改进</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#getNextval-%E7%AE%97%E6%B3%95%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">getNextval() 算法核心思想：</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-String" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【数据结构】 字符串
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/11/String/" class="article-date">
+	  <time datetime="2019-03-11T10:46:04.000Z" itemprop="datePublished">2019-03-11</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/String/" rel="tag">String</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/11/String/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h4 id="串的定义"><a href="#串的定义" class="headerlink" title="串的定义"></a>串的定义</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通常用一个字符数组来表示</span></span><br><span class="line"><span class="type">char</span> str[] = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line"><span class="comment">// 数组str内存储的字符为&#123;&#x27;h&#x27;,&#x27;e&#x27;,&#x27;l&#x27;,&#x27;l&#x27;,&#x27;o&#x27;,&#x27;\0&#x27;&#125; ,故有6个数组元素，其中&#x27;\0&#x27;是串的结束标志，告知编译器串结束了。</span></span><br><span class="line"><span class="comment">// 但是串str的长度为5，“hello”，</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>【注】以上定义方式一般不用，因为用该方式单纯以 ‘\0’ 结尾的串如果要得到字符串的长度较为麻烦（需要遍历整个串，时间复杂度为O(n)，故一般情况下我们用自己定义的结构体来定义串，下面会谈到。</li>
+</ul>
+<hr>
+<ul>
+<li>【注】空格也是串中的元素，由一个或多个空格组成的串称为空格串，空格串不是“空串”。</li>
+</ul>
+<hr>
+<ul>
+<li>串的逻辑结构与线性表类似，串是限定了元素为字符的线性表。但从操作对象上来说，串与线性表有着很大的不同：线性表的主要操作对象是单个元素，而串的主要操作对象是该串的一个“<strong>子串</strong>”。</li>
+</ul>
+<!-- more -->---
+<h4 id="串的存储结构"><a href="#串的存储结构" class="headerlink" title="串的存储结构"></a>串的存储结构</h4><hr>
+<p><strong>1. 定长顺序存储表示：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">Str</span>&#123;</span><br><span class="line">  <span class="type">char</span> str[maxsize+<span class="number">1</span>]; <span class="comment">// 用来存放字串的字符数组，maxsize 为字符串最大长度，maxsize+1为数组最大长度，+1 用于存储 &#x27;\0&#x27;.</span></span><br><span class="line">  <span class="type">int</span> length; <span class="comment">// 字符串长度，可用Str.length方法直接访问 length &lt;= maxsize;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2. 动态分配存储表示：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LStr</span>&#123;</span><br><span class="line">  <span class="type">char</span> *ch; <span class="comment">// 指向malloc();动态分配存储区的首地址的指针</span></span><br><span class="line">  <span class="type">int</span> length; <span class="comment">// 字符串长度</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="串的基本操作"><a href="#串的基本操作" class="headerlink" title="串的基本操作"></a>串的基本操作</h4><hr>
+<p><strong>1. 赋值操作：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">strassign</span><span class="params">(LStr&amp; str,<span class="type">char</span>* ch)</span></span>&#123; <span class="comment">// 需返回的变量带引用符号&amp;</span></span><br><span class="line">  <span class="keyword">if</span> (str.ch)&#123;</span><br><span class="line">    <span class="built_in">free</span>(str.ch); <span class="comment">// 释放原有空间</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> len = <span class="number">0</span>;</span><br><span class="line">  <span class="type">char</span> *c = ch;</span><br><span class="line">  <span class="keyword">while</span>(c)&#123; <span class="comment">// 计算ch的长度</span></span><br><span class="line">    ++len;</span><br><span class="line">    ++c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (len == <span class="number">0</span> )&#123;</span><br><span class="line">    str.ch = <span class="literal">NULL</span>; <span class="comment">// 如果ch为空，则直接返回一个空的串</span></span><br><span class="line">    str.len = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> &#123;</span><br><span class="line">    str.ch = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">char</span>)*(str.len+<span class="number">1</span>)); <span class="comment">// 用malloc函数分配一块连续的存储空间，str.len+1是为了容纳&#x27;\0&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> (str.ch == <span class="literal">NULL</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//分配失败</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      c = ch;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= len;i++)&#123; <span class="comment">//遍历并赋值</span></span><br><span class="line">        str.ch[i] = *c; <span class="comment">// *c 表示c指针所指的位置的值</span></span><br><span class="line">        ++c; <span class="comment">// c指针指向下一个位置</span></span><br><span class="line">      &#125;</span><br><span class="line">      str.len = len; <span class="comment">// 被赋值的串长度等于ch的串长</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// successfully</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2. 取串长度操作：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">StrLength</span><span class="params">(LStr str)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 有给串长度信息的情况：</span></span><br><span class="line">    <span class="keyword">return</span> str.len; <span class="comment">// 返回str串的长度</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//在没有给出串长度信息的情况下：</span></span><br><span class="line">    <span class="type">int</span> len = <span class="number">0</span>;</span><br><span class="line">    <span class="type">char</span> = *c;</span><br><span class="line">    c = str.ch;</span><br><span class="line">    <span class="keyword">while</span>(c)&#123;</span><br><span class="line">      ++len;</span><br><span class="line">      ++c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>串的比较操作</strong>：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">strCompare</span><span class="params">(LStr str1,LStr str2)</span></span>&#123;</span><br><span class="line">    <span class="comment">//啰嗦版:</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>;i &lt; str1.len &amp;&amp; i &lt; str2.len)&#123;</span><br><span class="line">        <span class="keyword">if</span>(str1.ch[i] - str2.ch[i] == <span class="number">0</span>) i++;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(str1.ch[i] - str2.ch[i] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;str1 &gt; str2&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            cout &lt;&lt; <span class="string">&quot;str1 &lt; str2&quot;</span> &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (str1.len - str2.len &gt; <span class="number">0</span>)&#123;</span><br><span class="line">      cout &lt;&lt; <span class="string">&quot;str1 &gt; str2&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (str1.len - str2.len &lt; <span class="number">0</span>)&#123;</span><br><span class="line">      cout &lt;&lt; <span class="string">&quot;str1 &lt; str2&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> cout &lt;&lt; <span class="string">&quot;str1 = str2&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 简洁版：</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; str1.len &amp;&amp; i &lt; str2.len ;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (str1.ch[i] != str2.ch[i])&#123;</span><br><span class="line">            <span class="keyword">return</span> str1.ch[i] - str2.ch[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str1.len - str2.len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>4. 串的连接操作：</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">concat</span><span class="params">(LStr &amp;str,LStr str1,LStr str2)</span></span>&#123;  <span class="comment">// 将两个字符串连接并用一个新的字符串str返回</span></span><br><span class="line">    <span class="keyword">if</span>(str.ch) &#123; <span class="comment">// 清除原有空间</span></span><br><span class="line">      <span class="built_in">free</span>(str.ch);</span><br><span class="line">      str.ch = <span class="literal">NULL</span>;</span><br><span class="line">      str.len = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    str.ch = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">char</span>)*(str1.len+str2.len+<span class="number">1</span>)); <span class="comment">// 分配连续空间，+1是为了多分配一个位置空间存放‘\0’</span></span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt; str1.len)&#123; <span class="comment">// 插入str1;</span></span><br><span class="line">      str.ch[i] = str1.ch[i];</span><br><span class="line">      ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(j &lt;= str2.len)&#123; <span class="comment">// 插入str2，注意这里用&quot;&lt;=&quot;是为了吧&#x27;\0&#x27; 也加到末尾</span></span><br><span class="line">      str.ch[i+j] = str2.ch[j];</span><br><span class="line">      ++j;</span><br><span class="line">    &#125;</span><br><span class="line">    str.len = str1.len + str2.len; <span class="comment">// 更新字符串长度</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 成功连接</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>5. 求子串操作：</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">subStr</span><span class="params">(LStr &amp;substr,LStr str,<span class="type">int</span> pos,<span class="type">int</span> len)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos + len &gt; str.len || pos &lt; <span class="number">0</span> || len &lt; <span class="number">0</span> || pos &gt;= str.len)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;  <span class="comment">//判断输入是否合法</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (substr.ch)&#123; <span class="comment">// 清空原空间</span></span><br><span class="line">      <span class="built_in">free</span>(substr.ch);</span><br><span class="line">      substr.ch = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (len == <span class="number">0</span>)&#123; <span class="comment">// 若子串长度为0.直接返回空子串</span></span><br><span class="line">      substr.ch = <span class="literal">NULL</span>;</span><br><span class="line">      substr.len = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">    substr.ch = (<span class="type">char</span>*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">char</span>)*(len+<span class="number">1</span>)); <span class="comment">// 分配连续的内存空间</span></span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> j = pos;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;len)&#123; <span class="comment">// 从pos处开始遍历并赋值给子串</span></span><br><span class="line">        substr.ch[i] = str.ch[j];</span><br><span class="line">        ++i;</span><br><span class="line">        ++j;</span><br><span class="line">    &#125;</span><br><span class="line">    substr.ch[i] = <span class="string">&#x27;\0&#x27;</span>; <span class="comment">// 这个千万别忘了加进去</span></span><br><span class="line">    substr.len = len; <span class="comment">// 更新子串长度</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 成功</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>串的清空操作：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 串的清空操作在上诉各函数中均有用到</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">clearStr</span><span class="params">(LStr &amp;str)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (str.ch)&#123;</span><br><span class="line">      <span class="built_in">free</span>(str.ch);</span><br><span class="line">      str.ch = <span class="literal">NULL</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  str.len = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h4 id="串的模式匹配算法-重点"><a href="#串的模式匹配算法-重点" class="headerlink" title="串的模式匹配算法(重点)"></a>串的模式匹配算法(重点)</h4><h6 id="何为模式匹配："><a href="#何为模式匹配：" class="headerlink" title="何为模式匹配："></a>何为模式匹配：</h6><ul>
+<li>对一个串中某子串的定位操作称为串的模式匹配，其中待匹配的子串称为“模式串”。</li>
+</ul>
+<h6 id="串的模式匹配算法分为："><a href="#串的模式匹配算法分为：" class="headerlink" title="串的模式匹配算法分为："></a>串的模式匹配算法分为：</h6><ol>
+<li>简单模式匹配算法</li>
+<li>KMP算法</li>
+</ol>
+<hr>
+<p><strong>1. 简单模式匹配算法：</strong></p>
+<ul>
+<li>_算法思想_：</li>
+<li>从主串的第一个位置起开始遍历字符串，若该字符与模式串的第一个字符相同，则继逐一比较后续字符，   否则从主串的下一个位置开始，重复上一步操作，以此类推，直到比较完模式串的所有字符。若匹配成     功，返回模式串在主串中的位置。匹配失败 ……,随便你想咋样。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">subStr_Match</span><span class="params">(Lstr str,LStr substr)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (substr.ch == <span class="literal">NULL</span> || str.ch == <span class="literal">NULL</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> i ,j , pos = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">0</span> , j = <span class="number">0</span>;i &lt; str.len &amp;&amp; i &lt; substr.len; )&#123;</span><br><span class="line">    <span class="keyword">if</span> (str.ch[i] == substr.ch[j])&#123;</span><br><span class="line">        ++j;</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      j = <span class="number">0</span>; <span class="comment">// 匹配失败，j 重新指向模式串起始位置</span></span><br><span class="line">      i = ++pos; <span class="comment">// pos 记录上一次匹配的起始位置，在匹配失败后将i指向上一轮匹配的初始位置pos的后面一个位置++pos开始新一轮匹配</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (j &gt;= substr.len)&#123;</span><br><span class="line">    <span class="keyword">return</span> pos; <span class="comment">// 匹配成功，返回模式串在主串中的位置</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<ol start="2">
+<li><em><strong>KMP算法</strong></em>：</li>
+</ol>
+<ul>
+<li><em>算法思想解析</em> :</li>
+<li>上述的匹配算法称为“简单模式匹配算法（BF）”，其时间复杂度为O(mn),其中m为主串长度，n为模式串长度。由此可知简单模式匹配算法虽然易于理解但是效率很低，无法满足当已知数据异常庞大时的效率要求。所以就诞生了接下来登场的KMP算法。</li>
+<li>我们知道，在BF算法中每次发生不匹配i与j都要回溯到该轮匹配的初始位置，并且在回溯之后的后几次匹配同样有可能导致（不必要的）不匹配状态，这是导致算法效率低下的主要原因，那么如何直接跳过这些不必要的不匹配状态而直接到达可能解决不匹配位置的的状态呢？</li>
+<li>解决办法就是利用匹配失败后的信息，那么如何利用呢？</li>
+<li>为了使问题变得更加直观，我们假想匹配过程就是模式串在主串上的移动(实际上并不会移动，全是指针在变化)，如果在某一次匹配时在模式串的第j位置发生了不匹配（j位置前的所有元素都已匹配成功），如果照着BF算法来做，我们会抛弃掉j位置前的匹配“成果”直接将i与j回溯重新开始下一轮比较。但现在我们不这么做，因为我们完全可以将j之前的匹配成果利用起来</li>
+<li>不不妨假设模式串为“ABABABB”，并且该模式串在与主串的一次匹配流程中第4个元素B与主串发生了不匹配，很显然这个时候主串i位置前的三个元素跟模式串是完全匹配的，为了利用这个成果，就是在模式串向后移动后尽可能地保留这些匹配成果，我们观察这三个元素“ABA”的特点，发现他的前缀与后缀出现了相同的字符序列“A”，这时候我们应该意识到，要时上一次的成果得到最大限度的保留，我们只能将模式串移动到前缀与后缀重合的状态，这样子就保留了一个匹配成果“A“，同时i根本就不需要回溯（原地不动就好），因为i无需从模式串头部重新开始与其匹配，而只需从保留的成果后开始匹配也就是模式串的第二个位置（A的后一个位置）开始匹配。</li>
+<li>但问题又来了，怎么知道模式串该怎么移动呢，从上面的分析我们发现，对于模式串移动的分析完全没有涉及到主串，那我们是怎么做到视主串而不见的呢(它可是”主“串啊给点面子好不好)。事实上，我们用到他了，因为我们的假设是”j位置前的元素与主串完全匹配“，竟然这样那么不就说明j位置前的模式串部分与主串的那一部分完全一样吗，所以我们可以用一个所谓”假模式串“来代替主串，而模式串只要在这个”傀儡身上移动就好了。所以，模式串在哪个位置与主串发生不匹配后模式串应该怎么移动，这个问题就可以脱离主串而背单独拿出来分析了，这就是后面要谈到的next数组（用与存放当j位置发生不匹配时，j指针应该重新调整到那个位置上）。有了next数组，我们就可以知道当模式串在J处与主串发生不匹配之后，为了最大限度地保留之前的匹配成果，模式串该怎么移动（指针该怎么变化）。</li>
+</ul>
+<hr>
+<p><strong>KMP算法代码</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">KMP</span> <span class="params">(LStr str,LStr substr,<span class="type">int</span> next[])</span></span>&#123; <span class="comment">// 函数接受主串，模式串，next数组</span></span><br><span class="line">  </span><br><span class="line">  <span class="type">int</span> i = <span class="number">1</span> ,j = <span class="number">1</span>; <span class="comment">// i 扫描主串，j 扫描模式串</span></span><br><span class="line">  <span class="keyword">for</span> (i &lt; str.len &amp;&amp; i &lt; substr.len)&#123;</span><br><span class="line">    <span class="keyword">if</span> (j == <span class="number">0</span> || str.ch[i] == substr.ch[j])&#123;  </span><br><span class="line"><span class="comment">// j=0;的情况就是模式串中的第一个字符与主串中的第i个字符不匹配，应从</span></span><br><span class="line"><span class="comment">// 主串的下一个位置与模式串的第一个位置继续比较，故++i(主串的下一个位置);</span></span><br><span class="line"><span class="comment">// ++j(模式串第一个位置0+1=1(很强))</span></span><br><span class="line">        ++j;</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">      j = next[j]; <span class="comment">// j 被调整到合适位置，这里的i不需要回朔，这也是KMP算法的一大特点</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (j &gt;= substr.len)&#123; <span class="comment">// j 的长度超过了模式串，显然匹配成功</span></span><br><span class="line">    <span class="keyword">return</span> i - substr.len; <span class="comment">// 匹配成功，返回模式串在主串中的位置</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>next数组的求法</strong>:</p>
+<ul>
+<li>经过前面的分析我们知道，只需要模式串本身我们就可以求出next数组，并不需要主串的参与。所以我们可以定义一个函数将next数组一次性求出，从此一劳永逸……</li>
+<li>这里我们要用到一个算法思想，那就是<strong>递推</strong>,我们知道数列就是一种有着递推关系的数的序列。现在假设等差数列{An},给你一个递推公式(实际上就是前一个元素与后一个元素的关系)：A(n+1) &#x3D; An + 1;其中n&#x3D;{1,2,3,…}然后告诉你第一个元素A1 &#x3D; 0(实际上告诉你任何一个位置上的元素值都可以); 有了这两个已知条件你可以知道这个数列的所有元素就是非负整数集{0,1,2,3, …}。</li>
+<li>那我们如何在求解next数组上面应用这个思想呢？ 首先看看我们有什么已知条件？</li>
+<li>显然我们需要知道两个相邻状态Sk与Sk+1之间的关系，假设模式串为p1～pm，问题转化为两个模式串之间的匹配问题。如果在Sk时，已经求得了next[j] &#x3D; t；若要求得Sk+1状态的next[j+1]，我们需要分两种状态来考虑：</li>
+</ul>
+<ol>
+<li>若Pj &#x3D; Pt；则next[j+1] &#x3D; t+1;</li>
+<li>若Pj !&#x3D; pt;这时候就又回到了我们讨论模式串与主串匹配出现匹配失败的经典情形了，不匹配发生在t处，我们应该去查next数组看看t应该怎样调整位置了，显然next[t]我们已经求得了，所以令t &#x3D; next[t],继续比较pj与pt，若不相等重复第二种情况，直到t &#x3D; 0;或者pj &#x3D; pt 满足第一种情况，从而求得next[j+i];</li>
+</ol>
+<hr>
+<p><strong>next求数组代码</strong>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">getNext</span><span class="params">(LStr substr,<span class="type">int</span> next[])</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> t = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> next[<span class="number">1</span>] = <span class="number">0</span>; <span class="comment">// 特殊情况，模式串的第一个位置发生不匹配</span></span><br><span class="line">    <span class="keyword">while</span>(i &lt; substr.len)&#123;</span><br><span class="line">        <span class="keyword">if</span>(t==<span class="number">0</span> || substr.ch[t] == substr.ch[j])&#123; <span class="comment">// t=0;是因为next数组中可能有0元素,也说明没有重合的前后缀</span></span><br><span class="line">            next[j+<span class="number">1</span>] = t+<span class="number">1</span>; </span><br><span class="line">            ++j;</span><br><span class="line">            ++t;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            t = next[t];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="KMP-算法的改进"><a href="#KMP-算法的改进" class="headerlink" title="KMP 算法的改进"></a>KMP 算法的改进</h4><hr>
+<ul>
+<li>KMP算法就还有什么地方需要改进的？</li>
+<li>为了回答这个问题我们先来看一种特殊情况：模式串为（A A A A A B）,该模式串所对应的next数组为{0,1,2,3,4,5}。可以遇见的是当在模式串第j&#x3D;5个位置A处发生不匹配时，next数组指导j指向4；而4处的元素依然不匹配（因为4处元素与5处相等），j来到了3（同样不匹配），紧接着来到了2（不匹配），来到1（依然不匹配），最后j&#x3D;0(++i,++j)到此才结束了之前陷入的“尴尬”局面。</li>
+<li>由上分析我们不难想到，如何才能让j直接跳到0；而免去从1-4的多余的比较呢？这就是KMP算法需要改进的地方</li>
+<li>也就是说，对KMP算法的改进主要就是对求next数组的方法的改进，于是就有了改进版的next数组，我们称之为 <strong>nextval 数组</strong></li>
+</ul>
+<hr>
+<h5 id="getNextval-算法核心思想："><a href="#getNextval-算法核心思想：" class="headerlink" title="getNextval() 算法核心思想："></a>getNextval() 算法核心思想：</h5><hr>
+<ul>
+<li>通过上面那个特殊情况，我们知道当j处发生不匹配时，若next数组指导的下一个位置的值与j处的值是相等的，那么显然这次比较就是多余的（因为显然还是会不匹配），所以我们应该跳过next数组所指向的那个位置，换一种思路就是我们应该让next[j] 所指向的位置与Pj不相等，就是改变next[j] 的值；改变后的next数组就是nextval数组.</li>
+<li>求解nextval数组的一般步骤：</li>
+</ul>
+<ol>
+<li>当j等于1时，nextval[j]赋值为 0 ，作为特殊标记；</li>
+<li>当j大于1 时：<br>   若Pj不等于P(next[j]),则nextval[j] 等于 next[j];<br>   若Pj等于P(next[j]),则nextval[j] 等于 nextval[next[j]];</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">getNextval</span><span class="params">(LStr substr,<span class="type">int</span> nextval[])</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> j = <span class="number">1</span>;</span><br><span class="line">  <span class="type">int</span> t = <span class="number">0</span>;</span><br><span class="line">  nextval[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(i&lt;substr.len)&#123;</span><br><span class="line">      <span class="keyword">if</span> (j == <span class="number">0</span> || substr.sh[j] == substr.ch[t])&#123;</span><br><span class="line">          <span class="keyword">if</span>(substr.ch[j+i] != substr.ch[t+<span class="number">1</span>])</span><br><span class="line">              nextval[j+<span class="number">1</span>] = t+<span class="number">1</span>;</span><br><span class="line">          <span class="keyword">else</span></span><br><span class="line">              nextval[j+<span class="number">1</span>] = nextval[t+<span class="number">1</span>];</span><br><span class="line">              </span><br><span class="line">              ++j;</span><br><span class="line">              ++t;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">          t = nextval[t];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2019/03/11/String/" title="【数据结构】 字符串" target="_blank" rel="external">https://ccyh.xyz/2019/03/11/String/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/12/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%B4%A0%E6%95%B0%E7%AD%9B%E6%B3%95/" title="【算法】素数筛法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/10/QueueStack/" title="【数据结构】栈与队列"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

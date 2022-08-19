@@ -17,18 +17,23 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Repositories | Hexo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Repositories">
-<meta property="og:url" content="https://ccyh.xyz/repository/index.html">
+  <title>利用归结原理求解问题 | Hexo</title>
+  <meta name="description" content="求解问题的步骤(1) 已知前提$F$用谓词公式表示并化为子句集$S$(2) 把待求解的问题$Q$用谓词公式表示，并否定$Q$,在与$ANSWER$构成析取式$(\neg Q \vee ANSWER)$;(3) 把$(\neg Q \vee ANSWER)$化为子句，并入到子句集$S$中，得到子句集$S’$;(4) 对子句集$S’$应用归结原理进行归结；(5) 若得到归结式 $ANSWER$,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用归结原理求解问题">
+<meta property="og:url" content="https://ccyh.xyz/2020/03/08/lygjylqjwt/index.html">
 <meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="求解问题的步骤(1) 已知前提$F$用谓词公式表示并化为子句集$S$(2) 把待求解的问题$Q$用谓词公式表示，并否定$Q$,在与$ANSWER$构成析取式$(\neg Q \vee ANSWER)$;(3) 把$(\neg Q \vee ANSWER)$化为子句，并入到子句集$S$中，得到子句集$S’$;(4) 对子句集$S’$应用归结原理进行归结；(5) 若得到归结式 $ANSWER$,">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-19T11:08:39.982Z">
-<meta property="article:modified_time" content="2022-08-19T11:08:39.982Z">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%88%A9%E7%94%A8%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86%E6%B1%82%E8%A7%A3%E9%97%AE%E9%A2%98/20200308032354633.png">
+<meta property="article:published_time" content="2020-03-08T03:18:11.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:50:55.312Z">
 <meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="AI">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%88%A9%E7%94%A8%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86%E6%B1%82%E8%A7%A3%E9%97%AE%E9%A2%98/20200308032354633.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://ccyh.xyz/repository/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2020/03/08/lygjylqjwt/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -45,7 +50,7 @@
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 
-<body class="main-center no-sidebar" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -342,48 +347,203 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="article article-repository article-type-list" itemscope="">
-  <header class="article-header">
-    <h1 itemprop="title">Repositories</h1>
-    <p class="text-muted">I have <span id="repo-count">0</span> projects on <span id="repo-platform">Github</span></p>
-  </header>
-  <div class="article-body">
-    <div class="repo-content">
-      <div class="blankslate">
-        <p>正在加载...</p>
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E8%A7%A3%E9%97%AE%E9%A2%98%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">求解问题的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">1.1.</span> <span class="toc-text">例子</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-lygjylqjwt" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      利用归结原理求解问题
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/03/08/lygjylqjwt/" class="article-date">
+	  <time datetime="2020-03-08T03:18:11.000Z" itemprop="datePublished">2020-03-08</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/AI/" rel="tag">AI</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/03/08/lygjylqjwt/#comments" class="article-comment-link">评论</a></span>
+        
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h2 id="求解问题的步骤"><a href="#求解问题的步骤" class="headerlink" title="求解问题的步骤"></a>求解问题的步骤</h2><p>(1) 已知前提$F$用谓词公式表示并化为子句集$S$<br>(2) 把待求解的问题$Q$用谓词公式表示，并否定$Q$,在与$ANSWER$构成析取式$(\neg Q \vee ANSWER)$;<br>(3) 把$(\neg Q \vee ANSWER)$化为子句，并入到子句集$S$中，得到子句集$S’$;<br>(4) 对子句集$S’$应用归结原理进行归结；<br>(5) 若得到归结式 $ANSWER$, 则答案就在$ANSWER$中。</p>
+<hr>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>(1) 已知：<br>$F_1$: 王先生（Wang）是小李（Li）的老师<br>$F_2$: 小李与小张（Zhang）是同班同学<br>$F_3$: 如果 x 与 y 是同班同学，则 x 的老师也是 y 的老师。<br>求：小张的老师是谁？</p>
+<p>解：定义谓词<br>$T(x,y)$: x 是 y 的老师<br>$C(x,y)$: x 和 y 是同学<br>把已知前提表达成谓词公式：<br>$F_1:T(Wang,Li)$<br>$F_2:C(Li,Zhang)$<br>$F_3:\forall x\forall y\forall z(C(x,y)\wedge T(z,x)\rightarrow T(z,y))$<br>设$x$为小张的老师，把目标表示成谓词公式，并把它否定后与$ANSWER$析取：<br>$$<br>\color{red}{\neg} \exists xT(x,Zhang) \vee ANSWER(x)<br>$$<br>把上述公式化为子句集啊啊啊：</p>
+<p>$C_1:T(Wang,Li)$<br>$C_2:C(Li,Zhang)$<br>$C_3:\neg C(x,y)\vee \neg T(z,x)\vee T(z,y)$<br>$C_4:\neg T(u,Zhang)\vee ANSWER(u)$</p>
+<p>应用归结原理进行归结：</p>
+<p>$C_13 :\neg C(Li,y) \vee T(Wang,y)$<br>$C_134 :\neg C(Li,Zhang) \vee ANSWER(Wang)$<br>$C_1234 :ANSWER(Wang)$</p>
+<p>故小张的老师是王老师。<br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E5%88%A9%E7%94%A8%E5%BD%92%E7%BB%93%E5%8E%9F%E7%90%86%E6%B1%82%E8%A7%A3%E9%97%AE%E9%A2%98/20200308032354633.png" alt="归结过程"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2020/03/08/lygjylqjwt/" title="利用归结原理求解问题" target="_blank" rel="external">https://ccyh.xyz/2020/03/08/lygjylqjwt/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
-</article>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
 
 
   
+</div>
 
-
-
-<!--项模版-->
-<script type="text/template" id="list-template">
-  <li class="col-sm-6 col-md-6 col-lg-4">
-    <div class="repo hover-shadow hover-grow">
-      <div class="repo-image geopattern" data-pattern-id="{%=name%}"></div>
-      <h3 class="repo-title"><a href="{%=clone_url%}" target="_blank" rel="external nofollow noopener noreferrer">{%=full_name%}</a></h3>
-      <p class="repo-body">{%=description%}</p>
-      <div class="repo-meta">
-        <span class="meta meta-type pull-left" aria-label="{%=language%} project">{%=language%}</span>
-        <span class="meta meta-star" aria-label="{%=stargazers_count%} stars"><i class="icon icon-star-fill"></i> {%=stargazers_count%}</span>
-        <span class="meta meta-fork" aria-label="{%=forks_count%} forks"><i class="icon icon-code-fork"></i> {%=forks_count%}</span>
-        <span class="meta meta-last-updated" aria-label="最后更新时间：{%=updated_at%}">
-        <i class="icon icon-clock"></i> <time datetime="{%=updated_at%}">{%=updated_at%}</time></span>
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/03/27/Kaggle_Titanic/" title="Kaggle_Titanic"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/03/07/%E5%BD%92%E7%BB%93%E5%8F%8D%E6%BC%94/" title="归结反演"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </li>
-</script>
+  </div>
+</div>
 
-<!--获取失败模版-->
-<script type="text/template" id="error-template">
-  <h3>加载失败</h3><p>请刷新或稍后再试...</p>
-</script>
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -443,73 +603,38 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
    
-  
+
+
+
+
+   
     
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
   <script type="text/javascript">
-    var open = function () {
-      var baiduTpl = new Object();
-      var handleTpl = function () {
-        baiduTpl.list = baidu.template("list-template");
-        baiduTpl.error = baidu.template("error-template");
-      };
-
-      var handleRepo = function () {
-        var repoContainer = $('.repo-content');
-        var errorContainer = repoContainer.find(".blankslate");
-        var countContainer = $("#repo-count");
-        var platformContainer = $("#repo-platform");
-
-        platformContainer.text("Github");
-
-        url = "https://api.github.com/users/cofess/repos";
-
-        $.get(url, function (result) {
-          if (result) {
-            errorContainer.remove();
-            countContainer.text(result.length);
-            var ul = $("<ul class='repo-list row clearfix'></ul>");
-            result.sort(function (a, b) {
-              return new Date(b.updated_at) - new Date(a.updated_at);
-            }).sort(function (a, b) {
-              var a_start = a.stargazers_count;
-              var b_start = b.stargazers_count;
-              if (a.fork) a_start * 0.5;
-              if (b.fork) b_start * 0.5;
-              return b_start - a_start;
-            }).map(function (repo) {
-              if (!repo.description) {
-                repo.description = "";
-              }
-              repo.updated_at = repo.updated_at.substring(0, repo.updated_at.lastIndexOf("T"));
-              var html = baiduTpl.list(repo);
-              ul.append(html);
-            });
-
-            repoContainer.append(ul);
-            $(".geopattern").each(function () {
-              $(this).geopattern($(this).data('pattern-id'));
-            });
-          } else {
-            errorContainer.append(baiduTpl.error());
-          }
-        });
-      };
-
-      return {
-        init: function () {
-          handleTpl();
-          handleRepo();
-        }
-      }
-    };
-    $(open().init);
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
   </script>
 
-  
-
-
-
+     
 
 
 

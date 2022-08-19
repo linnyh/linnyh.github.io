@@ -17,18 +17,24 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Repositories | Hexo</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Repositories">
-<meta property="og:url" content="https://ccyh.xyz/repository/index.html">
+  <title>感知机与逻辑门的实现 | Hexo</title>
+  <meta name="description" content="感知机 &amp;emsp;感知机（Perceptron）由两层神经元组成，输入层接收外界信号后传递给输出层，输出层是M-P神经元（如下图），亦称” 阙值逻辑单元（threshold logic unit）“。  逻辑门的实现 &amp;emsp;感知机能容易地实现逻辑与、或、非、异或运算。注意到$y&#x3D;f(\sum_{i}{w_ix_i-\theta})$,假定$f$为阶跃函数:$$s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="感知机与逻辑门的实现">
+<meta property="og:url" content="https://ccyh.xyz/2019/06/01/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="感知机 &amp;emsp;感知机（Perceptron）由两层神经元组成，输入层接收外界信号后传递给输出层，输出层是M-P神经元（如下图），亦称” 阙值逻辑单元（threshold logic unit）“。  逻辑门的实现 &amp;emsp;感知机能容易地实现逻辑与、或、非、异或运算。注意到$y&#x3D;f(\sum_{i}{w_ix_i-\theta})$,假定$f$为阶跃函数:$$s">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-08-19T11:08:39.982Z">
-<meta property="article:modified_time" content="2022-08-19T11:08:39.982Z">
+<meta property="og:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/20190624050228397.png">
+<meta property="og:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/20190624055322320.png">
+<meta property="article:published_time" content="2019-06-01T06:49:16.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:42:39.232Z">
 <meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/20190624050228397.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://ccyh.xyz/repository/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2019/06/01/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -45,7 +51,7 @@
 <meta name="generator" content="Hexo 6.2.0"></head>
 
 
-<body class="main-center no-sidebar" itemscope itemtype="http://schema.org/WebPage">
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
   <header class="header" itemscope itemtype="http://schema.org/WPHeader">
   <div class="slimContent">
     <div class="navbar-header">
@@ -342,48 +348,211 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="article article-repository article-type-list" itemscope="">
-  <header class="article-header">
-    <h1 itemprop="title">Repositories</h1>
-    <p class="text-muted">I have <span id="repo-count">0</span> projects on <span id="repo-platform">Github</span></p>
-  </header>
-  <div class="article-body">
-    <div class="repo-content">
-      <div class="blankslate">
-        <p>正在加载...</p>
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%84%9F%E7%9F%A5%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text">感知机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">逻辑门的实现</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-感知机与逻辑门的实现" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      感知机与逻辑门的实现
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/06/01/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="article-date">
+	  <time datetime="2019-06-01T06:49:16.000Z" itemprop="datePublished">2019-06-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/ML/" rel="tag">ML</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/06/01/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/#comments" class="article-comment-link">评论</a></span>
+        
       </div>
     </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h1 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h1><hr>
+<p>&amp;emsp;感知机（Perceptron）由两层神经元组成，输入层接收外界信号后传递给输出层，输出层是M-P神经元（如下图），亦称<strong>” 阙值逻辑单元（threshold logic unit）“</strong>。</p>
+<p><img src="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/20190624050228397.png" alt="M-P神经元简图"></p>
+<h1 id="逻辑门的实现"><a href="#逻辑门的实现" class="headerlink" title="逻辑门的实现"></a>逻辑门的实现</h1><hr>
+<p>&amp;emsp;感知机能容易地实现逻辑与、或、非、异或运算。注意到$y&#x3D;f(\sum_{i}{w_ix_i-\theta})$,假定$f$为阶跃函数:<br>$$<br>sgn(x) &#x3D; \begin{cases}<br>1, &amp; x&gt;&#x3D; 0 \\<br>0, &amp; x&lt;0<br>\end{cases}<br>$$<br>则有：</p>
+<ul>
+<li>与门（$ x_1\land x_2 $）：令$w_1&#x3D;w_2&#x3D;1,\theta&#x3D;1.5$,则$y&#x3D;f(1\cdot x_1+1\cdot x_2-2)$,仅当$x_1&#x3D;x_2&#x3D;1$时，$y&#x3D;1$</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python实现与门</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">AND</span>(<span class="params">x1,x2</span>):</span><br><span class="line">    </span><br><span class="line">    w1,w2,theta = <span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">1.5</span></span><br><span class="line">    result = w1*x1 + w2*x2 - theta</span><br><span class="line">    <span class="keyword">if</span> result &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>或门（$x_1\lor x_2$）：令$w_1&#x3D;w_2&#x3D;1,\theta&#x3D;0.5$,则$y&#x3D;f(1\cdot x_1+1\cdot x_2-0.5)$,仅当$x_1&#x3D;1$或$x_2&#x3D;1$时，$y&#x3D;1$。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python实现或门</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">OR</span>(<span class="params">x1,x2</span>):</span><br><span class="line">    w1,w2,theta = <span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">0.5</span></span><br><span class="line">    result = w1*x1 + w2*x2 - theta</span><br><span class="line">    <span class="keyword">if</span> result &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+<li>非门（$\lnot x_1$）：令$w_1&#x3D;-0.6$,$w_2&#x3D;0,\theta&#x3D;-0.5$,则$y&#x3D;f(-0.6\cdot x_1+0\cdot x_2+0.5)$,仅当$x_1&#x3D;1$时，$y&#x3D;0$；当$x_1&#x3D;0$时，$y&#x3D;1$。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 实现非门</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">NOT</span>(<span class="params">x1</span>):</span><br><span class="line">    w1, theta = -<span class="number">0.6</span>, -<span class="number">0.5</span></span><br><span class="line">    result = w1*x1 - theta</span><br><span class="line">    <span class="keyword">if</span> result &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+<li>与非门：令$w_1&#x3D;w_2&#x3D;-1,\theta&#x3D;-1.5$,则$y&#x3D;f(1\cdot x_1+1\cdot x_2+1.5)$,仅当$x_1&#x3D;x_2&#x3D;1$时，$y&#x3D;0$<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 实现与非门</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">NAND</span>(<span class="params">x1,x2</span>):</span><br><span class="line">    w1,w2,theta = -<span class="number">1.0</span>,-<span class="number">1.0</span>,-<span class="number">1.5</span></span><br><span class="line">    result = w1*x1 + w2*x2 - theta</span><br><span class="line">    <span class="keyword">if</span> result &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+<li>异或门（$x_1\oplus x_2$）：异或门在生活中有很多用处，我们常常听到下面这句话：“这件事要么你来做，要么我来做”。意思是这件事只能由我们之间的任何一个人来做，其他都不行。又比如你房间中的灯的开关一般门口一个床头一个，这样子你每按下其中任何一个开关都只会有两种结果（变得与另一个一样，变得与另一个不一样）利用这两种结果就可以构成灯的开与关。</li>
+</ul>
+<p><img src="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/20190624055322320.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 实现异或门</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ExOR</span>(<span class="params">x1,x2</span>):</span><br><span class="line">    <span class="keyword">return</span> AND(OR(x1,x2),NAND(x1,x2))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2019/06/01/%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E9%80%BB%E8%BE%91%E9%97%A8%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="感知机与逻辑门的实现" target="_blank" rel="external">https://ccyh.xyz/2019/06/01/感知机与逻辑门的实现/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
   </div>
-</article>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
 
 
   
+</div>
 
-
-
-<!--项模版-->
-<script type="text/template" id="list-template">
-  <li class="col-sm-6 col-md-6 col-lg-4">
-    <div class="repo hover-shadow hover-grow">
-      <div class="repo-image geopattern" data-pattern-id="{%=name%}"></div>
-      <h3 class="repo-title"><a href="{%=clone_url%}" target="_blank" rel="external nofollow noopener noreferrer">{%=full_name%}</a></h3>
-      <p class="repo-body">{%=description%}</p>
-      <div class="repo-meta">
-        <span class="meta meta-type pull-left" aria-label="{%=language%} project">{%=language%}</span>
-        <span class="meta meta-star" aria-label="{%=stargazers_count%} stars"><i class="icon icon-star-fill"></i> {%=stargazers_count%}</span>
-        <span class="meta meta-fork" aria-label="{%=forks_count%} forks"><i class="icon icon-code-fork"></i> {%=forks_count%}</span>
-        <span class="meta meta-last-updated" aria-label="最后更新时间：{%=updated_at%}">
-        <i class="icon icon-clock"></i> <time datetime="{%=updated_at%}">{%=updated_at%}</time></span>
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/06/03/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%880%EF%BC%89/" title="人工神经网络学习笔记（0）"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/05/01/Hexo-icarus%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E8%AF%A6%E6%83%85%E9%A1%B5/" title="Hexo-icarus修改文章详情页"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-  </li>
-</script>
+  </div>
+</div>
 
-<!--获取失败模版-->
-<script type="text/template" id="error-template">
-  <h3>加载失败</h3><p>请刷新或稍后再试...</p>
-</script>
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -443,73 +612,38 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
    
-  
+
+
+
+
+   
     
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
   <script type="text/javascript">
-    var open = function () {
-      var baiduTpl = new Object();
-      var handleTpl = function () {
-        baiduTpl.list = baidu.template("list-template");
-        baiduTpl.error = baidu.template("error-template");
-      };
-
-      var handleRepo = function () {
-        var repoContainer = $('.repo-content');
-        var errorContainer = repoContainer.find(".blankslate");
-        var countContainer = $("#repo-count");
-        var platformContainer = $("#repo-platform");
-
-        platformContainer.text("Github");
-
-        url = "https://api.github.com/users/cofess/repos";
-
-        $.get(url, function (result) {
-          if (result) {
-            errorContainer.remove();
-            countContainer.text(result.length);
-            var ul = $("<ul class='repo-list row clearfix'></ul>");
-            result.sort(function (a, b) {
-              return new Date(b.updated_at) - new Date(a.updated_at);
-            }).sort(function (a, b) {
-              var a_start = a.stargazers_count;
-              var b_start = b.stargazers_count;
-              if (a.fork) a_start * 0.5;
-              if (b.fork) b_start * 0.5;
-              return b_start - a_start;
-            }).map(function (repo) {
-              if (!repo.description) {
-                repo.description = "";
-              }
-              repo.updated_at = repo.updated_at.substring(0, repo.updated_at.lastIndexOf("T"));
-              var html = baiduTpl.list(repo);
-              ul.append(html);
-            });
-
-            repoContainer.append(ul);
-            $(".geopattern").each(function () {
-              $(this).geopattern($(this).data('pattern-id'));
-            });
-          } else {
-            errorContainer.append(baiduTpl.error());
-          }
-        });
-      };
-
-      return {
-        init: function () {
-          handleTpl();
-          handleRepo();
-        }
-      }
-    };
-    $(open().init);
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
   </script>
 
-  
-
-
-
+     
 
 
 
