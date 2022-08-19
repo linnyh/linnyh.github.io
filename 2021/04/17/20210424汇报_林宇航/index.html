@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems | Hexo</title>
+  <meta name="description" content="2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems概要问题动机&amp;emsp;对域本体的过度依赖和跨领域知识共享是对话状态跟踪两个实际和目前少有研究的问题。现有的方法在推理过程中通常不能跟踪未知的槽值，而且在适应新领域方面往往有不同的缺点。 主要贡献&amp;emsp;在本文中，作者提出了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems">
+<meta property="og:url" content="https://ccyh.xyz/2021/04/17/20210424%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/index.html">
+<meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems概要问题动机&amp;emsp;对域本体的过度依赖和跨领域知识共享是对话状态跟踪两个实际和目前少有研究的问题。现有的方法在推理过程中通常不能跟踪未知的槽值，而且在适应新领域方面往往有不同的缺点。 主要贡献&amp;emsp;在本文中，作者提出了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421093929388.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421104333339.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421190850534.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421202500240.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421203708650.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421204439950.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421204715962.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210422145135326.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210422153116577.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210422153338568.png">
+<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210422153439440.png">
+<meta property="article:published_time" content="2021-04-17T00:25:49.000Z">
+<meta property="article:modified_time" content="2022-08-19T15:43:51.400Z">
+<meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="DST">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210421093929388.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ccyh.xyz/2021/04/17/20210424%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/linnyh" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">张怀民</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Backend Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E7%96%AF%E5%B8%9D/">闲疯帝</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Borring/" rel="tag">Borring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DST/" rel="tag">DST</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Encrypted/" rel="tag">Encrypted</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knapsack/" rel="tag">Knapsack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/" rel="tag">List</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickSort/" rel="tag">QuickSort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discretemathematics/" rel="tag">discretemathematics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.5px;">AI</a> <a href="/tags/Algorithm/" style="font-size: 13.67px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 13px;">Array</a> <a href="/tags/Blog/" style="font-size: 13px;">Blog</a> <a href="/tags/Borring/" style="font-size: 13px;">Borring</a> <a href="/tags/C/" style="font-size: 13px;">C</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/DST/" style="font-size: 14px;">DST</a> <a href="/tags/Encrypted/" style="font-size: 13px;">Encrypted</a> <a href="/tags/Graph/" style="font-size: 13px;">Graph</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Knapsack/" style="font-size: 13px;">Knapsack</a> <a href="/tags/LeetCode/" style="font-size: 13.33px;">LeetCode</a> <a href="/tags/List/" style="font-size: 13.17px;">List</a> <a href="/tags/ML/" style="font-size: 13.83px;">ML</a> <a href="/tags/Math/" style="font-size: 13.33px;">Math</a> <a href="/tags/QuickSort/" style="font-size: 13px;">QuickSort</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/Tree/" style="font-size: 13.5px;">Tree</a> <a href="/tags/algorithm/" style="font-size: 13px;">algorithm</a> <a href="/tags/discretemathematics/" style="font-size: 13px;">discretemathematics</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210410%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" class="title">【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210424%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" class="title">【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210515%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" class="title">【论文笔记】2018-ACL-Global-Locally Self-Attentive Dialogue State Tracker</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-20210424汇报_林宇航" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/04/17/20210424%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" class="article-date">
+	  <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/DST/" rel="tag">DST</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/17/20210424%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h1 id="2019-ACL-Transferable-Multi-Domain-State-Generator-for-Task-Oriented-Dialogue-Systems"><a href="#2019-ACL-Transferable-Multi-Domain-State-Generator-for-Task-Oriented-Dialogue-Systems" class="headerlink" title="2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems"></a>2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems</h1><h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><h3 id="问题动机"><a href="#问题动机" class="headerlink" title="问题动机"></a>问题动机</h3><p>&emsp;对域本体的过度依赖和跨领域知识共享是对话状态跟踪两个实际和目前少有研究的问题。现有的方法在推理过程中通常不能跟踪未知的槽值，而且在适应新领域方面往往有不同的缺点。</p>
+<h3 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h3><p>&emsp;在本文中，作者提出了$TRADE$——一种用于面向<strong>多域任务</strong>的对话状态跟踪的<strong>可转移的</strong>对话状态生成器。该方法的简单性和效果的提高是$TRADE$的主要优势。本项工作的贡献总结为：</p>
+<ul>
+<li>提出<strong>Context-enhanced Slot Gate</strong> 与 <strong>Copy mechanism</strong> 让模型可以更好地在对话历史的任何地方追踪槽值。解决了多轮对话映射问题。</li>
+<li>提出在<strong>领域之间共享参数</strong>，让不同领域的知识可以相互流动。以便模型可以追踪未见过的槽值。</li>
+<li>利用在训练中已经看到的领域，实现<strong>zero-shot DST</strong>。如果有一些来自未见域的训练样本，TRADE可以适应新的zero-shot域而不忘记以前的域的知识。</li>
+</ul>
+<p>源码：<a target="_blank" rel="noopener" href="https://github.com/jasonwu0731/trade-dst">TRADE</a></p>
+<h2 id="相关研究"><a href="#相关研究" class="headerlink" title="相关研究"></a>相关研究</h2><ul>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/Q17-1024.pdf">2017-alc-Google’s Multilingual Neural Machine Translation System: Enabling Zero-Shot Translation</a></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1806.08730">2018-arXiv-The natural language de cathlon: Multitask learning as question answering.</a></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/K16-1002.pdf">2016-acl-Generating Sentences from a Continuous Space</a></strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2017/file/f87522788a2be2d171666752f97ddebb-Paper.pdf">2017-NIPS- Gradient episodic memory for continual learning</a></strong></p>
+</li>
+<li><h2 id="2018-acl-Diverse-Few-Shot-Text-Classification-with-Multiple-Metrics"><a href="#2018-acl-Diverse-Few-Shot-Text-Classification-with-Multiple-Metrics" class="headerlink" title="2018-acl-Diverse Few-Shot Text Classification with Multiple Metrics"></a><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/N18-1109.pdf">2018-acl-Diverse Few-Shot Text Classification with Multiple Metrics</a></h2></li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1812.00899">2018-acl-Toward Scalable Neural Dialogue State Tracking Model</a></strong></p>
+</li>
+<li><h2 id="2018-acl-Large-Scale-Multi-Domain-Belief-Tracking-with-Knowledge-Sharing"><a href="#2018-acl-Large-Scale-Multi-Domain-Belief-Tracking-with-Knowledge-Sharing" class="headerlink" title="2018-acl-Large-Scale Multi-Domain Belief Tracking with Knowledge Sharing"></a><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/P18-2069.pdf">2018-acl-Large-Scale Multi-Domain Belief Tracking with Knowledge Sharing</a></h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/P18-5002/"><strong>2018-acl-Neural approaches to conversational ai</strong></a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/W18-5001.pdf"><strong>2018-acl-Zero-shot dialog generation with cross-domain latent actions</strong></a></p>
+</li>
+</ul>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210421093929388.png" alt="image-20210421093929388"></p>
+<p>&emsp;如上图，TRADE模型分为三个部分：<strong>句子编码器（Utterance encoder）、槽门（slot gate）、状态生成器（state generator）</strong>。</p>
+<p>&emsp;该模型不是预测每个预定义的本体项的概率，而是<strong>直接生成插槽值</strong>。类似于约翰逊等人（2017）对于多语言神经机器翻译，我们共享所有的模型参数，并且状态生成器为每个不同的(域、插槽）对以不同的句子开始标记。</p>
+<p>令 $X = { (U_1,R_1),…,(U_T,R_T) }$ 为$T$轮对话历史，$B = { B_1,…,B_T }$ 为每一对话回合的对话状态且$B_t = (domain:D_n,slot:S_m,value:Y_j^{value})$, 其中$D={ D_1,…,D_N }$为$N$个不同领域；$S = { S_1,…,S_M}$为$M$个不同插槽。现在假设共有$J$个$(domain,slot)$对，$Y_j^{value}$是第$j$个$(domain,slot)$对的真实单词序列。</p>
+<h3 id="Utterance-Encoder"><a href="#Utterance-Encoder" class="headerlink" title="Utterance Encoder"></a>Utterance Encoder</h3><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210421104333339.png" alt="image-20210421104333339"></p>
+<p>&emsp;该部分的模型可以是任意的句子编码模型，本文用的是双向GRU来编码对话历史。其输入为$X<em>t=[U</em>{t-l},R<em>{t-l},…,U_t,R_t] \in \R^{|X_t|\times d</em>{emb}}$是被选中的最近的 $l$ 轮对话的所有单词的拼接矩阵。输出为被编码后的对话历史表示$H<em>t = [h_1^{enc},…,h</em>{|X<em>t|}^{enc}] \in \R^{|X_t|\times d</em>{hdd}}$。</p>
+<h3 id="State-Generator"><a href="#State-Generator" class="headerlink" title="State Generator"></a>State Generator</h3><p>&emsp;要使用输入源的文本生成插槽值，需要一种复制机制。有三种常见的复制方式，即基于索引的副本（Vinyals等人，2015）、硬门控副本（Gulcehre等人，2016；Madatto等人，2018；Wu等人，2019）和软门控副本（见等人，2017；McCann等人，2018）。基于索引的机制不适用于DST任务，因为确切的真实插槽值在话语中并不总是能找到。硬门拷贝机制通常需要给予门函数额外的监督信号。因此，本文使用<strong>软门控指针生成器复制</strong>来将词汇表上的分布和对话历史上的分布组合到一个单一的输出分布中。</p>
+<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210421190850534.png" alt="image-20210421190850534"></p>
+<p>&emsp;本文利用GRU作为State Generator的解码器来独立预测每个$(domain,slot)$对的值。如上图所示，State Generator 对于所有$J$个$(domain,slot)$独立解码，先将domain 和 slot 的嵌入之和作为GRU解码器的第一个输入。对于第$j$个$(domain,slot)$对的解码过程的第$k$步，解码器将上一步的词嵌入$w<em>{jk}$作为输入并返回其隐藏层状态$h</em>{jk}^{dec}$。State Generator 将该隐藏状态利用训练好的嵌入函数 $E \in \R^{|V|\times d<em>{hdd}}$ 映射为一个词表上的分布$P</em>{jk}^{vocab}$中; 于此同时，$h<em>{jk}^{dec}$被用于计算其与对话历史$H_t$的注意力分布$P</em>{jk}^{history}$：</p>
+<script type="math/tex; mode=display">
+P_{jk}^{vocab} = Softmax(E\cdot (h_{jk}^{dec})^T) \in \R^{|V|} \\
+P_{jk}^{history} = Softmax(H_t \cdot (h_{jk}^{dec})^T) \in \R^{|X_t|}</script><p>最终的输出$P_{jk}^{final}$是上述二者的带权和：</p>
+<script type="math/tex; mode=display">
+P_{jk}^{final} = p_{jk}^{gen} \times P_{jk}^{vocab} + (1 - p_{jk}^{gen}) \times P^{history}_{jk} \in \R^{|V|}</script><p>其中</p>
+<script type="math/tex; mode=display">
+p_{jk}^{gen} = Sigmoid(W_1 \cdot [h_{jk}^{dec};w_{jk};c_{jk}]) \in R^1,\\ c_{jk} = P_{jk}^{history} \cdot H_t \in R^{d_{hdd}}</script><blockquote>
+<p>$W_1$: 权重矩阵</p>
+<p>$c_{jk}$: 为通过attention权重加权求和得到的表征对话历史的上下文向量。</p>
+</blockquote>
+<p>请注意，由于公式（2），我们的模型能够生成单词，即使它们在词汇表中没有预定义。</p>
+<h3 id="Context-enhanced-slot-gate"><a href="#Context-enhanced-slot-gate" class="headerlink" title="Context-enhanced slot gate"></a>Context-enhanced slot gate</h3><p>&emsp;上下文增强插槽门$G$是一个简单的三分类器，他将来自编码器隐藏状态的对话历史$H_t$通过一个线性层映射到一个概率分布$(ptr,none,dontcare)$上。对于每一个$(domain,slot)$对，如果slot gate将其预测为$dontcare 或者 none$, 我们就将解码器生成的值无视掉，并且将该$(domain,slot)$对填充为$not-mentioned 或者 does-dot-care$, 否则的话我们将state generator 生成的值做为该对的值。对于第$j$个$(domain,slot)$对，其计算过程如下：</p>
+<script type="math/tex; mode=display">
+G_j = Softmax(W_g \cdot (c_{j0})^T) \in \R^3</script><h3 id="Optimization优化方法"><a href="#Optimization优化方法" class="headerlink" title="Optimization优化方法"></a>Optimization优化方法</h3><p>&emsp;在训练期间，我们同时优化slot gate 和 state generator。对于前者，利用交叉熵损失函数$L_g$来作为损失函数计算$G_j$与真实one-hot 标签$y_j^{gate}$之间的损失：</p>
+<script type="math/tex; mode=display">
+L_g = \sum_{j=1}^{J} -log(G_j \cdot (y_j^{gate})^T)</script><p>对于后者，用另一个交叉熵损失函数$L<em>v$ 计算$P</em>{jk}^{final}$和真实词$Y_j^{label}$之间的损失：</p>
+<script type="math/tex; mode=display">
+L_v = \sum_{j=1}^{J}\sum_{k=1}^{|Y_j|} -log(P_{jk}^{final} \cdot (y_{jk}^{value})^T)</script><p>$L_v$是每一个$(domain,slot)$对上每一步解码过程的损失之和。我们将上述两个损失函数加权求和后得到总的损失：</p>
+<script type="math/tex; mode=display">
+L = \alpha L_g + \beta L_v</script><h2 id="零样本与少样本"><a href="#零样本与少样本" class="headerlink" title="零样本与少样本"></a>零样本与少样本</h2><p>&emsp;作者先是用无限制微调模型得到一个基线模型，然后再用两种特定的持续学习技术：<strong>弹性权重巩固(EWC)</strong>（柯克帕特里克等，2017）和<strong>梯度情景记忆(GEM)</strong>（Lopez-Paz等，2017）来优化模型。首先定义$\Theta_S$为模型在源域上训练后的参数，将$\Theta$表示为当前经过目标域数据优化过后的模型参数。</p>
+<p><strong>EWC</strong>:</p>
+<p>&emsp;EWC利用费舍尔信息矩阵$F$的对较浅作为适应目标域数据的正则化器。该矩阵是用来自源域的样本来近似得到的。EWC损失定义为：</p>
+<script type="math/tex; mode=display">
+L_{ewc}(\Theta) = L(\Theta) + \sum_{i} \frac{\lambda}{2} F_i(\Theta_i - \Theta_{S,i})^2</script><blockquote>
+<p>$\lambda$: 超参数</p>
+</blockquote>
+<p><strong>GEM</strong>:</p>
+<p>&emsp;与EWC不同的是，GEM从源域保留了少量的样本K，并且，当模型学习新的目标域时，对梯度施加约束，以防止已存储样本的损失增加。训练过程的定义为：</p>
+<script type="math/tex; mode=display">
+Minimize_{\Theta} L(\Theta) \\
+Subject \text{ } to \text{ } L(\Theta,K) \le L(\Theta_S,K)</script><blockquote>
+<p>$L(\Theta,K)$: K 个保留样本的损失</p>
+</blockquote>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210421202500240.png" alt="image-20210421202500240"></p>
+<h3 id="训练细节"><a href="#训练细节" class="headerlink" title="训练细节"></a>训练细节</h3><p><strong>多域联合训练</strong>：优化器为Adam、batch_size = 32, learning rate = annealing in [0.001,0.0001]，dropout ratio = 0.2。</p>
+<p>$\alpha = \beta = 1$, 所有嵌入采用$Glove$（每个词的维度为400）,state generator使用了一种贪婪的搜索解码策略，因为生成的插槽值的长度通常很短。</p>
+<p><strong>领域扩展</strong>： 对于训练，遵循与联合训练部分相同的过程，并使用验证集对所有方法进行小网格搜索。对于EWC，我们为所有域设置了不同的$λ$值，并使用验证集选择最优值。最后，在GEM中，我们将保留的样本数量大小$K$设置为源域的$1%$。</p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210421203708650.png" alt="image-20210421203708650"></p>
+<p>如上图，可以看出在联合目标精度上TRADE取得了最优。</p>
+<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210421204439950.png" alt="image-20210421204439950"></p>
+<p>上图为少样本情况下TRADE的表现，上下两部分分别是在4个领域（排除某一个领域）以及在新领域（被排除的那个领域）上不同训练和迁移策略下的实验结果，结果表明先在四个已知领域预训练，再通过少量新领域数据做fine-tune的实验结果，无论哪一种评价方式，都好于通过四个已知领域和1%新领域数据重新训练。</p>
+<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210421204715962.png" alt="image-20210421204715962"></p>
+<p>上图为零样本情况下TRADE的表现，zero-shot部分实验结果实际无明显亮点，唯一看得过去的taxi领域的实验源自其与train领域槽位的高度重合。论文中的解释也比较尴尬（用slot accuracy的数值强行解释），因此可以认为zero-shot并未达到作者预期的效果</p>
+<h1 id="2020-ACL-Modeling-Long-Context-for-Task-Oriented-Dialogue-State-Generation"><a href="#2020-ACL-Modeling-Long-Context-for-Task-Oriented-Dialogue-State-Generation" class="headerlink" title="2020-ACL-Modeling Long Context for Task-Oriented Dialogue State Generation"></a>2020-ACL-Modeling Long Context for Task-Oriented Dialogue State Generation</h1><h2 id="概要-1"><a href="#概要-1" class="headerlink" title="概要"></a>概要</h2><h3 id="问题动机-1"><a href="#问题动机-1" class="headerlink" title="问题动机"></a>问题动机</h3><p>&emsp;2019年提出的TRADE模型只是简单地将对话历史拼接后转换成一个上下文序列作为槽值预测的根据。这样的话当拼接的序列长度很长的时候模型很难区分哪些部分来自用户或系统。观察到$MultiWOZ 2.0$数据集中最常的拼接序列可能达到880个token。且实验表明这么长的序列会严重影响TRADE的表现。</p>
+<h3 id="主要贡献-1"><a href="#主要贡献-1" class="headerlink" title="主要贡献"></a>主要贡献</h3><p>&emsp;本文提出了两种方法来建模长上下文，实现更好的对话状态追踪：</p>
+<ul>
+<li><strong>标记：</strong> 在构建对话上下文序列时，在每一个系统话语前插入一个$[sys]$标签，在每一个用户话语前插入一个$[usr]$标签。目的是为了提高模型区分用户话语和系统话语的能力。</li>
+<li><strong>集成：</strong> 将一个双向语言建模模型集成到模型的上游，作为一个辅助任务。以更好地获得对对话历史上下文的理解和表示。</li>
+</ul>
+<h2 id="相关研究-1"><a href="#相关研究-1" class="headerlink" title="相关研究"></a>相关研究</h2><ul>
+<li><h2 id="Global-Locally-Self-Attentive-Encoder-for-Dialogue-State-Tracking"><a href="#Global-Locally-Self-Attentive-Encoder-for-Dialogue-State-Tracking" class="headerlink" title="Global-Locally Self-Attentive Encoder for Dialogue State Tracking"></a><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/P18-1135.pdf">Global-Locally Self-Attentive Encoder for Dialogue State Tracking</a></h2></li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1911.06192">Multi-domain Dialogue State Tracking as Dynamic Knowledge Graph Enhanced Question Answering</a></strong></p>
+</li>
+<li><h2 id="Multi-Task-Learning-with-Language-Modeling-for-Question-Generation"><a href="#Multi-Task-Learning-with-Language-Modeling-for-Question-Generation" class="headerlink" title="Multi-Task Learning with Language Modeling for Question Generation"></a><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/D19-1337.pdf">Multi-Task Learning with Language Modeling for Question Generation</a></h2></li>
+</ul>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210422145135326.png" alt="image-20210422145135326"></p>
+<h3 id="Utterance-Tagging"><a href="#Utterance-Tagging" class="headerlink" title="Utterance Tagging"></a>Utterance Tagging</h3><p>&emsp;这部分很简单，就是在拼接上下文语句的时候在不同句子前加上标签。</p>
+<h3 id="Multi-task-Learning-with-Language-Modeling"><a href="#Multi-task-Learning-with-Language-Modeling" class="headerlink" title="Multi-task Learning with Language Modeling"></a>Multi-task Learning with Language Modeling</h3><p>&emsp;双向语言建模模型的任务是利用前向GRU和后向GRU分别预测下一个单词和前一个单词。首先将对话历史的拼接序列馈入嵌入层得到每一个单词的嵌入组成的嵌入嵌入序列；在将该序列馈入一个$Bi-GRU$ 得到两个方向的隐藏状态表示$\overrightarrow{h_t^{lm}}$和$\overleftarrow{h_t^{lm}}$，这两个表示被用来预测下一个和前一个单词：</p>
+<script type="math/tex; mode=display">
+P^{lm}(w_{t+1}|w_{<t+1}) = softmax(W_f\overrightarrow{h_t^{lm}}) \\
+P^{lm}(w_{t-1}|w_{>t-1}) - softmax(W_b\overleftarrow{h_t^{lm}})</script><p>损失函数采用对数似然：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+L^{lm} = & -\sum_{t=1}^{T-1} log(P^{lm}(w_{t+1}|w_{<t+1})) \\
+       & - \sum_{t=1}^T log(P^{lm}(w_{t-1}|w_{>t-1}))
+
+\end{align}</script><p>将两个隐藏层状态相加$h_t^{lm} = \overrightarrow{h_t^{lm}}+\overleftarrow{h_t^{lm}}$ 后再将结果与词嵌入$w_t$拼接后馈入句子编码器$Bi-GRU$，将slot gate 与 state generator 两个模块包含进来计算对话状态追踪的损失$L^{dst}$:</p>
+<script type="math/tex; mode=display">
+L^{total} = L^{dst} + \alpha L^{lm}</script><blockquote>
+<p>$\alpha$: 超参数，用来平衡两个任务</p>
+</blockquote>
+<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210422153116577.png" alt="image-20210422153116577"></p>
+<p>如上图，该模型在联合精度与槽精度上都是SOTA</p>
+<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210422153338568.png" alt="image-20210422153338568"></p>
+<p>上图展示了$\alpha$的取值对联合精度的影响</p>
+<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210422153439440.png" alt="image-20210422153439440"></p>
+<p>上图展示了对于不同上下文长度上本模型与原生TRADE的比较，以及两者的预测错误类型比较。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2021/04/17/20210424%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" title="【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems" target="_blank" rel="external">https://ccyh.xyz/2021/04/17/20210424汇报_林宇航/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/linnyh" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/linnyh" target="_blank"><span class="text-dark">张怀民</span><small class="ml-1x">Backend Developer &amp; Designer</small></a></h3>
+        <div>虚怀若谷</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/04/17/20210410%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" title="【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5_%E6%9E%97%E5%AE%87%E8%88%AA/" title="【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'oR2IQXqpGEFy4GHNDgdmfSMR-gzGzoHsz',
+    appKey: 'hwYfVGzICBlXGiokUXaNqJsx',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>
