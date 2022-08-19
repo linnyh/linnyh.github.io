@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>【数据结构】树 | Hexo</title>
+  <meta name="description" content="树的基本概念树的定义：前面所提到的线性结构的元素是一种一对一的关系，而树是一种一对多的非线性结构，下面将通过一个具体的树的例子讲解到底什么样的结构才是树以 及树的一些相关术语：  上图就是个树结构的概图了，我们可以看到它是由唯一的一个根节点和若干棵互不相交的子树组成的，由此可知树的定义是地柜的，即在树的定义中又用到了树的定义。这里需要注意的是，树的结点数可以是零，若为零时，称为一棵空树。结点：上">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数据结构】树">
+<meta property="og:url" content="https://ccyh.xyz/2019/03/05/BinaryTree/index.html">
+<meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="树的基本概念树的定义：前面所提到的线性结构的元素是一种一对一的关系，而树是一种一对多的非线性结构，下面将通过一个具体的树的例子讲解到底什么样的结构才是树以 及树的一些相关术语：  上图就是个树结构的概图了，我们可以看到它是由唯一的一个根节点和若干棵互不相交的子树组成的，由此可知树的定义是地柜的，即在树的定义中又用到了树的定义。这里需要注意的是，树的结点数可以是零，若为零时，称为一棵空树。结点：上">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b7679982.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b768378b.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b76a92a2.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b768378b.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b76b04b4.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b7746fce.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b775c25b.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b7758a61.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b7780558.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5b7755d25.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5bf2c8c41.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5bf2d25e8.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5bf2c9721.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e5bf2d661c.png">
+<meta property="article:published_time" content="2019-03-05T10:46:04.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:46:38.238Z">
+<meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="Tree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/01/28/5c4e5b7679982.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ccyh.xyz/2019/03/05/BinaryTree/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/linnyh" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">张怀民</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Backend Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E7%96%AF%E5%B8%9D/">闲疯帝</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Borring/" rel="tag">Borring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DST/" rel="tag">DST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Encrypted/" rel="tag">Encrypted</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knapsack/" rel="tag">Knapsack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/" rel="tag">List</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickSort/" rel="tag">QuickSort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discretemathematics/" rel="tag">discretemathematics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.6px;">AI</a> <a href="/tags/Algorithm/" style="font-size: 13.8px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 13px;">Array</a> <a href="/tags/Blog/" style="font-size: 13px;">Blog</a> <a href="/tags/Borring/" style="font-size: 13px;">Borring</a> <a href="/tags/C/" style="font-size: 13px;">C</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/DST/" style="font-size: 13px;">DST</a> <a href="/tags/Encrypted/" style="font-size: 13px;">Encrypted</a> <a href="/tags/Graph/" style="font-size: 13px;">Graph</a> <a href="/tags/Hexo/" style="font-size: 13.4px;">Hexo</a> <a href="/tags/Knapsack/" style="font-size: 13px;">Knapsack</a> <a href="/tags/LeetCode/" style="font-size: 13.4px;">LeetCode</a> <a href="/tags/List/" style="font-size: 13.2px;">List</a> <a href="/tags/ML/" style="font-size: 14px;">ML</a> <a href="/tags/Math/" style="font-size: 13.4px;">Math</a> <a href="/tags/QuickSort/" style="font-size: 13px;">QuickSort</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/Tree/" style="font-size: 13.6px;">Tree</a> <a href="/tags/algorithm/" style="font-size: 13px;">algorithm</a> <a href="/tags/discretemathematics/" style="font-size: 13px;">discretemathematics</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/" class="title">【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/30/ResidualNetwork/" class="title">【Pytorch基础】深度残差神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-30T14:36:33.000Z" itemprop="datePublished">2020-04-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/FashionMnistCNN/" class="title">FashionMnist数据集卷积神经网络实战</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T15:58:02.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/CNN/" class="title">【Pytorch基础】卷积神经网络基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T03:05:13.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/28/Softmax/" class="title">【Pytorch基础】多分类问题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-28T09:49:35.000Z" itemprop="datePublished">2020-04-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">树的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.</span> <span class="toc-text">树的存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">3.</span> <span class="toc-text">二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E6%80%A7%E8%B4%A8"><span class="toc-number">4.</span> <span class="toc-text">二叉树的几个重要性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">5.</span> <span class="toc-text">二叉树的存储结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95-%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0-%EF%BC%9A"><span class="toc-number">6.</span> <span class="toc-text">二叉树的遍历算法(递归实现)：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E7%AE%97%E6%B3%95-%E9%9D%9E%E9%80%92%E5%BD%92%E5%AE%9E%E7%8E%B0"><span class="toc-number">7.</span> <span class="toc-text">二叉树的遍历算法(非递归实现)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%B8%8A%E5%9B%BE%E8%80%8C%E6%9F%A5%E5%A4%84%E5%B0%86%E4%BD%9C%E4%B8%BA%E4%BE%8B%E5%AD%90%E6%96%B9%E4%BE%BF%E8%AE%B2%E8%A7%A3%E4%B8%8B%E9%9D%A2%E7%9A%84%E7%AE%97%E6%B3%95"><span class="toc-number">7.0.1.</span> <span class="toc-text">上图而查处将作为例子方便讲解下面的算法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">线索二叉树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%91%E4%B8%8E%E6%A3%AE%E6%9E%97%E7%9A%84%E4%BA%92%E7%9B%B8%E8%BD%AC%E6%8D%A2"><span class="toc-number">9.</span> <span class="toc-text">树与森林的互相转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">树与二叉树的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E5%B9%B3%E8%A1%A1%E6%A0%91"><span class="toc-number">10.1.</span> <span class="toc-text">二叉排序树与二叉平衡树</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B5%AB%E5%A4%AB%E6%9B%BC%E6%A0%91%E4%B8%8E%E8%B5%AB%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81"><span class="toc-number">10.2.</span> <span class="toc-text">赫夫曼树与赫夫曼编码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B5%AB%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81%EF%BC%9A"><span class="toc-number">10.3.</span> <span class="toc-text">赫夫曼编码：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%88%A9%E7%94%A8%E8%B5%AB%E5%A4%AB%E6%9B%BC%E6%A0%91%E7%9A%84%E7%89%B9%E7%82%B9%E6%9D%A5%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-number">10.3.1.</span> <span class="toc-text">* 利用赫夫曼树的特点来对文件进行压缩存储</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9C%8D%E5%A4%AB%E6%9B%BC-n-%E5%8F%89%E6%A0%91"><span class="toc-number">10.4.</span> <span class="toc-text">霍夫曼$n$叉树</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-BinaryTree" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【数据结构】树
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/03/05/BinaryTree/" class="article-date">
+	  <time datetime="2019-03-05T10:46:04.000Z" itemprop="datePublished">2019-03-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Tree/" rel="tag">Tree</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/03/05/BinaryTree/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h4 id="树的基本概念"><a href="#树的基本概念" class="headerlink" title="树的基本概念"></a>树的基本概念</h4><p><strong>树的定义：</strong><br>前面所提到的线性结构的元素是一种一对一的关系，而树是一种一对多的非线性结构，下面将通过一个具体的树的例子讲解到底什么样的结构才是树以 及树的一些相关术语：</p>
+<p><img src="https://i.loli.net/2019/01/28/5c4e5b7679982.png" alt=""></p>
+<p>上图就是个树结构的概图了，我们可以看到它是由唯一的一个根节点和若干棵互不相交的子树组成的，由此可知树的定义是地柜的，即在树的定义中又用到了树的定义。这里需要注意的是，树的结点数可以是零，若为零时，称为一棵<strong>空树</strong>。<br><strong>结点：</strong>上图中的每一个橙色圆圈都是结点，结点中不仅有数据域，还存在几个或零个指向其子树的指针；<br><strong>结点的度：</strong>该节点所引申出的分支数目，如上图中的B结点，向下引申出了E和F，故其度为2；<br><strong>树的度：</strong>树的度为树中所有结点的度的最大值，如上图树的度为A结点的度为3；<br><strong>叶子结点：</strong>又称为<em>终端结点</em>，指的是度为零的结点<br><strong>非终端结点：</strong>又称为分支结点，指的是度不为零的结点，上图中的ABCDEG都是非终端结点。另外，非终端结点除去根节点A之外的所有结点又称为<em>内部结点</em>。<br><strong>祖先：</strong>从树的根节点到某一节点的路径上的所有结点都成为该结点的祖先结点，如E的祖先节点为：<br>A和B，因为路径为：A—B—E；<br><strong>层次：</strong>根处为第一层，以此类推……，如上图树的层次为4层；<br><strong>结点的深度和高度：</strong>联系实际，只需记住，高度是从底往上数；而深度是从上往下数；比如结点B的高度为3；而深度为2。根节点A的高度为树的高度为4；<br><strong>有序树：</strong>树中结点的子树从左到右都是有次序的不能交换<br><strong>无序树：</strong>树中结点的子树没有次序，可以任意交换<br><strong>丰满树：</strong>理想的平衡树，要求除了最底层外，其他层都是满的<br><strong>森林：</strong>若干棵互不相交的树的集合，若吧上图中的根节点A去掉，就成了一个森林</p>
+<hr>
+<h4 id="树的存储结构"><a href="#树的存储结构" class="headerlink" title="树的存储结构"></a>树的存储结构</h4><ul>
+<li>顺序存储：<br>双亲存储结构，亦称双亲表示法(克鲁斯卡尔算法)</li>
+<li>链式存储：<br>孩子存储结构（孩子表示法）<br>孩子兄弟存储结构（孩子兄弟表示法）</li>
+</ul>
+<hr>
+<h4 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h4><ul>
+<li>二叉树的五种基本形式</li>
+<li>满二叉树的概念</li>
+<li>完全二叉树的概念<h4 id="二叉树的几个重要性质"><a href="#二叉树的几个重要性质" class="headerlink" title="二叉树的几个重要性质"></a>二叉树的几个重要性质</h4></li>
+<li><strong>性质一：</strong>非空二叉树上叶子结点的数量等于双分支结点数加 1，即为$ n_0 = n_2 + 1$；</li>
+<li><strong>性质二：</strong>二叉树的第$i$层上最多有$2^{i-1}$;</li>
+<li><strong>性质三：</strong>高度（或深度）为$k$的二叉树最多有$2^k-1$个结点，换句话说就是一个深度为k的满二叉树的结点为$2^k-1$.</li>
+<li><strong>性质四：</strong>该性质与二叉树的顺序存储结构相关，在下面会提到，这里不再赘述；</li>
+<li><strong>性质五：</strong>函数$Catalan( ):$给定$n$个结点，能构成$h(n)$种不同的二叉树，其中：$h(n)=\frac{1}{n+1}×C_{2n}^n$ ;</li>
+<li><strong>性质六：</strong>具有$n$个结点的完全二叉树的高度（或深度）为$[\log_2{n}]+1$(向下取整)；</li>
+</ul>
+<h4 id="二叉树的存储结构"><a href="#二叉树的存储结构" class="headerlink" title="二叉树的存储结构"></a>二叉树的存储结构</h4><ul>
+<li><strong>顺序存储结构：</strong><br>用一个数组来存储<em>完全二叉树</em>，将完全二叉树的结点值按编号依次存入一个一维数组中。<br><img src="https://i.loli.net/2019/01/28/5c4e5b768378b.png" alt=""></li>
+</ul>
+<p>如果要从一维数组中还原二叉树的本来结构，按照以下规则：<br>$i$ 为某结点的编号，若$i\not=1$，则该结点的双亲结点的编号为$i/2$向下取整；<br>如果$2i\leq n$,则该结点的左孩子编号为$2i$,否则该结点没有左孩子；<br>如果$2i+1 \leq n$,则该结点的右孩子编号为$2i+1$;否则该结点无右孩子；<br>下面给出将数组还原成二叉链树的代码：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">creatBTree</span><span class="params">(<span class="type">int</span> BT[],<span class="type">int</span> n,BTNode *&amp;e)</span></span>&#123;</span><br><span class="line">  BTNode *BTNode_array[maxsize];</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;++i )&#123;</span><br><span class="line">    BTNode_array[i] = (BTNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(BTNode));</span><br><span class="line">    BTNode_array[i] -&gt; data = BT[i];</span><br><span class="line">    BTNode_array[i] -&gt; lchild = <span class="literal">NULL</span>;</span><br><span class="line">    BTNode_array[i] -&gt; rchild = <span class="literal">NULL</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i &lt;= n;++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">2</span>*i &lt;= n )&#123;</span><br><span class="line">      BTNode_array[i] -&gt; lchild = BTNode_array[<span class="number">2</span>*i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((<span class="number">2</span>*i+<span class="number">1</span>) &lt;= n)&#123;</span><br><span class="line">      BTNode_array[i] -&gt; rchild = BTNode_array[<span class="number">2</span>*i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  e = BTNode_array[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>链式存储结构：</strong><br>为了能够存储任意形式的二叉树结构，且根据二叉树一对多的非线性关系，设计出了二叉树的链式存储结构，结点定义如下：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">BTNode</span>&#123;</span><br><span class="line">	<span class="type">int</span> data; <span class="comment">//数据域</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">BTNode</span> *lchild;<span class="comment">//指向左孩子的指针</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">BTNode</span> *rchild;<span class="comment">//指向右孩子的指针</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="二叉树的遍历算法-递归实现-："><a href="#二叉树的遍历算法-递归实现-：" class="headerlink" title="二叉树的遍历算法(递归实现)："></a>二叉树的遍历算法(递归实现)：</h4><strong>深度优先遍历：</strong></li>
+<li>前序遍历：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">preorder</span><span class="params">(BTNode *p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">Visit</span>(p);</span><br><span class="line">		<span class="built_in">preorder</span>(p -&gt; lchild);</span><br><span class="line">		<span class="built_in">preorder</span>(p -&gt; rchild);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>中序遍历：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">inorder</span><span class="params">(BTNode *p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">inorder</span>(p -&gt; lchild);</span><br><span class="line">		<span class="built_in">Visit</span>(p);</span><br><span class="line">		<span class="built_in">inorder</span>(p -&gt; rchild);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>后序遍历：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">postorder</span><span class="params">(BTNode *p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">postorder</span>(p -&gt; lchild);</span><br><span class="line">		<span class="built_in">postorder</span>(p -&gt; rchild);</span><br><span class="line">		<span class="built_in">Visit</span>(p);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>广度优先遍历：</strong></p>
+</li>
+<li><p>算法流程图解：<br><img src="https://i.loli.net/2019/01/28/5c4e5b76a92a2.png" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">level</span> <span class="params">(BTNode *p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		BTNode *que[maxsize];</span><br><span class="line">		<span class="type">int</span> front = <span class="number">0</span>;</span><br><span class="line">		<span class="type">int</span> rear = <span class="number">0</span>;</span><br><span class="line">		BTNode *q;</span><br><span class="line">		rear = (rear + <span class="number">1</span>)%maxsize;</span><br><span class="line">		que[rear] = p;</span><br><span class="line">		<span class="keyword">while</span>(front != rear)&#123;</span><br><span class="line">			front = (front + <span class="number">1</span>)%maxsize;</span><br><span class="line">			q = que[front];</span><br><span class="line">			<span class="built_in">Visit</span>(q);</span><br><span class="line">			<span class="keyword">if</span>(q -&gt; lchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">				rear = (rear + <span class="number">1</span>)%maxsize;</span><br><span class="line">				que[rear] = q -&gt; lchild;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(q -&gt; rchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">				rear = (rear + <span class="number">1</span>)%maxsize;</span><br><span class="line">				que[rear] = q -&gt; rchild;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h4 id="二叉树的遍历算法-非递归实现"><a href="#二叉树的遍历算法-非递归实现" class="headerlink" title="二叉树的遍历算法(非递归实现)"></a>二叉树的遍历算法(非递归实现)</h4><p><img src="https://i.loli.net/2019/01/28/5c4e5b768378b.png" alt=""></p>
+<h6 id="上图而查处将作为例子方便讲解下面的算法"><a href="#上图而查处将作为例子方便讲解下面的算法" class="headerlink" title="上图而查处将作为例子方便讲解下面的算法"></a>上图而查处将作为例子方便讲解下面的算法</h6><hr>
+<p><strong>深度优先遍历算法：</strong></p>
+<ul>
+<li><p>先序遍历：<br><img src="https://i.loli.net/2019/01/28/5c4e5b76b04b4.png" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">preorderNonrecursion</span><span class="params">(BTNode *bt)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(bt != <span class="literal">NULL</span>)&#123;</span><br><span class="line">	BTNode *Stack[maxsize];</span><br><span class="line">	<span class="type">int</span> top = <span class="number">-1</span>;</span><br><span class="line">	BTNode *p;</span><br><span class="line">	Stack[++top] = bt;</span><br><span class="line">	<span class="keyword">while</span>(top != <span class="literal">NULL</span>)&#123;</span><br><span class="line">	    p = Stack[top--];</span><br><span class="line">	    <span class="built_in">Visit</span>(p);</span><br><span class="line">	    <span class="keyword">if</span>(p -&gt; rchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">	        Stack[++top] = p -&gt; rchild;</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="keyword">if</span>(p -&gt; lchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">	        Stack[++top] = p -&gt; lchild;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>后序遍历：<br>先序遍历算法遍历例子二叉树将得到：A B D E C F G<br>后序遍历例子二叉树：D E B F G C A<br>将后序遍历序列逆置：A C G F B E D<br>可以发现，如果将先序遍历序列中对左右子树的遍历顺序交换一下，就可以得到逆后序遍历序列，再将逆后序序列逆置即可得到后序遍历序列。<br><img src="https://i.loli.net/2019/01/28/5c4e5b7746fce.png" alt=""></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">postorderNonrecursion</span><span class="params">(BTNode *bt)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(bt != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		BTNode Stack1[maxsize];</span><br><span class="line">		BTNode Stack2[maxsize];</span><br><span class="line">		<span class="type">int</span> top1 = <span class="number">-1</span>;</span><br><span class="line">		<span class="type">int</span> top2 = <span class="number">-1</span>;</span><br><span class="line">		BTNode *p = <span class="literal">NULL</span>;</span><br><span class="line">		Stack1[++top1] = bt;</span><br><span class="line">		<span class="keyword">while</span>(top1 != <span class="number">-1</span>)&#123;</span><br><span class="line">			p = Stack1[top--];</span><br><span class="line">			Stack2[++top] = p;</span><br><span class="line">			<span class="keyword">if</span>(p -&gt; lchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">				Stack1[++top] = p -&gt; lchild;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(p -&gt; rchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">				Stack1[++top] = p -&gt; rchild;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(top2 != <span class="number">-1</span>)&#123;</span><br><span class="line">			p = Stack2[top--];</span><br><span class="line">			<span class="built_in">Visit</span>(p);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>中序遍历：<br><img src="https://i.loli.net/2019/01/28/5c4e5b775c25b.png" alt=""><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">inorderNonrecursion</span><span class="params">(BTNode *bt)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(bt != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		BTNode *Stack[maxsize];</span><br><span class="line">		<span class="type">int</span> top = <span class="number">-1</span>;</span><br><span class="line">		BTNode *p;</span><br><span class="line">		p = bt;</span><br><span class="line">		<span class="keyword">while</span>(top != <span class="number">-1</span> || p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">			<span class="keyword">while</span>(p -&gt; lchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">				Stack[++top] = p;</span><br><span class="line">				p = p -&gt; lchild;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(top != <span class="number">-1</span>)&#123;</span><br><span class="line">				p = Stack[top--];</span><br><span class="line">				<span class="built_in">Visit</span>(p);</span><br><span class="line">				p = p -&gt; rchild;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="线索二叉树"><a href="#线索二叉树" class="headerlink" title="线索二叉树"></a>线索二叉树</h4></li>
+</ul>
+<hr>
+<p>对于二叉链表存储结构，$n$个结点的二叉树有$n+1$个空链域，能不能把这些空链域有效地利用起来，使二叉树的遍历更加高效呢？答案是肯定的，这就是线索二叉树的由来。</p>
+<ul>
+<li>线索二叉树的优势：二叉树被线索化后近似于一个线性结构，分支结构的遍历操作就被转化成了近似线性结构的遍历操作，通过线索的辅助使得寻找当前结点的前驱或者后继的效率大大提高。<br><strong>线索二叉树的构造：</strong><br><img src="https://i.loli.net/2019/01/28/5c4e5b7758a61.png" alt=""><br><strong>结点定义：</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">TBTNode</span>&#123;</span><br><span class="line">	<span class="type">int</span> data; <span class="comment">// 数据域</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">TBTNode</span> *lchild; <span class="comment">// 左孩子（前驱结点）指针</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">TBTNode</span> *rchild; <span class="comment">// 右孩子（后继结点）指针</span></span><br><span class="line">	<span class="type">int</span> ltag , rtag; <span class="comment">//线索标记</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>根据二叉树的遍历方式的不同，线索二叉树可以分为先序线索二叉树、中序线索二叉树和后序线索二叉树。对一棵二叉树中的所有结点的空指针按照某种遍历方式加上线索的过程叫做二叉树的线索化，被线索化的二叉树就称为线索二叉树。<br><strong>通过中序遍历对二叉树线索化代码：</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">InThread</span><span class="params">(TBTNode *p,TBTNode *&amp;pre)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">InThread</span>(p -&gt; lchild,pre); <span class="comment">// 递归地线索化左子树</span></span><br><span class="line">		<span class="keyword">if</span>(p -&gt; lchild == <span class="literal">NULL</span>)&#123; <span class="comment">// 建立当前结点前驱线索</span></span><br><span class="line">			p -&gt; lchild = pre;</span><br><span class="line">			p -&gt; ltag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(pre != <span class="literal">NULL</span> &amp;&amp; pre -&gt; rchild == <span class="literal">NULL</span>)&#123; <span class="comment">// 建立前驱结点的后继线索</span></span><br><span class="line">			pre -&gt; rchild = p;</span><br><span class="line">			pre -&gt; rtag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		pre = p; <span class="comment">// pre 跟上 p，之后p会指向下一个结点</span></span><br><span class="line">		<span class="built_in">InThread</span>(p -&gt; rchild,pre); <span class="comment">// 递归地线索化右子树</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>通过中序遍历线索二叉树的主程序如下：</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">creatTBTNode</span><span class="params">(TBTNode *root)</span></span>&#123;</span><br><span class="line">	TBTNode *pre = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="keyword">if</span>(root != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="built_in">InThread</span>(root,pre); <span class="comment">//递归建立线索二叉树</span></span><br><span class="line">		pre -&gt; rchild = <span class="literal">NULL</span>; <span class="comment">// 处理最后一个结点</span></span><br><span class="line">		pre -&gt; rtag = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>遍历中序线索二叉树：</strong><br><em>寻找中序线索二叉树 root 的第一个遍历结点：</em><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TBTNode *<span class="title">First</span><span class="params">(TBTNode *root)</span></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>( root -&gt; ltag == <span class="number">0</span>)&#123;</span><br><span class="line">		root = root -&gt; lchild;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<em>在中序线索二叉树中，求结点p在中序下的后继结点的算法：</em><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TBTNode *<span class="title">Next</span><span class="params">(TBTNode *p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p -&gt; rtag == <span class="number">0</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">First</span>(p -&gt; rchild);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> p -&gt; rchild;  <span class="comment">// rtag = 1; 直接返回后继线索</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<em>在中序线索二叉树上执行中序遍历：</em><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Inoreder</span><span class="params">(TBTNode *root)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (TBTNode *p = <span class="built_in">First</span>(root);p != <span class="literal">NULL</span>;p = <span class="built_in">Next</span>(p))&#123;</span><br><span class="line">		<span class="built_in">Visit</span>(p);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>通过前序遍历对二叉树线索化</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">preInThread</span><span class="params">(TBTNode *p,TBTNode *&amp;pre)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p -&gt; lchild != <span class="literal">NULL</span>)&#123;</span><br><span class="line">			p -&gt; lchild = pre;</span><br><span class="line">			p -&gt; ltag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (pre != <span class="literal">NULL</span> &amp;&amp; pre -&gt; rchild == <span class="literal">NULL</span>)&#123;</span><br><span class="line">			pre -&gt; rchild = p;</span><br><span class="line">			pre -&gt; rtag = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		pre = p;</span><br><span class="line">		<span class="keyword">if</span> (p -&gt; ltag == <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="built_in">preThread</span>(p -&gt; lchild,pre);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (p -&gt; rtag == <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="built_in">preThread</span>(p -&gt; rchild,pre);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>遍历前序线索二叉树算法：</strong><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">preorder</span><span class="params">(TBTNode *root)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		TBTNode *p = root;</span><br><span class="line">		<span class="keyword">while</span>(p != <span class="literal">NULL</span>)&#123;</span><br><span class="line">			<span class="keyword">while</span>(p -&gt; ltag == <span class="number">0</span>)&#123;</span><br><span class="line">				<span class="built_in">Visit</span>(p);</span><br><span class="line">				p = p -&gt; lchild;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">Visit</span>(p);</span><br><span class="line">			p = p -&gt; rchild;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="树与森林的互相转换"><a href="#树与森林的互相转换" class="headerlink" title="树与森林的互相转换"></a>树与森林的互相转换</h4></li>
+</ul>
+<hr>
+<hr>
+<h4 id="树与二叉树的应用"><a href="#树与二叉树的应用" class="headerlink" title="树与二叉树的应用"></a>树与二叉树的应用</h4><hr>
+<h5 id="二叉排序树与二叉平衡树"><a href="#二叉排序树与二叉平衡树" class="headerlink" title="二叉排序树与二叉平衡树"></a>二叉排序树与二叉平衡树</h5><hr>
+<h5 id="赫夫曼树与赫夫曼编码"><a href="#赫夫曼树与赫夫曼编码" class="headerlink" title="赫夫曼树与赫夫曼编码"></a>赫夫曼树与赫夫曼编码</h5><hr>
+<p><strong>赫夫曼树的相关概念及介绍：</strong><br>赫夫曼树又被称为最优二叉树，它的特点是<strong>带权路径最短</strong>。下面介绍几个相关概念：</p>
+<ul>
+<li><strong>路径：</strong>指从树中一个结点到另一个结点的分支所构成的路线</li>
+<li><strong>路径长度：</strong>路径上的分支数目</li>
+<li><strong>树的路径长度：</strong>从根到<strong>每个结点</strong>的路径长度之和</li>
+<li><strong>带权路径长度：</strong>结点具有<strong>权值</strong>，从该结点到<strong>根结点</strong>的路径长度乘于该结点的权值就是该结点的带权路径长度</li>
+<li><strong>树的带权路径长度（WPL）：</strong>树中所有<strong>叶子结点</strong>的带权路径长度之和</li>
+</ul>
+<p><strong>赫夫曼树的构造方法：</strong><br>给定$n$个权值，用这些个权值来构造赫夫曼树：<br>首先了解一下赫夫曼树的一些特点：</p>
+<ul>
+<li>权值越大的结点距离根节点越近</li>
+<li>树中没有度为1的结点</li>
+<li>树的带权路径长度最短</li>
+</ul>
+<p>根据上述特点反推我们是如何来构造一个赫夫曼树：</p>
+<ul>
+<li>从最底层开始构造</li>
+<li>最底层结点离根节点月远故其路径长度最大，而为使其带权路径长度最短，应选择权值最小的结点作为最底层结点</li>
+<li>权值最大的结点离根节点最近</li>
+</ul>
+<p>有了上述导论我们就可以开始构造一棵赫夫曼树了：<br><img src="https://i.loli.net/2019/01/28/5c4e5b7780558.png" alt=""><br>上图构建的赫夫曼树的WPL为：$8×1+7×2+5×3+4×4+2×4=61$,这是这些结点所能构造的所有不同的树中树的带权路径长度最小的构造方式。</p>
+<h5 id="赫夫曼编码："><a href="#赫夫曼编码：" class="headerlink" title="赫夫曼编码："></a>赫夫曼编码：</h5><hr>
+<h6 id="利用赫夫曼树的特点来对文件进行压缩存储"><a href="#利用赫夫曼树的特点来对文件进行压缩存储" class="headerlink" title="* 利用赫夫曼树的特点来对文件进行压缩存储"></a>* 利用赫夫曼树的特点来对文件进行压缩存储</h6><hr>
+<p>看个例子：如果有这样一串字符将要被存储于计算机中$AECCBCDEEDECCCBAEEEBECDDBB$<br>选三位长度的二进制数为A到E编码：<br><img src="https://i.loli.net/2019/01/28/5c4e5b7755d25.png" alt=""><br>根据上表我们可以将该字符串编码为：<br>$000100010010001010011100100011100010010010001000100100100001000100100100001100010011011001001$<br>解码时每三位一个字符解码<br>总共需要78位来存储这个字符串，是否有根节省空间的编码形式呢？</p>
+<p>答案是肯定的，我们统计一下这个字符串中各个字符出现的频率（权值）：<br><img src="https://i.loli.net/2019/01/28/5c4e5bf2c8c41.png" alt=""><br>利用上表的信息构建一棵霍夫曼树，并将树中每个结点的左右分支进行编号（左0右1）：<br><img src="https://i.loli.net/2019/01/28/5c4e5bf2d25e8.png" alt=""><br>到此我们得到了对A到E的霍夫曼编码规则：<br><img src="https://i.loli.net/2019/01/28/5c4e5bf2c9721.png" alt=""><br>根据上表的编码规则可将字符串编码为：<br>$1110010101101011110011110101010110111000011001011111111110110$<br>只需61位的空间就能存储该字符串，可以直观地发现比普通编码短了很多。</p>
+<p><strong>解码霍夫曼编码：</strong><br>解码霍夫曼编码需要用到上诉的那棵霍夫曼树，从左至右依次读取字符串编码，从根结点开始，读取到1则向右分支走，读取到0则向左分支走，直到走到叶子结点并读取该结点。</p>
+<hr>
+<ul>
+<li>[注] <em>对于同一组结点，构造出的霍夫曼树是不唯一的。但是，得到的不同的霍夫曼树的WPL却是相同的</em></li>
+</ul>
+<h5 id="霍夫曼-n-叉树"><a href="#霍夫曼-n-叉树" class="headerlink" title="霍夫曼$n$叉树"></a>霍夫曼$n$叉树</h5><ul>
+<li><em>霍夫曼树不都是二叉树，霍夫曼二叉树只是霍夫曼$n$叉树的一种特例</em></li>
+</ul>
+<hr>
+<p>构造霍夫曼$n$叉树的逻辑与构造霍夫曼二叉树并无二异，我们知道对于结点数目大于等于2的待处理序列都可以构造霍夫曼二叉树。但却不一定能用来构造霍夫曼n叉树，构造n叉树的结点数目要求为大于等于3的奇数，若非奇数可以加上一个权值为0的结点。<br><img src="https://i.loli.net/2019/01/28/5c4e5bf2d661c.png" alt=""></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2019/03/05/BinaryTree/" title="【数据结构】树" target="_blank" rel="external">https://ccyh.xyz/2019/03/05/BinaryTree/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/linnyh" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/linnyh" target="_blank"><span class="text-dark">张怀民</span><small class="ml-1x">Backend Developer &amp; Designer</small></a></h3>
+        <div>虚怀若谷</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/03/06/linearList/" title="【数据结构】线性表"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/01/arrayandlist/" title="【数据结构】数组、矩阵、和广义表"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'oR2IQXqpGEFy4GHNDgdmfSMR-gzGzoHsz',
+    appKey: 'hwYfVGzICBlXGiokUXaNqJsx',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

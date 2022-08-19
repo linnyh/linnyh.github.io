@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>【Pytorch基础】梯度下降算法 | Hexo</title>
+  <meta name="description" content="回顾&amp;emsp;上偏文章我们尝试用枚举法找到权重的最优取值，并限定区间为0到4.1，步长为0.1,显然我们很快就能找到最优的权重。这是因为未知权重只有一个，复杂度为线性的。但如果模型为$y &#x3D; f(w_1,w_2,w_3…,w_n,x)$, 有多个未知权重，如此一来即使你知道每个权重的取值在$[a,b]$内，枚举的时间复杂度也是$O((b-a)^n)$级别的。复杂度随权重数量指数级增长，这当然是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Pytorch基础】梯度下降算法">
+<meta property="og:url" content="https://ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="回顾&amp;emsp;上偏文章我们尝试用枚举法找到权重的最优取值，并限定区间为0到4.1，步长为0.1,显然我们很快就能找到最优的权重。这是因为未知权重只有一个，复杂度为线性的。但如果模型为$y &#x3D; f(w_1,w_2,w_3…,w_n,x)$, 有多个未知权重，如此一来即使你知道每个权重的取值在$[a,b]$内，枚举的时间复杂度也是$O((b-a)^n)$级别的。复杂度随权重数量指数级增长，这当然是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604110727225.png">
+<meta property="og:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604112226207.png">
+<meta property="og:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604114310137.png">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/X_cubed_plot.gif/150px-X_cubed_plot.gif">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/20200423094724179.png">
+<meta property="article:published_time" content="2020-04-23T13:36:59.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:44:59.272Z">
+<meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="ML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604110727225.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/linnyh" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">张怀民</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Backend Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E7%96%AF%E5%B8%9D/">闲疯帝</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Borring/" rel="tag">Borring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DST/" rel="tag">DST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Encrypted/" rel="tag">Encrypted</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knapsack/" rel="tag">Knapsack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/" rel="tag">List</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickSort/" rel="tag">QuickSort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discretemathematics/" rel="tag">discretemathematics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.6px;">AI</a> <a href="/tags/Algorithm/" style="font-size: 13.8px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 13px;">Array</a> <a href="/tags/Blog/" style="font-size: 13px;">Blog</a> <a href="/tags/Borring/" style="font-size: 13px;">Borring</a> <a href="/tags/C/" style="font-size: 13px;">C</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/DST/" style="font-size: 13px;">DST</a> <a href="/tags/Encrypted/" style="font-size: 13px;">Encrypted</a> <a href="/tags/Graph/" style="font-size: 13px;">Graph</a> <a href="/tags/Hexo/" style="font-size: 13.4px;">Hexo</a> <a href="/tags/Knapsack/" style="font-size: 13px;">Knapsack</a> <a href="/tags/LeetCode/" style="font-size: 13.4px;">LeetCode</a> <a href="/tags/List/" style="font-size: 13.2px;">List</a> <a href="/tags/ML/" style="font-size: 14px;">ML</a> <a href="/tags/Math/" style="font-size: 13.4px;">Math</a> <a href="/tags/QuickSort/" style="font-size: 13px;">QuickSort</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/Tree/" style="font-size: 13.6px;">Tree</a> <a href="/tags/algorithm/" style="font-size: 13px;">algorithm</a> <a href="/tags/discretemathematics/" style="font-size: 13px;">discretemathematics</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/" class="title">【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/30/ResidualNetwork/" class="title">【Pytorch基础】深度残差神经网络</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-30T14:36:33.000Z" itemprop="datePublished">2020-04-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/FashionMnistCNN/" class="title">FashionMnist数据集卷积神经网络实战</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T15:58:02.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/29/CNN/" class="title">【Pytorch基础】卷积神经网络基础</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-29T03:05:13.000Z" itemprop="datePublished">2020-04-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/04/28/Softmax/" class="title">【Pytorch基础】多分类问题</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-04-28T09:49:35.000Z" itemprop="datePublished">2020-04-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-梯度下降算法" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【Pytorch基础】梯度下降算法
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/" class="article-date">
+	  <time datetime="2020-04-23T13:36:59.000Z" itemprop="datePublished">2020-04-23</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/ML/" rel="tag">ML</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h2><p>&emsp;上偏文章我们尝试用枚举法找到权重的最优取值，并限定区间为0到4.1，步长为0.1,显然我们很快就能找到最优的权重。这是因为未知权重只有一个，复杂度为线性的。但如果模型为$y = f(w_1,w_2,w_3…,w_n,x)$, 有多个未知权重，如此一来即使你知道每个权重的取值在$[a,b]$内，枚举的时间复杂度也是$O((b-a)^n)$级别的。复杂度随权重数量指数级增长，这当然是不可接受的。</p>
+<hr>
+<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p>&emsp;已知平均损失函数为：</p>
+<script type="math/tex; mode=display">cost(w) = \frac{\sum_{i=0}^{n}(\hat y_i - y_i)^2}{n}</script><p>假设其图像为：<br><img src="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604110727225.png" alt=""></p>
+<p>又假设当前权重位于红点位置：<br><img src="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604112226207.png" alt=""></p>
+<p>不难发现，当权重值(图中x)位于左侧红点（斜率为负）位置时，它应该往右（+）以靠近最优值；当权重值位于右侧红点（斜率为正）位置时，它应该往左（-）以靠近最优值。因此当前权重点的斜率方向可以规定其调整方向，而不必再去暴力枚举，调整方式为：</p>
+<script type="math/tex; mode=display">w = w - \alpha \frac{\partial cost}{\partial w}</script><p>也即：</p>
+<ul>
+<li>当梯度(导数)为正时权重减少</li>
+<li>增加的绝对值大小取决于 $\alpha$ , 称为学习率（一般来说取小一点好）</li>
+</ul>
+<p>如此一来，每一次权重的迭代都朝着当前损失下降最快的方向更新，就称为梯度下降，是赤裸裸的贪心思想。按照我们对贪心算法的认知来看，当损失函数如上图所示为一个<strong>非凸函数</strong>时，其不一定每次都得到最优解，如它可能陷入如下情况中：<br><img src="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604114310137.png" alt=""><br>上图所示情况由于学习率很小而算法只顾眼前导致只能收敛于一个局部最优解，而与全局最优解失之交臂。<br>但是，实际应用中出现很多局部最优点的数量其实不会很多，反而会出现<a target="_blank" rel="noopener" href="https://zh.m.wikipedia.org/wiki/%E9%9E%8D%E9%BB%9E">鞍点</a>导致权重停止更新。<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/X_cubed_plot.gif/150px-X_cubed_plot.gif" alt="鞍点图示"><br>因为在鞍点处梯度为0，导致$\alpha \frac{\partial cost}{\partial w}$为0，权重无法继续迭代更新。</p>
+<hr>
+<h2 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h2><p>&emsp;接下来我们摈弃暴力枚举算法用梯度下降算法来对上篇文章例子中的权重进行更新。<br>首先求梯度函数：</p>
+<script type="math/tex; mode=display">\frac{\partial cost}{\partial w} = \frac{\partial}{\partial w} \left( \frac{\sum_{i=1}^{n}(\hat y_i - y_i)^2}{n} \right)</script><script type="math/tex; mode=display">= \frac{1}{n}\sum_{i=1}^{n}(x_i \cdot w - y_i)^2</script><script type="math/tex; mode=display">= \frac{1}{n}\sum_{i=1}^{n}2\cdot (x_i \cdot w - y_i)\frac{\partial (x_i \cdot w - y_i)}{\partial w}</script><script type="math/tex; mode=display">= \frac{1}{n}\sum_{i=1}^{n}2\cdot x_i \cdot (x_i \cdot w - y_i)</script><p>因此，权重更新函数为：</p>
+<script type="math/tex; mode=display">w = w - \alpha \cdot \frac{1}{n} \sum_{i=1}^{n} 2 \cdot x_i \cdot (x_i \cdot w - y_i)</script><h3 id="梯度下降算法具体实现"><a href="#梯度下降算法具体实现" class="headerlink" title="梯度下降算法具体实现"></a>梯度下降算法具体实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 准备数据集</span></span><br><span class="line">x_data = [<span class="number">1.0</span>, <span class="number">2.0</span>, <span class="number">3.0</span>]</span><br><span class="line">y_data = [<span class="number">2.0</span>, <span class="number">4.0</span>, <span class="number">6.0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化权重w, 学习率 a</span></span><br><span class="line">w = <span class="number">0.1</span></span><br><span class="line">a = <span class="number">0.01</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义模型函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x * w;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义平均损失函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost</span>(<span class="params">xs, ys</span>):</span><br><span class="line">    loss = <span class="number">0</span> <span class="comment">#损失和</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(xs,ys):</span><br><span class="line">        y_predict = forward(x)</span><br><span class="line">        loss += (y - y_predict) ** <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> loss / <span class="built_in">len</span>(xs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义梯度函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient</span>(<span class="params">xs, ys</span>):</span><br><span class="line">    grad = <span class="number">0</span> <span class="comment"># 初始化梯度</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(xs, ys):</span><br><span class="line">        grad += <span class="number">2</span> * x * (x * w - y)</span><br><span class="line">    <span class="keyword">return</span> grad / <span class="built_in">len</span>(xs)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;训练前预测：&#x27;</span>,<span class="number">4</span>,forward(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用于绘制损失函数</span></span><br><span class="line">w_list = []</span><br><span class="line">cost_list = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开始训练模型16个世代</span></span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">    cost_val = cost(x_data, y_data)</span><br><span class="line">    grad_val = gradient(x_data, y_data)</span><br><span class="line">    w -= a * grad_val</span><br><span class="line">    w_list.append(w)</span><br><span class="line">    cost_list.append(cost_val)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;第&#x27;</span>,epoch,<span class="string">&#x27;世代&#x27;</span>,<span class="string">&#x27; w = &#x27;</span>,w,<span class="string">&#x27; loss = &#x27;</span>,cost_val)</span><br><span class="line">    </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;训练后预测：&#x27;</span>,<span class="number">4</span>,forward(<span class="number">4</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">训练前预测：</span> <span class="number">4</span> <span class="number">0.4</span></span><br><span class="line"><span class="string">第</span> <span class="number">0</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">0.2773333333333333</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">16.846666666666668</span></span><br><span class="line"><span class="string">第</span> <span class="number">1</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">0.4381155555555556</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">13.84870874074074</span></span><br><span class="line"><span class="string">第</span> <span class="number">2</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">0.583891437037037</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">11.384254083055142</span></span><br><span class="line"><span class="string">第</span> <span class="number">3</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">0.7160615695802469</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">9.358362823119462</span></span><br><span class="line"><span class="string">第</span> <span class="number">4</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">0.8358958230860906</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">7.692990167840783</span></span><br><span class="line"><span class="string">第</span> <span class="number">5</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">0.9445455462647221</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">6.323979828639249</span></span><br><span class="line"><span class="string">第</span> <span class="number">6</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.043054628613348</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">5.198592484911624</span></span><br><span class="line"><span class="string">第</span> <span class="number">7</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.1323695299427687</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">4.273474071152241</span></span><br><span class="line"><span class="string">第</span> <span class="number">8</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.213348373814777</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">3.5129856186680826</span></span><br><span class="line"><span class="string">第</span> <span class="number">9</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.2867691922587312</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">2.8878303112393273</span></span><br><span class="line"><span class="string">第</span> <span class="number">10</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.3533374009812495</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">2.3739248638525594</span></span><br><span class="line"><span class="string">第</span> <span class="number">11</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.4136925768896662</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">1.9514717458585313</span></span><br><span class="line"><span class="string">第</span> <span class="number">12</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.4684146030466307</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">1.6041965071733062</span></span><br><span class="line"><span class="string">第</span> <span class="number">13</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.518029240095612</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">1.3187208265189987</span></span><br><span class="line"><span class="string">第</span> <span class="number">14</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.5630131776866882</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">1.084047129213129</span></span><br><span class="line"><span class="string">第</span> <span class="number">15</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.6037986144359306</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.891134920085601</span></span><br><span class="line"><span class="string">第</span> <span class="number">16</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.6407774104219104</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.7325525103068125</span></span><br><span class="line"><span class="string">第</span> <span class="number">17</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.6743048521158654</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.602190721361547</span></span><br><span class="line"><span class="string">第</span> <span class="number">18</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.7047030659183846</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.4950275369912518</span></span><br><span class="line"><span class="string">第</span> <span class="number">19</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.7322641130993355</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.4069346366306757</span></span><br><span class="line"><span class="string">第</span> <span class="number">20</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.7572527958767308</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.3345183572942651</span></span><br><span class="line"><span class="string">第</span> <span class="number">21</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.7799092015949025</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.27498895717843275</span></span><br><span class="line"><span class="string">第</span> <span class="number">22</span> <span class="string">世代</span>  <span class="string">w</span> <span class="string">=</span>  <span class="number">1.8004510094460449</span>  <span class="string">loss</span> <span class="string">=</span>  <span class="number">0.2260531445321019</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">训练后预测：</span> <span class="number">4</span> <span class="number">7.999577741380291</span></span><br></pre></td></tr></table></figure>
+<h3 id="绘制损失函数"><a href="#绘制损失函数" class="headerlink" title="绘制损失函数"></a>绘制损失函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">plt.plot(w_list, cost_list)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;cost&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;W&#x27;</span>)</span><br><span class="line">plt.xlim(<span class="number">0</span>,<span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/20200423094724179.png" alt=""></p>
+<p>上述损失函数的收敛趋势看起来非常平滑，当实际中可能很少出现这么平滑的损失函数，对于这个问题可以采用<strong>指数加权均值</strong>的方法来让函数平滑化：<br>假设 $C<em>i$ 表示第 $i$ 轮训练的损失值则平滑处理后损失为 $C</em>{i}^{‘}$，则有：</p>
+<script type="math/tex; mode=display">C_{i}^{'} = \begin{cases} C_0, & \text {if $i=0$} \\ \beta C_{i}^{'} + (1- \beta)C_{i-1}^{'}, & \text{if $i>0$} \end{cases}</script><p>这样可以让我们更好地观察收敛的情况！</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/" title="【Pytorch基础】梯度下降算法" target="_blank" rel="external">https://ccyh.xyz/2020/04/23/梯度下降算法/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/linnyh" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/linnyh" target="_blank"><span class="text-dark">张怀民</span><small class="ml-1x">Backend Developer &amp; Designer</small></a></h3>
+        <div>虚怀若谷</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/24/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/" title="【Pytorch基础】梯度下降算法的改进"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/23/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="【Pytorch基础】线性模型"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'oR2IQXqpGEFy4GHNDgdmfSMR-gzGzoHsz',
+    appKey: 'hwYfVGzICBlXGiokUXaNqJsx',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>
