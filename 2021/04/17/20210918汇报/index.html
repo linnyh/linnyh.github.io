@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>【论文笔记】Multi-Attention-Based Scalable Dialog State Tracking | 虛懷若谷</title>
+  <meta name="description" content="2020-AAAI-MA-DST: Multi-Attention-Based Scalable Dialog State Tracking概要问题动机​    DST问题面临的问题包括跨域对话难以追踪以及数据稀缺。 主要贡献​    我们的工作最类似于TRADE，并通过提出自我和交叉注意力机制来捕捉位置和历史相关性。特别是，本文使用交叉注意在不同语义级别上的上下文和槽之间的模型关系，并使用自我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【论文笔记】Multi-Attention-Based Scalable Dialog State Tracking">
+<meta property="og:url" content="http://example.com/2021/04/17/20210918%E6%B1%87%E6%8A%A5/index.html">
+<meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="2020-AAAI-MA-DST: Multi-Attention-Based Scalable Dialog State Tracking概要问题动机​    DST问题面临的问题包括跨域对话难以追踪以及数据稀缺。 主要贡献​    我们的工作最类似于TRADE，并通过提出自我和交叉注意力机制来捕捉位置和历史相关性。特别是，本文使用交叉注意在不同语义级别上的上下文和槽之间的模型关系，并使用自我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913150205296.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913153131965.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913161124381.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913164707933.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913165410110.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913165735858.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913170542010.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913183618011.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913185710878.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913185722921.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913185804824.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913190749272.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913190828964.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915092106975.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915100828101.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915100916189.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915151248361.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915152540308.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915153105733.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915153800601.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915153839201.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915154433053.png">
+<meta property="article:published_time" content="2021-04-17T00:25:49.000Z">
+<meta property="article:modified_time" content="2022-08-19T15:20:47.125Z">
+<meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="DST">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913150205296.png">
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+  <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2021/04/17/20210918%E6%B1%87%E6%8A%A5/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/linnyh" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">张怀民</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Backend Developer &amp; NLPer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Fuzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-board">
+          <a href="/messagebd">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">留言</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-talk">
+          <a href="/shuoshuo">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">微言</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E7%96%AF%E5%B8%9D/">闲疯帝</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Borring/" rel="tag">Borring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DST/" rel="tag">DST</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Encrypted/" rel="tag">Encrypted</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knapsack/" rel="tag">Knapsack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/" rel="tag">List</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickSort/" rel="tag">QuickSort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discretemathematics/" rel="tag">discretemathematics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.5px;">AI</a> <a href="/tags/Algorithm/" style="font-size: 13.67px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 13px;">Array</a> <a href="/tags/Blog/" style="font-size: 13px;">Blog</a> <a href="/tags/Borring/" style="font-size: 13px;">Borring</a> <a href="/tags/C/" style="font-size: 13px;">C</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/DST/" style="font-size: 14px;">DST</a> <a href="/tags/Encrypted/" style="font-size: 13px;">Encrypted</a> <a href="/tags/Graph/" style="font-size: 13px;">Graph</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Knapsack/" style="font-size: 13px;">Knapsack</a> <a href="/tags/LeetCode/" style="font-size: 13.33px;">LeetCode</a> <a href="/tags/List/" style="font-size: 13.17px;">List</a> <a href="/tags/ML/" style="font-size: 13.83px;">ML</a> <a href="/tags/Math/" style="font-size: 13.33px;">Math</a> <a href="/tags/QuickSort/" style="font-size: 13px;">QuickSort</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/Tree/" style="font-size: 13.5px;">Tree</a> <a href="/tags/algorithm/" style="font-size: 13px;">algorithm</a> <a href="/tags/discretemathematics/" style="font-size: 13px;">discretemathematics</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210410%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210424%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210515%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2018-ACL-Global-Locally Self-Attentive Dialogue State Tracker</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-20210918汇报" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【论文笔记】Multi-Attention-Based Scalable Dialog State Tracking
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/04/17/20210918%E6%B1%87%E6%8A%A5/" class="article-date">
+	  <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/DST/" rel="tag">DST</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/17/20210918%E6%B1%87%E6%8A%A5/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 20(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+<h1 id="2020-AAAI-MA-DST-Multi-Attention-Based-Scalable-Dialog-State-Tracking"><a href="#2020-AAAI-MA-DST-Multi-Attention-Based-Scalable-Dialog-State-Tracking" class="headerlink" title="2020-AAAI-MA-DST: Multi-Attention-Based Scalable Dialog State Tracking"></a>2020-AAAI-MA-DST: Multi-Attention-Based Scalable Dialog State Tracking</h1><h2 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h2><h3 id="问题动机"><a href="#问题动机" class="headerlink" title="问题动机"></a>问题动机</h3><p>​    DST问题面临的问题包括跨域对话难以追踪以及数据稀缺。</p>
+<h3 id="主要贡献"><a href="#主要贡献" class="headerlink" title="主要贡献"></a>主要贡献</h3><p>​    我们的工作最类似于TRADE，并通过提出自我和交叉注意力机制来捕捉位置和历史相关性。特别是，本文使用交叉注意在不同语义级别上的上下文和槽之间的模型关系，并使用自我注意来解决跨域共引用。此外，本文提出的体系结构并不依赖于事先了解域本体，也可以用于新域或看不见的插槽值的零镜头设置。</p>
+<p>​    与MultiWoZ2.1数据集上目前的SOTA模型相比，我们的模型在全数据设置下的联合目标精度提高了5%，在零镜头设置下提高了高达2%。</p>
+<h2 id="相关研究"><a href="#相关研究" class="headerlink" title="相关研究"></a>相关研究</h2><ul>
+<li>2017-IEEE-Scalable multidomain dialogue state tracking</li>
+<li>2019-ACL-Transferable multi-domain state generator for task-oriented dialogue systems.</li>
+<li>2018-arXiv-SDNet: Contextualized attention-based deep network for conversational question answering</li>
+</ul>
+<h2 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h2><p>​    定义到第 t 回合的对话历史为 $C_t = { U_1,A_1,U_2,A_2,…U_t }$, 其中 $U_i, A_i$ 分别表示第 $i$ 轮的用户话语和系统话语。令 $S = { s_1,s_2,…,s_n }$ 表示所有$n$个可能的插槽。 $DST_t = { s_1:v_1,s_2:v_2,..,s_n:v_n }$ 表示第 $t$ 回合的对话状态。若槽未被提及，其值为 “none” 。DST 的任务为给定 $C_t$ 预测 $DST_t$。</p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><h3 id="TRADE-概览"><a href="#TRADE-概览" class="headerlink" title="TRADE 概览"></a>TRADE 概览</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913150205296.png" alt="image-20210913150205296"></p>
+<p>​    以往的对话状态常见状态中每个插槽值的预测作为分类问题，但是槽值有可能是OOV的，因此基于实体候选值的预测存在问题。TRADE为了解决该问题提出了一种基于解码器的方案，同时使用生成和指向机制，使得模型能够生成未见槽值。</p>
+<p>​    这篇论文是对TRADE的改进，重点改进DST的对话上下文和槽语义编码，以稳健地捕获槽和对话历史之间的重要依赖关系，以及对话历史中的共同引用。提出了一个Multi-Attention DST(MA-DST)网络。它包含了槽编码和对话历史之间的多层交叉注意，以捕获<code>不同粒度级别</code>的关系，然后是一个<code>自我注意</code>层，以帮助解决对对话历史中早期槽提到的引用。</p>
+<hr>
+<h3 id="MA-DST基本架构"><a href="#MA-DST基本架构" class="headerlink" title="MA-DST基本架构"></a>MA-DST基本架构</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913153131965.png" alt="image-20210913153131965"></p>
+<p>​    该模型对槽名$s_i$和对话历史$C_t$进行编码，然后解码槽值$v_i$ 。模型包括一个用于槽名的<code>编码器</code>、一个用于对话历史的<code>编码器</code>、一个生成槽值的<code>解码器</code>和一个三类<code>槽门分类器SG</code>，它预测特殊符号{none、dontcare、gen}，这将在后面详细描述。模型权值在槽之间共享，这使得模型更健壮和可伸缩。</p>
+<h4 id="编码器"><a href="#编码器" class="headerlink" title="编码器"></a>编码器</h4><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913161124381.png" alt="image-20210913161124381"></p>
+<p>​    本文提出的插槽$s_i$和对话历史$C_t$编码器使用了三个阶段的注意力：</p>
+<ul>
+<li>词级别注意力</li>
+<li>交叉注意力</li>
+<li>对话历史的自注意力</li>
+</ul>
+<h5 id="Enriched-Word-Embedding-Layer"><a href="#Enriched-Word-Embedding-Layer" class="headerlink" title="Enriched Word Embedding Layer"></a>Enriched Word Embedding Layer</h5><p>​    对于$C_t$和$s_i$，我们首先将每个单词投射到一个低维空间中。我们使用了一个300维的GloVE嵌入，和一个100维的字符嵌入，这两者都得到了微调。对于对话历史$C_t$，我们还添加了一个5维POS标签嵌入和一个5维NER标签嵌入。我们还使用每个单词的转弯索引作为特征，并将其初始化为5维嵌入。</p>
+<p>​    为了捕捉单词的上下文意义，还使用了上下文ELMo嵌入。我们通过取不同ELMo层输出的加权平均值来计算$C_t$和$s_i$的1024维ELMo嵌入。我们只在训练模型时学习这些组合权重，而不是微调所有ELMo层的参数。所有的单词级嵌入都被连接起来，生成丰富的上下文单词级表示 e :</p>
+<script type="math/tex; mode=display">
+e &= [GloVE(w),CharEmbedding(w),ELMo(w), \\ & POS-tag(w), NER-tag(w),position-tag(w)]</script><h5 id="Word-Level-Cross-Attention-Layer"><a href="#Word-Level-Cross-Attention-Layer" class="headerlink" title="Word-Level Cross-Attention Layer"></a>Word-Level Cross-Attention Layer</h5><p>​    为了突出对话历史中的单词与插槽的关系，引入了二者词到词的注意力：</p>
+<script type="math/tex; mode=display">
+\alpha_{jk} = \frac{exp(f(We_j^C)Df(We_k^s))}{\sum_{k=1}^{K} exp(f(We_j^C)Df(We_k^s))} \\
+\hat{a}^C_j = \sum_{k=1}^{K} \alpha_{jk} * e_k^s</script><blockquote>
+<p>$e_j^C, e_k^s$ 分别表示第 j 个上下文单词嵌入以及第 k 个槽名嵌入</p>
+<p>$f$ 表示非线性激活函数，为ReLU</p>
+</blockquote>
+<p>为了得到会话历史记录中每个单词的表示$r_j$，我们将参与的向量与初始单词嵌入连接起来:</p>
+<script type="math/tex; mode=display">
+r_j^C = [e_j^C,\hat{a}_j^C] \tag{4}</script><p>对于槽名称中每个单词 k 的槽表示，我们使用嵌入 $r_k^s = e_k^s$。</p>
+<h5 id="First-Layer-RNN"><a href="#First-Layer-RNN" class="headerlink" title="First Layer RNN"></a>First Layer RNN</h5><p>​    槽名中每个单词和对话的计算表示$r^s_k$和$r_j^C$，然后通过一个门控重复单元(GRU)，为了对单词之间的时间交互进行建模，并得到一个上下文表示。对于每个$C_t$和$s_i$，我们使用双向GRU，并通过平均每个时间步长的每个GRU方向的隐藏状态来获得隐藏的上下文表示：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913164707933.png" alt="image-20210913164707933"></p>
+<blockquote>
+<p>$H_1^C$和$H_1^s$分别是会话历史和槽名的编码表示序列，由第一个双向GRU层输出(K为槽名长度，J为对话历史长度)。</p>
+</blockquote>
+<h5 id="Higher-Level-Cross-Attention-Layer"><a href="#Higher-Level-Cross-Attention-Layer" class="headerlink" title="Higher Level Cross Attention Layer"></a>Higher Level Cross Attention Layer</h5><p>​    我们在基础RNN层上添加了一个交叉注意网络，以参与由之前的RNN层生成的更高层次的表示，即$H_1^C$和$H_1^s$。我们使用了双向交叉注意网络，一个从对话历史$H_1^C$到插槽$H_1^s$，另一个在相反的方向。这一灵感来自于阅读理解方面的一些作品，其中交叉注意力被用来计算长段落和查询问题之间的关系。</p>
+<p>​    槽到对话历史的注意子网络有助于突出显示对话中与我们想要生成值的槽相关的单词。与词级注意相似，注意力权重计算如下：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913165410110.png" alt="image-20210913165410110"></p>
+<p>我们将插槽名中的每个单词的注意向量$\hat{h}_k^{s,1}$与其对应的隐藏状态$h_k^{s,1}$融合如下：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913165735858.png" alt="image-20210913165735858"></p>
+<p>类似地，对话历史对槽的子网络计算注意权重来突出槽名称中的哪些单词与对话历史记录中的每个单词最相关。这用基于注意力的表示$\hat{h}_j^{C,1}$丰富了对话历史$h_j^{C,1}$中的单词表示，从而产生了一个新的表示$r_j^{C,1}$。所有的计算都类似于对话历史注意的槽，但方向相反。</p>
+<h5 id="Second-Layer-RNN"><a href="#Second-Layer-RNN" class="headerlink" title="Second Layer RNN"></a>Second Layer RNN</h5><p>​    然后将表示$r_k^{s,1}$和$r_j^{C,1}$通过第二个双向GRU层，得到$h^{s,2}_k$和$h^{C,2}_j$。这有助于将这些向量与时间信息融合在一起。</p>
+<h5 id="Self-Attention-Layer"><a href="#Self-Attention-Layer" class="headerlink" title="Self Attention Layer"></a>Self Attention Layer</h5><p>​    在对话表示$h^{C，2}_j$之上添加了一个自我注意网络。这一层有助于解决对话历史记录中跨话语的单词之间的相关性。我们引入这个子网络来解决用户引用之前话语中出现的插槽值的情况，这是对话中常见的现象, 自注意力计算如下：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913170542010.png" alt="image-20210913170542010"></p>
+<p>对话中每个单词的最终表示$r_j^{C，2}$是自参与向量$\hat{h}_j^{C,2}$的合并表示和隐藏状态$h_j^{C,2}$的合并表示，根据公式 $(9)$ 进行合并。</p>
+<h5 id="Third-Layer-RNN-and-Slot-Summarization"><a href="#Third-Layer-RNN-and-Slot-Summarization" class="headerlink" title="Third Layer RNN and Slot Summarization"></a>Third Layer RNN and Slot Summarization</h5><p>​    使用第三层RNN来获得会话历史记录的最终表示:</p>
+<script type="math/tex; mode=display">
+h_j^{C,3} = GRU(r_j^{C,2}), j = 1...J</script><p>由于插槽名称的长度比对话历史记录要短得多，因此可以用更少的信息进行编码。因此没有使用额外的RNN，而是使用线性转换来总结槽，以将槽表示减少为单个向量：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913183618011.png" alt="image-20210913183618011"></p>
+<blockquote>
+<p>$w^T$ 为训练过程中的用来学习的参数</p>
+</blockquote>
+<p>最后，$HC、3=[h_1^{C,3},h_2^{C,3},…,h_J^{C,3}]$是对话历史中的每个单词表示，而$h^{s,3}$是总结的槽名表示，两者都将在解码步骤中使用。</p>
+<h4 id="解码器和槽门分类器"><a href="#解码器和槽门分类器" class="headerlink" title="解码器和槽门分类器"></a>解码器和槽门分类器</h4><p>​    解码器网络是一个GRU，它可以解码插槽$s_i$的值$v_i$。在计算槽值中的每个单词的每个解码步骤 $i$ 中，网络计算<code>两个分布</code>：一个是所有词汇内词汇（单词生成分布）和一个是对话历史中所有单词的分布（单词历史分布）。这允许解码器生成在对话历史中出现但在训练数据的词汇表中不存在的看不见单词。这个公式消除了有一个包含所有可能的槽值的预定义本体的依赖性，这对自由形式的槽是有限制性的。由于能够生成看不见的插槽值，该网络非常适合零镜头用例。</p>
+<p>​    通过结合对话历史表示的最后一个隐藏状态和总结的槽表示来初始化解码器：</p>
+<script type="math/tex; mode=display">
+h_0^{dec} = W[h_J^{C,3},h^{s,3}]</script><p>其中W是一个可学习的参数。在每个解码时间步长 $i$ 时，解码器在词汇表上生成一个概率分布：</p>
+<script type="math/tex; mode=display">
+P_i^{vocab} = Softmax(W*h_i^{dec})</script><p>解码器还通过使用指针网络生成对话历史中单词的概率分布，即计算对话历史中每个单词的注意力权重。为了生成最终的词汇表分布，我们取$P<em>{history}$和$P</em>{vocab}$的加权和：</p>
+<script type="math/tex; mode=display">
+P_i^{final} = p_i^gen \times P_i^{vocab} + (1-p_i^{gen}) \times P_i^{history}</script><p>​    为了避免对对话中不存在的插槽运行解码器，我们还训练了一个插槽门分类器。这是一个三分类器，它预测以下类别{none，dontcare，gen}。只有当分类器预测gen时，我们才能解码槽值。</p>
+<p>​    利用标准的交叉熵损失，以多任务的方式训练网络。我们将插槽发生器（解码器）和SG分类器的损失组合如下：</p>
+<script type="math/tex; mode=display">
+Loss_{combined} = Loss_{generator} + \gamma \times Loss_{classifier}</script><h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li>MultiWOZ 2.0</li>
+<li>MultiWOZ 2.1</li>
+</ul>
+<h3 id="主要结果"><a href="#主要结果" class="headerlink" title="主要结果"></a>主要结果</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913185710878.png" alt="image-20210913185710878"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913185722921.png" alt="image-20210913185722921"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913185804824.png" alt="image-20210913185804824"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913190749272.png" alt="image-20210913190749272"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210913190828964.png" alt="image-20210913190828964"></p>
+<h1 id="2020-CL-Context-Sensitive-Generation-Network-for-Handing-Unknown-Slot-Values-in-Dialogue-State-Tracking"><a href="#2020-CL-Context-Sensitive-Generation-Network-for-Handing-Unknown-Slot-Values-in-Dialogue-State-Tracking" class="headerlink" title="2020-CL-Context-Sensitive Generation Network for Handing Unknown Slot Values in Dialogue State Tracking"></a>2020-CL-Context-Sensitive Generation Network for Handing Unknown Slot Values in Dialogue State Tracking</h1><h2 id="概要-1"><a href="#概要-1" class="headerlink" title="概要"></a>概要</h2><h3 id="问题动机-1"><a href="#问题动机-1" class="headerlink" title="问题动机"></a>问题动机</h3><p>​    传统上，对话状态跟踪通常使用基于本体的方法来解决，该方法基于所有槽值都预先已知的假设。然而，在实际情况下，不可能知道所有的槽值，对话状态跟踪模型经常遇到在训练中从未见过的槽值，也被称为未知槽值。这使得现有的方法表现不佳。</p>
+<p>​    事实上，在一个未知的插槽值中，通常有不止一个词汇表外的单词，指针机制无法只通过单词嵌入来区分它们。由于解码过程中这种情况的输入不确定性，解码器的输出会逐渐发生偏差，导致未知槽值的误差。</p>
+<p>​    一般来说，目前的开放词汇表DST方法基本上依赖于指针机制来解决未知的槽值问题。然而，指针机制在解码中面临着输入信息不确定的问题。当未知槽值中存在多个词汇外单词时，指针机制中的指针生成的未知槽值会发生偏差。</p>
+<h3 id="主要贡献-1"><a href="#主要贡献-1" class="headerlink" title="主要贡献"></a>主要贡献</h3><p>​    为了解决这个缺点，本文强调解码器的输入应该注入更多的信息，而不仅仅是单词嵌入。本文针对对话状态跟踪中的未知槽值问题，提出了一种新的上下文敏感生成网络(CSG)。我们提出的模型将单词上下文信息连接到解码器的输入。这样，不同的词汇外单词可以<code>通过单词上下文信息来区分</code>，单词上下文信息也可以丰富单词的表示，而过去只能通过单词嵌入来表示。</p>
+<ul>
+<li>提出了一种新的上下文敏感生成网络，利用词汇上下文信息来克服词汇外词汇引起的不确定信息问题。</li>
+<li>模型具有高度移植性，可以方便地部署到现有的基于指针机制的对话状态跟踪模型中。</li>
+<li>在最具影响力的MultiWOZ2.1和DSTC2基准测试上，我们的模型在提取未知槽值的同时保持知道槽值的能力方面比最先进的基线具有明显的优势。</li>
+</ul>
+<h2 id="相关研究-1"><a href="#相关研究-1" class="headerlink" title="相关研究"></a>相关研究</h2><ul>
+<li>2020-arXiv-Efficient context and schema fusion networks for multi-domain dialogue state tracking</li>
+<li><p>2017-ACL-Get to the point: Summarization with pointer-generator networks</p>
+</li>
+<li><p>2018-ACL-An end-to-end approach for handling unknown slot values in dialogue state tracking</p>
+</li>
+<li>2018-ACL-Improving slot filling in spoken language understanding with joint pointer and attention</li>
+<li>2019-ACL-Transferable multi-domain state generator for taskoriented dialogue systems</li>
+</ul>
+<h2 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h2><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915092106975.png" alt="image-20210915092106975"></p>
+<h3 id="基本架构"><a href="#基本架构" class="headerlink" title="基本架构"></a>基本架构</h3><p>​    如上图，绿色部分为<font color=green>编码器</font>，用于生成对话历史的向量表示和每个单词的上下文表示，其可以是任何编码模型如Bi-LSTM 和 Bi-GRU。编码器的输入是对话历史$H=[w<em>1，…，w_l]∈R^{l×d</em>{emb}}$，这是对话历史中所有单词的连接。$l$ 是对话历史的长度，$d<em>{emb}$ 是单词嵌入的大小。输出包含两个部分，一个是最终隐藏状态 $S \in \R^{d</em>{hid}}$ ，将作为解码器的初始隐藏层状态。另一部分为每一编码时刻的隐藏状态 $OT = [o_1^{enc},…,o_l^{enc}]$ 。在我们的模型中，我们假设OT不仅是对话历史的表示，而且是对话历史中每个单词的上下文表示。因此，OT可以用于增强解码中OOV词汇的表示。</p>
+<p>​    蓝色部分为<font color=blue>解码器</font>，在解码的初始步骤中，使用插槽嵌入作为解码器的输入。在编码的第 $t$ 步，解码器的输出 $o<em>t^{dec} \in \R^{d</em>{hid}}$ 用于生成对对话历史的注意力分布：</p>
+<script type="math/tex; mode=display">
+p_t^{history} = softmax(OT\cdot (o_t^{dec})^T)</script><p>然后，输入对话历史中槽值的第$t$个字的位置$pos_t$由$p_t^{history}$中的最大注意决定:</p>
+<script type="math/tex; mode=display">
+pos_t = {argmax} \text{ } p_t^{history} \\
+i \in [1,...,l]</script><p>​    在解码的第 $t+1$ 步，传统的指针网络将第$t$步选择出的嵌入 $w<em>{pos_t}$ 作为解码器 $I</em>{t+1}$ 的输入。然而OOV词汇嵌入中的信息是不完整的，不能有效地表示单词。因此，本文提出的模型融合了单词的嵌入以及上下文表示作为编码器的输入：</p>
+<script type="math/tex; mode=display">
+I_{t+1} = com(w_{pos_t}, o_{pos_t}^{enc})</script><p>具体融合方法将在后面探讨。</p>
+<h3 id="Context-Utilization-Schemes"><a href="#Context-Utilization-Schemes" class="headerlink" title="Context Utilization Schemes"></a>Context Utilization Schemes</h3><p>​    在本文中，我们认为单词不仅应该有词汇表空间表示，即单词嵌入$w_{pos_t}$，而且还应该有上下文表示。在传统的编码器-解码器模型中，通常只考虑单词嵌入，而忽略上下文表示。当一个单词是一个词汇外的单词时，通常使用一个统一的单词嵌入“UNK”来表示这个单词。这样，这个词的信息就不能得到充分的表示，这将导致结果的偏差。因此，我们建议将单词的嵌入和上下文表示相结合，不仅可以提高单词中的信息，而且可以有效地解决未知的槽值问题。</p>
+<p>​    为了有效地利用单词上下文信息，我们提出了将单词上下文信息与单词嵌入相结合的不同方案，如下：</p>
+<p><strong>上下文表示法被直接用作单词的表示法</strong>:</p>
+<script type="math/tex; mode=display">
+I_{t+1} = o_{pos_t}^{enc}</script><p><strong>单词嵌入和上下文表示的和被用作单词的表示</strong>：</p>
+<script type="math/tex; mode=display">
+I_{t+1} = w_{pos_t} + o_{pos_t}^{enc}</script><p><strong>使用单词嵌入和上下文表示的连接作为单词的表示</strong>:</p>
+<script type="math/tex; mode=display">
+I_{t+1} = [w_{pos_t},o_{pos_t}^{enc}]</script><p>​    上述三个单词的上下文利用方案是为了探讨不同情况下不同的上下文利用方式。在特定的对话状态跟踪系统中，模型的实现基本上是异构的，因此不同的上下文利用方案可能会产生不同的效果。接下来，将通过实验分析来详细说明它。</p>
+<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集-1"><a href="#数据集-1" class="headerlink" title="数据集"></a>数据集</h3><ul>
+<li>DSTC2</li>
+<li>MultiWOZ 2.1</li>
+</ul>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915100828101.png" alt="image-20210915100828101"></p>
+<h3 id="主要结果-1"><a href="#主要结果-1" class="headerlink" title="主要结果"></a>主要结果</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915100916189.png" alt="image-20210915100916189"></p>
+<h1 id="2021-ACL-Leveraging-Slot-Descriptions-for-Zero-Shot-Cross-Domain-Dialogue-State-Tracking"><a href="#2021-ACL-Leveraging-Slot-Descriptions-for-Zero-Shot-Cross-Domain-Dialogue-State-Tracking" class="headerlink" title="2021-ACL-Leveraging Slot Descriptions for Zero-Shot Cross-Domain Dialogue State Tracking"></a>2021-ACL-Leveraging Slot Descriptions for Zero-Shot Cross-Domain Dialogue State Tracking</h1><h2 id="概要-2"><a href="#概要-2" class="headerlink" title="概要"></a>概要</h2><h3 id="问题动机-2"><a href="#问题动机-2" class="headerlink" title="问题动机"></a>问题动机</h3><p>​    零镜头跨域对话状态跟踪(DST)使我们能够在看不见的领域内处理面向任务的对话，而无需花费收集域内数据的费用。因此研究能够使用很少或没有域内数据构建健壮和可扩展的对话系统的方法是非常重要的。</p>
+<h3 id="主要贡献-2"><a href="#主要贡献-2" class="headerlink" title="主要贡献"></a>主要贡献</h3><p>​    本文提出了一种零镜头跨域DST的<code>槽描述增强</code>生成方法。具体来说，模型首先用预先训练好的自注意编码器对对话上下文和插槽进行编码，并以自动回归的方式生成插槽值。此外，我们还结合了槽类型的信息描述，以捕获跨槽的共享信息，以促进跨领域的知识转移。在MultiWOZ数据集上的实验结果表明，本文提出的方法在零镜头跨域设置中显著改进了现有的最先进的结果。</p>
+<ul>
+<li>提出了一种简单而新颖的基于T5的生成性DST模型，显著提高了现有的零镜头跨域DST结果</li>
+<li>研究了不同的插槽描述公式的有效性。据我们所知，这是第一个全面研究零镜头跨域DST中插槽描述的有效性的工作</li>
+</ul>
+<h2 id="相关研究-2"><a href="#相关研究-2" class="headerlink" title="相关研究"></a>相关研究</h2><ul>
+<li><p>[ ] 2019-ACL-Transferable multi-domain state generator for task-oriented dialogue systems.</p>
+</li>
+<li><p>[ ] 2019-arXiv-Multi-domain dialogue state tracking as dynamic knowledge graph enhanced question answering.</p>
+</li>
+<li><p>[ ] 2020-AAAI- Towards scalable multi-domain conversational agents: The</p>
+<p>schema-guided dialogue dataset.</p>
+</li>
+<li><p>[ ] 2020-MLR-Exploring the limits of transfer learning with a unified text-to-text transformer.</p>
+</li>
+<li><p>[ ] 2020-AAAI-Attention-informed mixed-language training for zero-shot cross-lingual</p>
+<p>task-oriented dialogue systems.</p>
+</li>
+<li><p>[ ] 2020-arXiv-Zero-shot transfer learning with synthesized data for multi-domain dialogue state tracking.</p>
+</li>
+<li><p>[ ] 2020-arXiv-Language model is all you need: Natural language understanding as question answering.</p>
+</li>
+<li><p>[ ] 2019-arXiv- Robust zero-shot cross-domain slot filling with example values.</p>
+</li>
+<li><p>[ ] 2020-arXiv-From machine reading comprehension to dialogue state tracking:</p>
+<p>Bridging the gap.</p>
+</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="T5DST-概要"><a href="#T5DST-概要" class="headerlink" title="T5DST 概要"></a>T5DST 概要</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915151248361.png" alt="image-20210915151248361"></p>
+<p>​    该模型的设计遵循了生成性问题回答模型的基础。如上图所示，给定了一个由两个人交替出现的话语组成的对话历史，表示为 $C<em>t = { U_1,R_1,…,R</em>{t-1},U<em>t }$ , 我们分别向用户和系统话语添加$”user:”和”system:”$前缀。然后将所有的话语和插槽名$s_i$连接成一个序列，即$user：U_1…system：R</em>{t−1}user：U_t[sep]s_i$。使用该序列作为编码器的输入，解码器生成相应的插槽值$v_i$：</p>
+<script type="math/tex; mode=display">
+v_i = Seq2seq(C_t,s_i)</script><p>这个生成过程的学习目标是最小化给定$C_t$和$s_i$的$v_i$的负对数似然，即:</p>
+<script type="math/tex; mode=display">
+\mathcal{L} = -\sum_{i}^{n} log \text{ } p(v_i | C_t,s_i)</script><blockquote>
+<p>$n$ 为追踪的槽的数量</p>
+</blockquote>
+<p>​    我们使用 T5 初始化模型参数，这是一种具有相对位置嵌入的编码器-解码器变压器，对大量英语文本进行了预训练。我们将我们的模型表示为T5DST。为了将插槽描述合并到T5DST中，我们将插槽名称替换为相应的插槽描述作为模型输入。</p>
+<h3 id="插槽类型描述"><a href="#插槽类型描述" class="headerlink" title="插槽类型描述"></a>插槽类型描述</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915152540308.png" alt="image-20210915152540308"></p>
+<p>​    虽然不同的槽可能有不同的名称，但它们可以共享相同的槽类型。如上表所示，酒店星级和餐厅预订人员的插槽类型都是<code>数字插槽</code>，而酒店互联网和酒店停车场都是<code>布尔插槽</code>。根据这些观察结果，我们$\color{olive}{假设在槽描述中添加槽类型信息有助于不同槽之间的知识转移}$。我们为下面的域的 “槽类型” 构建一个模板 $[slot \text{ } type]\text{ } of \text{ }[slot] \text{ } of\text{ } the \text{ } [domain]$。我们表示槽描述为槽类型。更多细节见下表。</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915153105733.png" alt="image-20210915153105733"></p>
+<h2 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集-2"><a href="#数据集-2" class="headerlink" title="数据集"></a>数据集</h3><p>​    本文在MultiWOZ2.0数据集上评估了所提出的方法，该方法有7个域。本文使用了Wu等人的预处理和评估设置。其中<u>餐厅、火车、景点、酒店和出租车</u>领域被用于训练，因为测试集只包含这5个领域。</p>
+<p>​    在零镜头跨域实验中，模型首先用四个域进行训练，然后在未见的域的测试集上进行评估。联合目标精度用于评价模型的性能。当且仅当所有的预测值都与Oracle值完全匹配时，生成的对话状态才被认为是正确的。</p>
+<h3 id="主要结果-2"><a href="#主要结果-2" class="headerlink" title="主要结果"></a>主要结果</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915153800601.png" alt="image-20210915153800601"></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915153839201.png" alt="image-20210915153839201"></p>
+<p>​    零镜头跨域实验结果见表2。总的来说，与三个基线模型TRADE，SUMBT和SimpleTOD++相比，T5DST在平均联合目标精度方面取得了显著更高的性能。这些结果表明，该模型可以有效地捕获槽-上下文关系，从而更好地推广到未见的领域。</p>
+<p>​    进一步在少镜头跨域设置下进行实验，模型首先在4个域上训练，然后用1%、5%和10%的目标域数据进行微调。如表3所示，模型在5个领域中的4个领域中都优于DSTQA模型。此外，本文的方法在现实世界的学习场景中更实际，因为它不需要一个完整的本体的监督。本文还进行了全面的实验，并将该模型与以前的方法进行了比较。结果见下表：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210915154433053.png" alt="image-20210915154433053"></p>
+<p>​    总之，本文提出的槽类型描述提高了T5DST在所有领域的零镜头性能。与人类标记和朴素的描述公式相比，它产生了平均2%的联合目标精度提高。这一结果表明，<code>槽类型信息可以更好地捕获不同槽之间的共享属性（如时间、位置），从而促进DST的域知识传输</code>。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2021/04/17/20210918%E6%B1%87%E6%8A%A5/" title="【论文笔记】Multi-Attention-Based Scalable Dialog State Tracking" target="_blank" rel="external">http://example.com/2021/04/17/20210918汇报/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/linnyh" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/linnyh" target="_blank"><span class="text-dark">张怀民</span><small class="ml-1x">Backend Developer &amp; NLPer</small></a></h3>
+        <div>虚怀若谷</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/04/17/20210925%E6%B1%87%E6%8A%A5/" title="【论文笔记】A Comparative Study on Schema-Guided Dialogue State Tracking"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/04/17/20211002%E6%B1%87%E6%8A%A5/" title="【论文笔记】Jointly Optimizing State Operation Prediction and Value Generation for Dialogue State Tracking"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <!-- <script>
+            var now = new Date(); 
+            function createtime() { 
+                var grt= new Date("02/17/2019 18:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                now.setTime(now.getTime()+250); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+            } 
+            setInterval("createtime()",250);
+          </script> -->
+      
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Drive by <a href="https://github.com/linnyh" target="_blank"> linnyh </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+        <div class="publishby">
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span class="post-meta-divider">|</span><span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+        </div>
+        <!-- <div class="publishby">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+        </div> -->
+    </div>
+</footer>
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'oR2IQXqpGEFy4GHNDgdmfSMR-gzGzoHsz',
+    appKey: 'hwYfVGzICBlXGiokUXaNqJsx',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>

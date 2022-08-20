@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Hexo+icarus主题配置 | 虛懷若谷</title>
+  <meta name="description" content="下载icarus主题 进入博客主目录，点击鼠标右键Git Bash Here,进入命令行界面 输入： 1git clone https:&#x2F;&#x2F;github.com&#x2F;ppoffice&#x2F;hexo-theme-icarus themes&#x2F;icarus  打开themes文件夹，就会发现多了一个icarus文件夹，这就是主题的所有文件    配置主题1. 更改站点配置文件_config.yml,将主题改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+icarus主题配置">
+<meta property="og:url" content="http://example.com/2019/04/29/Hexo+icarus%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="虚怀若谷">
+<meta property="og:description" content="下载icarus主题 进入博客主目录，点击鼠标右键Git Bash Here,进入命令行界面 输入： 1git clone https:&#x2F;&#x2F;github.com&#x2F;ppoffice&#x2F;hexo-theme-icarus themes&#x2F;icarus  打开themes文件夹，就会发现多了一个icarus文件夹，这就是主题的所有文件    配置主题1. 更改站点配置文件_config.yml,将主题改">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/Hexo+icarus主题配置/20190429082811950.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/Hexo+icarus主题配置/20190429093801600.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/Hexo+icarus主题配置/20190429094726470.png">
+<meta property="article:published_time" content="2019-04-29T09:31:10.000Z">
+<meta property="article:modified_time" content="2022-08-19T12:48:14.857Z">
+<meta property="article:author" content="Daniel Lin">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/Hexo+icarus主题配置/20190429082811950.png">
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+  <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://example.com/2019/04/29/Hexo+icarus%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+    <link href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.css" rel="stylesheet">
+  
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/linnyh" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">张怀民</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Backend Developer &amp; NLPer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Fuzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-board">
+          <a href="/messagebd">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">留言</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-talk">
+          <a href="/shuoshuo">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">微言</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mathematics/">Mathematics</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86/">底层原理</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E7%96%AF%E5%B8%9D/">闲疯帝</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Array/" rel="tag">Array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Borring/" rel="tag">Borring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DST/" rel="tag">DST</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Encrypted/" rel="tag">Encrypted</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graph/" rel="tag">Graph</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Knapsack/" rel="tag">Knapsack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/List/" rel="tag">List</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Math/" rel="tag">Math</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/QuickSort/" rel="tag">QuickSort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String/" rel="tag">String</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tools/" rel="tag">Tools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tree/" rel="tag">Tree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discretemathematics/" rel="tag">discretemathematics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="tag">并查集</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/AI/" style="font-size: 13.5px;">AI</a> <a href="/tags/Algorithm/" style="font-size: 13.67px;">Algorithm</a> <a href="/tags/Array/" style="font-size: 13px;">Array</a> <a href="/tags/Blog/" style="font-size: 13px;">Blog</a> <a href="/tags/Borring/" style="font-size: 13px;">Borring</a> <a href="/tags/C/" style="font-size: 13px;">C</a> <a href="/tags/C/" style="font-size: 13px;">C++</a> <a href="/tags/DST/" style="font-size: 14px;">DST</a> <a href="/tags/Encrypted/" style="font-size: 13px;">Encrypted</a> <a href="/tags/Graph/" style="font-size: 13px;">Graph</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Knapsack/" style="font-size: 13px;">Knapsack</a> <a href="/tags/LeetCode/" style="font-size: 13.33px;">LeetCode</a> <a href="/tags/List/" style="font-size: 13.17px;">List</a> <a href="/tags/ML/" style="font-size: 13.83px;">ML</a> <a href="/tags/Math/" style="font-size: 13.33px;">Math</a> <a href="/tags/QuickSort/" style="font-size: 13px;">QuickSort</a> <a href="/tags/String/" style="font-size: 13px;">String</a> <a href="/tags/Tools/" style="font-size: 13px;">Tools</a> <a href="/tags/Tree/" style="font-size: 13.5px;">Tree</a> <a href="/tags/algorithm/" style="font-size: 13px;">algorithm</a> <a href="/tags/discretemathematics/" style="font-size: 13px;">discretemathematics</a> <a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 13px;">并查集</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">四月 2021</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210410%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210424%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210515%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2018-ACL-Global-Locally Self-Attentive Dialogue State Tracker</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BDicarus%E4%B8%BB%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">下载icarus主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text">配置主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E9%83%A8%E5%88%86%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">主题配置文件（部分）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E9%9B%AA%E8%8A%B1%E9%A3%98%E8%90%BD%E6%95%88%E6%9E%9C"><span class="toc-number">2.2.</span> <span class="toc-text">添加雪花飘落效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E8%AE%BF%E9%97%AE%E9%87%8F%E4%B8%8E%E8%AE%BF%E5%AE%A2%E9%87%8F%E7%BB%9F%E8%AE%A1"><span class="toc-number">2.3.</span> <span class="toc-text">网站访问量与访客量统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1"><span class="toc-number">2.4.</span> <span class="toc-text">网站运行时间统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E7%82%B9%E5%87%BB%E7%89%B9%E6%95%88"><span class="toc-number">2.5.</span> <span class="toc-text">鼠标点击特效</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%8B%E6%9D%BF%E5%A8%98%E6%8F%92%E4%BB%B6"><span class="toc-number">2.6.</span> <span class="toc-text">看板娘插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.7.</span> <span class="toc-text">遇到的坑及解决方法</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Hexo+icarus主题配置" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo+icarus主题配置
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/04/29/Hexo+icarus%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" class="article-date">
+	  <time datetime="2019-04-29T09:31:10.000Z" itemprop="datePublished">2019-04-29</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Hexo/" rel="tag">Hexo</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/04/29/Hexo+icarus%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 15(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <span id="more"></span>
+<hr>
+<h2 id="下载icarus主题"><a href="#下载icarus主题" class="headerlink" title="下载icarus主题"></a>下载icarus主题</h2><ol>
+<li>进入博客主目录，点击鼠标右键Git Bash Here,进入命令行界面</li>
+<li><p>输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/ppoffice/hexo-theme-icarus themes/icarus</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开themes文件夹，就会发现多了一个icarus文件夹，这就是主题的所有文件</p>
+</li>
+</ol>
+<hr>
+<h2 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h2><!-- more -->1. 更改站点配置文件_config.yml,将主题改为icarus
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">icarus</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>Icarus文件目录概览：<br><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/Hexo+icarus主题配置/20190429082811950.png" alt=""><blockquote>
+<ul>
+<li>$config.yml$是主题的配置文件</li>
+<li>$/layout$ 文件夹中是主题各种模板文件</li>
+<li>我们主要的超作就是在这两个文件中了</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<hr>
+<h3 id="主题配置文件（部分）"><a href="#主题配置文件（部分）" class="headerlink" title="主题配置文件（部分）"></a>主题配置文件（部分）</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Version of the Icarus theme that is currently used</span></span><br><span class="line"><span class="attr">version:</span> <span class="number">2.3</span><span class="number">.0</span></span><br><span class="line"><span class="comment"># 你的网站图标，可以搜索在线图标制作，并将其放在images文件夹中</span></span><br><span class="line"><span class="attr">favicon:</span> <span class="string">/images/favicons.ico</span></span><br><span class="line"><span class="comment"># Path or URL to RSS atom.xml</span></span><br><span class="line"><span class="attr">rss:</span> <span class="string">/atom.xml</span></span><br><span class="line"><span class="comment"># 显示在导航栏左侧的网站logo，同样可以自己制作</span></span><br><span class="line"><span class="attr">logo:</span> <span class="string">/images/gen.svg</span></span><br><span class="line"><span class="comment"># Open Graph metadata</span></span><br><span class="line"><span class="comment"># https://hexo.io/docs/helpers.html#open-graph</span></span><br><span class="line"><span class="attr">open_graph:</span></span><br><span class="line">    <span class="comment"># Facebook App ID</span></span><br><span class="line">    <span class="attr">fb_app_id:</span> </span><br><span class="line">    <span class="comment"># Facebook Admin ID</span></span><br><span class="line">    <span class="attr">fb_admins:</span> </span><br><span class="line">    <span class="comment"># Twitter ID</span></span><br><span class="line">    <span class="attr">twitter_id:</span> </span><br><span class="line">    <span class="comment"># Twitter site</span></span><br><span class="line">    <span class="attr">twitter_site:</span> </span><br><span class="line">    <span class="comment"># Google+ profile link</span></span><br><span class="line">    <span class="attr">google_plus:</span> </span><br><span class="line"><span class="comment">#  导航栏</span></span><br><span class="line"><span class="attr">navbar:</span></span><br><span class="line">    <span class="comment">#菜单（显示名称：对应文件夹）</span></span><br><span class="line">    <span class="attr">menu:</span></span><br><span class="line">        <span class="string">主页:</span> <span class="string">/</span></span><br><span class="line">        <span class="string">归档:</span> <span class="string">/archives</span></span><br><span class="line">        <span class="string">分类:</span> <span class="string">/categories</span></span><br><span class="line">        <span class="string">标签:</span> <span class="string">/tags</span></span><br><span class="line">        <span class="string">关于:</span> <span class="string">/about</span>   </span><br><span class="line">    <span class="comment"># 导航栏右侧图标链接</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">        <span class="attr">My GitHub:</span></span><br><span class="line">            <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">            <span class="attr">url:</span> <span class="string">&#x27;你的gityhub地址&#x27;</span></span><br><span class="line"><span class="comment"># Footer section link settings</span></span><br><span class="line"><span class="attr">footer:</span></span><br><span class="line">    <span class="comment"># 页脚图标链接</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">        <span class="attr">Creative Commons:</span></span><br><span class="line">            <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-creative-commons</span></span><br><span class="line">            <span class="attr">url:</span> <span class="string">&#x27;https://creativecommons.org/&#x27;</span></span><br><span class="line">        <span class="attr">Attribution 4.0 International:</span></span><br><span class="line">            <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-creative-commons-by</span></span><br><span class="line">            <span class="attr">url:</span> <span class="string">&#x27;https://creativecommons.org/licenses/by/4.0/&#x27;</span></span><br><span class="line">        <span class="attr">Download on GitHub:</span></span><br><span class="line">            <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">            <span class="attr">url:</span> <span class="string">&#x27;http://github.com/ppoffice/hexo-theme-icarus&#x27;</span></span><br><span class="line"><span class="comment"># 文章显示设置</span></span><br><span class="line"><span class="attr">article:</span></span><br><span class="line">    <span class="comment"># Code highlight theme</span></span><br><span class="line">    <span class="comment"># https://github.com/highlightjs/highlight.js/tree/master/src/styles</span></span><br><span class="line">    <span class="comment">#代码主题atom-one-light亮色，atom-one-dark暗色</span></span><br><span class="line">    <span class="attr">highlight:</span> <span class="string">atom-one-dark</span></span><br><span class="line">    <span class="comment"># 是否显示文章主图</span></span><br><span class="line">    <span class="attr">thumbnail:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># 是否显示估算阅读时间</span></span><br><span class="line">    <span class="attr">readtime:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 搜索插件设置</span></span><br><span class="line"><span class="comment"># http://ppoffice.github.io/hexo-theme-icarus/categories/Configuration/Search-Plugins</span></span><br><span class="line"><span class="attr">search:</span></span><br><span class="line">    <span class="comment"># Name of the search plugin</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">insight</span></span><br><span class="line"><span class="comment"># 评论插件设置</span></span><br><span class="line"><span class="comment"># http://ppoffice.github.io/hexo-theme-icarus/categories/Configuration/Comment-Plugins</span></span><br><span class="line"><span class="attr">comment:</span></span><br><span class="line">    <span class="comment">#可选valine，disqus（科学上网）等</span></span><br><span class="line">    <span class="comment"># Name of the comment plugin</span></span><br><span class="line">    <span class="comment">#type: valine</span></span><br><span class="line">    <span class="comment">#app_id: 不为空</span></span><br><span class="line">    <span class="comment">#app_key: 不为空</span></span><br><span class="line">    <span class="comment">#notify: true</span></span><br><span class="line">    <span class="comment">#verify: true</span></span><br><span class="line">    <span class="comment">#placeholder:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">disqus</span></span><br><span class="line">    <span class="attr">shortname:</span> <span class="string">不能为空</span></span><br><span class="line"><span class="comment"># 打赏功能</span></span><br><span class="line"><span class="comment"># http://ppoffice.github.io/hexo-theme-icarus/categories/Donation/</span></span><br><span class="line"><span class="attr">donate:</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 阿里巴巴支付宝</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">alipay</span></span><br><span class="line">        <span class="comment"># 二维码图片</span></span><br><span class="line">        <span class="attr">qrcode:</span> <span class="string">&#x27;/images/honbao.PNG&#x27;</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 微信</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">wechat</span></span><br><span class="line">        <span class="comment"># 二维码图片</span></span><br><span class="line">        <span class="attr">qrcode:</span> <span class="string">&#x27;/images/yjtp.png&#x27;</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line"><span class="comment"># 分享插件设置</span></span><br><span class="line"><span class="comment"># http://ppoffice.github.io/hexo-theme-icarus/categories/Configuration/Share-Plugins</span></span><br><span class="line"><span class="attr">share:</span></span><br><span class="line">    <span class="comment"># 插件类型，有多种，可选，自行百度</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">sharejs</span></span><br><span class="line"><span class="comment"># Sidebar settings.</span></span><br><span class="line"><span class="comment"># Please be noted that a sidebar is only visible when it has at least one widget</span></span><br><span class="line"><span class="attr">sidebar:</span></span><br><span class="line">    <span class="comment"># 左侧边栏设置</span></span><br><span class="line">    <span class="attr">left:</span></span><br><span class="line">        <span class="comment"># 是否不随页面滚动</span></span><br><span class="line">        <span class="comment"># http://ppoffice.github.io/hexo-theme-icarus/Configuration/Theme/make-a-sidebar-sticky-when-page-scrolls/</span></span><br><span class="line">        <span class="attr">sticky:</span> <span class="literal">false</span></span><br><span class="line">    <span class="comment"># 右侧边栏设置</span></span><br><span class="line">    <span class="attr">right:</span></span><br><span class="line">        <span class="comment"># 是否不随页面滚动</span></span><br><span class="line">        <span class="comment"># http://ppoffice.github.io/hexo-theme-icarus/Configuration/Theme/make-a-sidebar-sticky-when-page-scrolls/</span></span><br><span class="line">        <span class="attr">sticky:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment"># 边栏小部件设置</span></span><br><span class="line"><span class="comment"># http://ppoffice.github.io/hexo-theme-icarus/categories/Widgets/</span></span><br><span class="line"><span class="attr">widgets:</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 个人信息</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">profile</span></span><br><span class="line">        <span class="comment"># 部件位置（左）</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">left</span></span><br><span class="line">        <span class="comment"># 作者名（字符串）</span></span><br><span class="line">        <span class="attr">author:</span> <span class="string">飞鱼</span></span><br><span class="line">        <span class="comment"># 作者身份描述（字符串）</span></span><br><span class="line">        <span class="attr">author_title:</span> <span class="string">Student</span></span><br><span class="line">        <span class="comment"># 作者当前居住地</span></span><br><span class="line">        <span class="attr">location:</span> <span class="string">China,Fujian</span></span><br><span class="line">        <span class="comment"># 头像（可用本地图片或网络图片链接）</span></span><br><span class="line">        <span class="attr">avatar:</span> <span class="string">&#x27;/images/ava.png&#x27;</span></span><br><span class="line">        <span class="comment"># Email address for the Gravatar to be shown in the profile widget</span></span><br><span class="line">        <span class="attr">gravatar:</span> </span><br><span class="line">        <span class="comment"># 关注我的链接，可设为你的GitHub主页</span></span><br><span class="line">        <span class="attr">follow_link:</span> <span class="string">&#x27;https://github.com/yourname&#x27;</span></span><br><span class="line">        <span class="comment"># 个人介绍部件底部图标社交链接</span></span><br><span class="line">        <span class="attr">social_links:</span></span><br><span class="line">            <span class="attr">Github:</span></span><br><span class="line">                <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-github</span></span><br><span class="line">                <span class="attr">url:</span> <span class="string">&#x27;https://github.com/yourname&#x27;</span></span><br><span class="line">            <span class="attr">Facebook:</span></span><br><span class="line">                <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-facebook</span></span><br><span class="line">                <span class="attr">url:</span> <span class="string">&#x27;https://facebook.com&#x27;</span></span><br><span class="line">            <span class="attr">Twitter:</span></span><br><span class="line">                <span class="attr">icon:</span> <span class="string">fab</span> <span class="string">fa-twitter</span></span><br><span class="line">                <span class="attr">url:</span> <span class="string">&#x27;https://twitter.com/yourname&#x27;</span></span><br><span class="line">            <span class="attr">RSS:</span></span><br><span class="line">                <span class="attr">icon:</span> <span class="string">fas</span> <span class="string">fa-rss</span></span><br><span class="line">                <span class="attr">url:</span> <span class="string">/</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># Widget name</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">toc</span></span><br><span class="line">        <span class="comment"># Where should the widget be placed, left or right</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">left</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 分类</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">category</span></span><br><span class="line">        <span class="comment"># 位置指定</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">left</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 标签云</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">tagcloud</span></span><br><span class="line">        <span class="comment"># 位置</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 近期文章</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">recent_posts</span></span><br><span class="line">        <span class="comment"># 位置</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">left</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 归档</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">archive</span></span><br><span class="line">        <span class="comment"># Where should the widget be placed, left or right</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 标签</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">tag</span></span><br><span class="line">        <span class="comment"># Where should the widget be placed, left or right</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="bullet">-</span></span><br><span class="line">        <span class="comment"># 外部链接</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">links</span></span><br><span class="line">        <span class="comment"># Where should the widget be placed, left or right</span></span><br><span class="line">        <span class="attr">position:</span> <span class="string">left</span></span><br><span class="line">        <span class="comment"># Links to be shown in the links widget</span></span><br><span class="line">        <span class="attr">links:</span></span><br><span class="line">            <span class="attr">Google:</span> <span class="string">&#x27;https://google.com&#x27;</span></span><br><span class="line">            <span class="attr">Baidu:</span> <span class="string">&#x27;https://baidu.com&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>上述设置已经让你的博客稍微有点属于你的样子了，下面来添加一些有意思的元素。</p>
+<hr>
+<h3 id="添加雪花飘落效果"><a href="#添加雪花飘落效果" class="headerlink" title="添加雪花飘落效果"></a>添加雪花飘落效果</h3><ul>
+<li>在 $\color{DarkTurquoise}{/themes/icarus/sourse/js/src}$目录下新建一个 snow.js 文件(若没有src/文件夹可以自己新建)，复制粘贴以下代码：<br><strong> 样式1：六边形雪花 </strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params">$</span>)&#123;</span><br><span class="line">	$.fn.<span class="property">snow</span> = <span class="keyword">function</span>(<span class="params">options</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> $flake = $(<span class="string">&#x27;&#x27;</span>).<span class="title function_">css</span>(&#123;<span class="string">&#x27;position&#x27;</span>: <span class="string">&#x27;absolute&#x27;</span>,<span class="string">&#x27;z-index&#x27;</span>:<span class="string">&#x27;9999&#x27;</span>, <span class="string">&#x27;top&#x27;</span>: <span class="string">&#x27;-50px&#x27;</span>&#125;).<span class="title function_">html</span>(<span class="string">&#x27;❄&#x27;</span>),</span><br><span class="line">	documentHeight 	= $(<span class="variable language_">document</span>).<span class="title function_">height</span>(),</span><br><span class="line">	documentWidth	= $(<span class="variable language_">document</span>).<span class="title function_">width</span>(),</span><br><span class="line">	defaults = &#123;</span><br><span class="line">		minSize		: <span class="number">10</span>,</span><br><span class="line">		maxSize		: <span class="number">20</span>,</span><br><span class="line">		newOn		: <span class="number">1000</span>,</span><br><span class="line">		flakeColor	: <span class="string">&quot;#AFDAEF&quot;</span> <span class="comment">/* 此处可以定义雪花颜色，若要白色可以改为#FFFFFF */</span></span><br><span class="line">	&#125;,</span><br><span class="line">	options	= $.<span class="title function_">extend</span>(&#123;&#125;, defaults, options);</span><br><span class="line">	<span class="keyword">var</span> interval= <span class="built_in">setInterval</span>( <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> startPositionLeft = <span class="title class_">Math</span>.<span class="title function_">random</span>() * documentWidth - <span class="number">100</span>,</span><br><span class="line">	startOpacity = <span class="number">0.5</span> + <span class="title class_">Math</span>.<span class="title function_">random</span>(),</span><br><span class="line">	sizeFlake = options.<span class="property">minSize</span> + <span class="title class_">Math</span>.<span class="title function_">random</span>() * options.<span class="property">maxSize</span>,</span><br><span class="line">	endPositionTop = documentHeight - <span class="number">200</span>,</span><br><span class="line">	endPositionLeft = startPositionLeft - <span class="number">500</span> + <span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">500</span>,</span><br><span class="line">	durationFall = documentHeight * <span class="number">10</span> + <span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">5000</span>;</span><br><span class="line">	$flake.<span class="title function_">clone</span>().<span class="title function_">appendTo</span>(<span class="string">&#x27;body&#x27;</span>).<span class="title function_">css</span>(&#123;</span><br><span class="line">		<span class="attr">left</span>: startPositionLeft,</span><br><span class="line">		<span class="attr">opacity</span>: startOpacity,</span><br><span class="line">		<span class="string">&#x27;font-size&#x27;</span>: sizeFlake,</span><br><span class="line">		<span class="attr">color</span>: options.<span class="property">flakeColor</span></span><br><span class="line">	&#125;).<span class="title function_">animate</span>(&#123;</span><br><span class="line">		<span class="attr">top</span>: endPositionTop,</span><br><span class="line">		<span class="attr">left</span>: endPositionLeft,</span><br><span class="line">		<span class="attr">opacity</span>: <span class="number">0.2</span></span><br><span class="line">	&#125;,durationFall,<span class="string">&#x27;linear&#x27;</span>,<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">		$(<span class="variable language_">this</span>).<span class="title function_">remove</span>()</span><br><span class="line">	&#125;);</span><br><span class="line">	&#125;, options.<span class="property">newOn</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)(jQuery);</span><br><span class="line">$(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    $.fn.<span class="title function_">snow</span>(&#123; </span><br><span class="line">	    <span class="attr">minSize</span>: <span class="number">5</span>, <span class="comment">/* 定义雪花最小尺寸 */</span></span><br><span class="line">	    <span class="attr">maxSize</span>: <span class="number">50</span>,<span class="comment">/* 定义雪花最大尺寸 */</span></span><br><span class="line">	    <span class="attr">newOn</span>: <span class="number">300</span>  <span class="comment">/* 定义密集程度，数字越小越密集 */</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">作者：donlex</span><br><span class="line">链接：<span class="attr">http</span>:<span class="comment">//www.imooc.com/article/272005</span></span><br></pre></td></tr></table></figure>
+<strong> 样式2：圆点状雪花 </strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">snowFall</span>(<span class="params">snow</span>) &#123;</span><br><span class="line">    <span class="comment">/* 可配置属性 */</span></span><br><span class="line">    snow = snow || &#123;&#125;;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">maxFlake</span> = snow.<span class="property">maxFlake</span> || <span class="number">200</span>;   <span class="comment">/* 最多片数 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">flakeSize</span> = snow.<span class="property">flakeSize</span> || <span class="number">10</span>;  <span class="comment">/* 雪花形状 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">fallSpeed</span> = snow.<span class="property">fallSpeed</span> || <span class="number">1</span>;   <span class="comment">/* 坠落速度 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 兼容写法 */</span></span><br><span class="line">requestAnimationFrame = <span class="variable language_">window</span>.<span class="property">requestAnimationFrame</span> ||</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">mozRequestAnimationFrame</span> ||</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">webkitRequestAnimationFrame</span> ||</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">msRequestAnimationFrame</span> ||</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">oRequestAnimationFrame</span> ||</span><br><span class="line">    <span class="keyword">function</span>(<span class="params">callback</span>) &#123; <span class="built_in">setTimeout</span>(callback, <span class="number">1000</span> / <span class="number">60</span>); &#125;;</span><br><span class="line"></span><br><span class="line">cancelAnimationFrame = <span class="variable language_">window</span>.<span class="property">cancelAnimationFrame</span> ||</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">mozCancelAnimationFrame</span> ||</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">webkitCancelAnimationFrame</span> ||</span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">msCancelAnimationFrame</span> ||</span><br><span class="line">	<span class="variable language_">window</span>.<span class="property">oCancelAnimationFrame</span>;</span><br><span class="line"><span class="comment">/* 开始下雪 */</span></span><br><span class="line">snowFall.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">start</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">/* 创建画布 */</span></span><br><span class="line">    snowCanvas.<span class="title function_">apply</span>(<span class="variable language_">this</span>);</span><br><span class="line">    <span class="comment">/* 创建雪花形状 */</span></span><br><span class="line">    createFlakes.<span class="title function_">apply</span>(<span class="variable language_">this</span>);</span><br><span class="line">    <span class="comment">/* 画雪 */</span></span><br><span class="line">    drawSnow.<span class="title function_">apply</span>(<span class="variable language_">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 创建画布 */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">snowCanvas</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">/* 添加Dom结点 */</span></span><br><span class="line">    <span class="keyword">var</span> snowcanvas = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;canvas&quot;</span>);</span><br><span class="line">    snowcanvas.<span class="property">id</span> = <span class="string">&quot;snowfall&quot;</span>;</span><br><span class="line">    snowcanvas.<span class="property">width</span> = <span class="variable language_">window</span>.<span class="property">innerWidth</span>;</span><br><span class="line">    snowcanvas.<span class="property">height</span> = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">clientHeight</span>;</span><br><span class="line">    snowcanvas.<span class="title function_">setAttribute</span>(<span class="string">&quot;style&quot;</span>, <span class="string">&quot;position:absolute; top: 0; left: 0; z-index: 1; pointer-events: none;&quot;</span>);</span><br><span class="line">    <span class="variable language_">document</span>.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;body&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(snowcanvas);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">canvas</span> = snowcanvas;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">ctx</span> = snowcanvas.<span class="title function_">getContext</span>(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line">    <span class="comment">/* 窗口大小改变的处理 */</span></span><br><span class="line">    <span class="variable language_">window</span>.<span class="property">onresize</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        snowcanvas.<span class="property">width</span> = <span class="variable language_">window</span>.<span class="property">innerWidth</span>;</span><br><span class="line">        <span class="comment">/* snowcanvas.height = window.innerHeight */</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 雪运动对象 */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">flakeMove</span>(<span class="params">canvasWidth, canvasHeight, flakeSize, fallSpeed</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * canvasWidth);   <span class="comment">/* x坐标 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">y</span> = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * canvasHeight);  <span class="comment">/* y坐标 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = <span class="title class_">Math</span>.<span class="title function_">random</span>() * flakeSize + <span class="number">2</span>;          <span class="comment">/* 形状 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">maxSize</span> = flakeSize;                           <span class="comment">/* 最大形状 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">speed</span> = <span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">1</span> + fallSpeed;         <span class="comment">/* 坠落速度 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">fallSpeed</span> = fallSpeed;                         <span class="comment">/* 坠落速度 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velY</span> = <span class="variable language_">this</span>.<span class="property">speed</span>;                             <span class="comment">/* Y方向速度 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velX</span> = <span class="number">0</span>;                                      <span class="comment">/* X方向速度 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">stepSize</span> = <span class="title class_">Math</span>.<span class="title function_">random</span>() / <span class="number">30</span>;                 <span class="comment">/* 步长 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">step</span> = <span class="number">0</span>                                       <span class="comment">/* 步数 */</span></span><br><span class="line">&#125;</span><br><span class="line">flakeMove.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">update</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="variable language_">this</span>.<span class="property">x</span>,</span><br><span class="line">        y = <span class="variable language_">this</span>.<span class="property">y</span>;</span><br><span class="line">    <span class="comment">/* 左右摆动(余弦) */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velX</span> *= <span class="number">0.98</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">velY</span> &lt;= <span class="variable language_">this</span>.<span class="property">speed</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">velY</span> = <span class="variable language_">this</span>.<span class="property">speed</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velX</span> += <span class="title class_">Math</span>.<span class="title function_">cos</span>(<span class="variable language_">this</span>.<span class="property">step</span> += <span class="number">.05</span>) * <span class="variable language_">this</span>.<span class="property">stepSize</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">y</span> += <span class="variable language_">this</span>.<span class="property">velY</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> += <span class="variable language_">this</span>.<span class="property">velX</span>;</span><br><span class="line">    <span class="comment">/* 飞出边界的处理 */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">x</span> &gt;= canvas.<span class="property">width</span> || <span class="variable language_">this</span>.<span class="property">x</span> &lt;= <span class="number">0</span> || <span class="variable language_">this</span>.<span class="property">y</span> &gt;= canvas.<span class="property">height</span> || <span class="variable language_">this</span>.<span class="property">y</span> &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">reset</span>(canvas.<span class="property">width</span>, canvas.<span class="property">height</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 飞出边界-放置最顶端继续坠落 */</span></span><br><span class="line">flakeMove.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">reset</span> = <span class="keyword">function</span>(<span class="params">width, height</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">x</span> = <span class="title class_">Math</span>.<span class="title function_">floor</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() * width);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">y</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">size</span> = <span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="variable language_">this</span>.<span class="property">maxSize</span> + <span class="number">2</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">speed</span> = <span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">1</span> + <span class="variable language_">this</span>.<span class="property">fallSpeed</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velY</span> = <span class="variable language_">this</span>.<span class="property">speed</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">velX</span> = <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 渲染雪花-随机形状（此处可修改雪花颜色！！！）</span></span><br><span class="line">flakeMove.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">render</span> = <span class="keyword">function</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> snowFlake = ctx.<span class="title function_">createRadialGradient</span>(<span class="variable language_">this</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">y</span>, <span class="number">0</span>, <span class="variable language_">this</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">y</span>, <span class="variable language_">this</span>.<span class="property">size</span>);</span><br><span class="line">    snowFlake.<span class="title function_">addColorStop</span>(<span class="number">0</span>, <span class="string">&quot;rgba(255, 255, 255, 0.9)&quot;</span>);  <span class="comment">/* 此处是雪花颜色，默认是白色 */</span></span><br><span class="line">    snowFlake.<span class="title function_">addColorStop</span>(<span class="number">.5</span>, <span class="string">&quot;rgba(255, 255, 255, 0.5)&quot;</span>); <span class="comment">/* 若要改为其他颜色，请自行查 */</span></span><br><span class="line">    snowFlake.<span class="title function_">addColorStop</span>(<span class="number">1</span>, <span class="string">&quot;rgba(255, 255, 255, 0)&quot;</span>);    <span class="comment">/* 找16进制的RGB 颜色代码。 */</span></span><br><span class="line">    ctx.<span class="title function_">save</span>();</span><br><span class="line">    ctx.<span class="property">fillStyle</span> = snowFlake;</span><br><span class="line">    ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">    ctx.<span class="title function_">arc</span>(<span class="variable language_">this</span>.<span class="property">x</span>, <span class="variable language_">this</span>.<span class="property">y</span>, <span class="variable language_">this</span>.<span class="property">size</span>, <span class="number">0</span>, <span class="title class_">Math</span>.<span class="property">PI</span> * <span class="number">2</span>);</span><br><span class="line">    ctx.<span class="title function_">fill</span>();</span><br><span class="line">    ctx.<span class="title function_">restore</span>();</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/* 创建雪花-定义形状 */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createFlakes</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> maxFlake = <span class="variable language_">this</span>.<span class="property">maxFlake</span>,</span><br><span class="line">        flakes = <span class="variable language_">this</span>.<span class="property">flakes</span> = [],</span><br><span class="line">        canvas = <span class="variable language_">this</span>.<span class="property">canvas</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; maxFlake; i++) &#123;</span><br><span class="line">        flakes.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title function_">flakeMove</span>(canvas.<span class="property">width</span>, canvas.<span class="property">height</span>, <span class="variable language_">this</span>.<span class="property">flakeSize</span>, <span class="variable language_">this</span>.<span class="property">fallSpeed</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 画雪 */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">drawSnow</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> maxFlake = <span class="variable language_">this</span>.<span class="property">maxFlake</span>,</span><br><span class="line">        flakes = <span class="variable language_">this</span>.<span class="property">flakes</span>;</span><br><span class="line">    ctx = <span class="variable language_">this</span>.<span class="property">ctx</span>, canvas = <span class="variable language_">this</span>.<span class="property">canvas</span>, that = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="comment">/* 清空雪花 */</span></span><br><span class="line">    ctx.<span class="title function_">clearRect</span>(<span class="number">0</span>, <span class="number">0</span>, canvas.<span class="property">width</span>, canvas.<span class="property">height</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> e = <span class="number">0</span>; e &lt; maxFlake; e++) &#123;</span><br><span class="line">        flakes[e].<span class="title function_">update</span>();</span><br><span class="line">        flakes[e].<span class="title function_">render</span>(ctx);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*  一帧一帧的画 */</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">loop</span> = <span class="title function_">requestAnimationFrame</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        drawSnow.<span class="title function_">apply</span>(that);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 调用及控制方法 */</span></span><br><span class="line"><span class="keyword">var</span> snow = <span class="keyword">new</span> <span class="title function_">snowFall</span>(&#123;<span class="attr">maxFlake</span>:<span class="number">60</span>&#125;);</span><br><span class="line">snow.<span class="title function_">start</span>();</span><br><span class="line"></span><br><span class="line">作者：donlex</span><br><span class="line">链接：<span class="attr">http</span>:<span class="comment">//www.imooc.com/article/272005</span></span><br></pre></td></tr></table></figure></li>
+<li>最后在$\color{DarkTurquoise}{/themes/icarus/layout/layout.ejs}$的$body$标签中添加代码：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 雪花特效 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">var</span> windowWidth = $(<span class="variable language_">window</span>).<span class="title function_">width</span>();</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">if</span> (windowWidth &gt; <span class="number">480</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">write</span>(<span class="string">&#x27;&lt;script type=&quot;text/javascript&quot; src=&quot;/js/src/snow.js&quot;&gt;&lt;\/script&gt;&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>默认雪花为白色，可自行更改颜色，效果可见本站</li>
+</ul>
+<hr>
+<h3 id="网站访问量与访客量统计"><a href="#网站访问量与访客量统计" class="headerlink" title="网站访问量与访客量统计"></a>网站访问量与访客量统计</h3><ul>
+<li>不蒜子官网：<a target="_blank" rel="noopener" href="http://busuanzi.ibruce.info/">http://busuanzi.ibruce.info/</a></li>
+<li>在$\color{DarkTurquoise}{/themes/icarus/layout/common/footer.ejs}$模板文件的中添加如下代码：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;busuanzi_container_site_pv&quot;</span> <span class="attr">class</span>=<span class="string">&quot;theme-info&quot;</span>&gt;</span></span><br><span class="line">  |  本站总访问量<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;busuanzi_value_site_pv&quot;</span>&gt;</span>span&gt;次</span><br><span class="line"> span&gt;</span><br><span class="line"> <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;busuanzi_container_site_uv&quot;</span> <span class="attr">class</span>=<span class="string">&quot;theme-info&quot;</span>&gt;</span></span><br><span class="line">  |  本站访客数<span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;busuanzi_value_site_uv&quot;</span>&gt;</span>span&gt;人次</span><br><span class="line"> span&gt;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">&quot;//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;</span>&gt;</span>script&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在$\color{DarkTurquoise}{/themes/icarus/_config.yml}$中添加：<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">busuanzi:</span></span><br><span class="line">    <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure></li>
+<li>最终效果：</li>
+</ul>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/Hexo+icarus主题配置/20190429093801600.png" alt=""></p>
+<h3 id="网站运行时间统计"><a href="#网站运行时间统计" class="headerlink" title="网站运行时间统计"></a>网站运行时间统计</h3><ul>
+<li>在$\color{DarkTurquoise}{/themes/icarus/layout/common/footer.ejs}$中添加：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;timeDate&quot;</span>&gt;</span>载入天数...<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;times&quot;</span>&gt;</span>载入时分秒...<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>(); </span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">function</span> <span class="title function_">createtime</span>(<span class="params"></span>) &#123; </span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">var</span> grt= <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="string">&quot;12/28/2018 12:49:00&quot;</span>);<span class="comment">//此处修改你的建站时间或者网站上线时间 </span></span></span><br><span class="line"><span class="language-javascript">                    now.<span class="title function_">setTime</span>(now.<span class="title function_">getTime</span>()+<span class="number">250</span>); </span></span><br><span class="line"><span class="language-javascript">                    days = (now - grt ) / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> / <span class="number">24</span>; dnum = <span class="title class_">Math</span>.<span class="title function_">floor</span>(days); </span></span><br><span class="line"><span class="language-javascript">                    hours = (now - grt ) / <span class="number">1000</span> / <span class="number">60</span> / <span class="number">60</span> - (<span class="number">24</span> * dnum); hnum = <span class="title class_">Math</span>.<span class="title function_">floor</span>(hours); </span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span>(<span class="title class_">String</span>(hnum).<span class="property">length</span> ==<span class="number">1</span> )&#123;hnum = <span class="string">&quot;0&quot;</span> + hnum;&#125; minutes = (now - grt ) / <span class="number">1000</span> /<span class="number">60</span> - (<span class="number">24</span> * <span class="number">60</span> * dnum) - (<span class="number">60</span> * hnum); </span></span><br><span class="line"><span class="language-javascript">                    mnum = <span class="title class_">Math</span>.<span class="title function_">floor</span>(minutes); <span class="keyword">if</span>(<span class="title class_">String</span>(mnum).<span class="property">length</span> ==<span class="number">1</span> )&#123;mnum = <span class="string">&quot;0&quot;</span> + mnum;&#125; </span></span><br><span class="line"><span class="language-javascript">                    seconds = (now - grt ) / <span class="number">1000</span> - (<span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span> * dnum) - (<span class="number">60</span> * <span class="number">60</span> * hnum) - (<span class="number">60</span> * mnum); </span></span><br><span class="line"><span class="language-javascript">                    snum = <span class="title class_">Math</span>.<span class="title function_">round</span>(seconds); <span class="keyword">if</span>(<span class="title class_">String</span>(snum).<span class="property">length</span> ==<span class="number">1</span> )&#123;snum = <span class="string">&quot;0&quot;</span> + snum;&#125; </span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;timeDate&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;本站已安全运行 &quot;</span>+dnum+<span class="string">&quot; 天 &quot;</span>; </span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;times&quot;</span>).<span class="property">innerHTML</span> = hnum + <span class="string">&quot; 小时 &quot;</span> + mnum + <span class="string">&quot; 分 &quot;</span> + snum + <span class="string">&quot; 秒&quot;</span>; </span></span><br><span class="line"><span class="language-javascript">                &#125; </span></span><br><span class="line"><span class="language-javascript">            <span class="built_in">setInterval</span>(<span class="string">&quot;createtime()&quot;</span>,<span class="number">250</span>);</span></span><br><span class="line"><span class="language-javascript">            </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>修改自己的建站时间</li>
+<li>最终效果：</li>
+</ul>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/Hexo+icarus主题配置/20190429094726470.png" alt=""></p>
+<hr>
+<h3 id="鼠标点击特效"><a href="#鼠标点击特效" class="headerlink" title="鼠标点击特效"></a>鼠标点击特效</h3><ul>
+<li>在 $\color{DarkTurquoise}{/themes/icarus/sourse/js/src}$中添加click.js文件，复制以下代码进去：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">!<span class="keyword">function</span>(<span class="params">e,t,a</span>)&#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">n</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="title function_">c</span>(<span class="string">&quot;.heart&#123;width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);&#125;.heart:after,.heart:before&#123;content: &#x27;&#x27;;width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;&#125;.heart:after&#123;top: -5px;&#125;.heart:before&#123;left: -5px;&#125;&quot;</span>),</span><br><span class="line">        <span class="title function_">o</span>(),</span><br><span class="line">        <span class="title function_">r</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">r</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> e=<span class="number">0</span>;e&lt;d.<span class="property">length</span>;e++)</span><br><span class="line">            d[e].<span class="property">alpha</span>&lt;=<span class="number">0</span>?(t.<span class="property">body</span>.<span class="title function_">removeChild</span>(d[e].<span class="property">el</span>),d.<span class="title function_">splice</span>(e,<span class="number">1</span>)):(d[e].<span class="property">y</span>--,d[e].<span class="property">scale</span>+=<span class="number">.004</span>,d[e].<span class="property">alpha</span>-=<span class="number">.013</span>,d[e].<span class="property">el</span>.<span class="property">style</span>.<span class="property">cssText</span>=<span class="string">&quot;left:&quot;</span>+d[e].<span class="property">x</span>+<span class="string">&quot;px;top:&quot;</span>+d[e].<span class="property">y</span>+<span class="string">&quot;px;opacity:&quot;</span>+d[e].<span class="property">alpha</span>+<span class="string">&quot;;transform:scale(&quot;</span>+d[e].<span class="property">scale</span>+<span class="string">&quot;,&quot;</span>+d[e].<span class="property">scale</span>+<span class="string">&quot;) rotate(45deg);background:&quot;</span>+d[e].<span class="property">color</span>+<span class="string">&quot;;z-index:99999&quot;</span>);</span><br><span class="line">        <span class="title function_">requestAnimationFrame</span>(r)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">o</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> t=<span class="string">&quot;function&quot;</span>==<span class="keyword">typeof</span> e.<span class="property">onclick</span>&amp;&amp;e.<span class="property">onclick</span>;</span><br><span class="line">        e.<span class="property">onclick</span>=<span class="keyword">function</span>(<span class="params">e</span>)&#123;</span><br><span class="line">            t&amp;&amp;<span class="title function_">t</span>(),<span class="title function_">i</span>(e)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">function</span> <span class="title function_">i</span>(<span class="params">e</span>)&#123;</span><br><span class="line">            <span class="keyword">var</span> a=t.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">            a.<span class="property">className</span>=<span class="string">&quot;heart&quot;</span>,d.<span class="title function_">push</span>(&#123;<span class="attr">el</span>:a,<span class="attr">x</span>:e.<span class="property">clientX</span>-<span class="number">5</span>,<span class="attr">y</span>:e.<span class="property">clientY</span>-<span class="number">5</span>,<span class="attr">scale</span>:<span class="number">1</span>,<span class="attr">alpha</span>:<span class="number">1</span>,<span class="attr">color</span>:<span class="title function_">s</span>()&#125;),t.<span class="property">body</span>.<span class="title function_">appendChild</span>(a)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">c</span>(<span class="params">e</span>)&#123;</span><br><span class="line">        <span class="keyword">var</span> a=t.<span class="title function_">createElement</span>(<span class="string">&quot;style&quot;</span>);a.<span class="property">type</span>=<span class="string">&quot;text/css&quot;</span>;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            a.<span class="title function_">appendChild</span>(t.<span class="title function_">createTextNode</span>(e))</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(t)&#123;</span><br><span class="line">            a.<span class="property">styleSheet</span>.<span class="property">cssText</span>=e</span><br><span class="line">        &#125;</span><br><span class="line">        t.<span class="title function_">getElementsByTagName</span>(<span class="string">&quot;head&quot;</span>)[<span class="number">0</span>].<span class="title function_">appendChild</span>(a)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">s</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span><span class="string">&quot;rgb(&quot;</span>+~~(<span class="number">255</span>*<span class="title class_">Math</span>.<span class="title function_">random</span>())+<span class="string">&quot;,&quot;</span>+~~(<span class="number">255</span>*<span class="title class_">Math</span>.<span class="title function_">random</span>())+<span class="string">&quot;,&quot;</span>+~~(<span class="number">255</span>*<span class="title class_">Math</span>.<span class="title function_">random</span>())+<span class="string">&quot;)&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> d=[];</span><br><span class="line">    e.<span class="property">requestAnimationFrame</span>=<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> e.<span class="property">requestAnimationFrame</span>||e.<span class="property">webkitRequestAnimationFrame</span>||e.<span class="property">mozRequestAnimationFrame</span>||e.<span class="property">oRequestAnimationFrame</span>||e.<span class="property">msRequestAnimationFrame</span>||<span class="keyword">function</span>(<span class="params">e</span>)&#123;</span><br><span class="line">            <span class="built_in">setTimeout</span>(e,<span class="number">1e3</span>/<span class="number">60</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;(),</span><br><span class="line">    <span class="title function_">n</span>()</span><br><span class="line">&#125;</span><br><span class="line">(<span class="variable language_">window</span>,<span class="variable language_">document</span>);</span><br></pre></td></tr></table></figure></li>
+<li>最后在$\color{DarkTurquoise}{/themes/icarus/layout/layout.ejs}$文件中的<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>的下一行添加：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;/js/src/click.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>效果见本站</li>
+</ul>
+<hr>
+<h3 id="看板娘插件"><a href="#看板娘插件" class="headerlink" title="看板娘插件"></a>看板娘插件</h3><ul>
+<li>在博客主目录下进入点击进入<strong>Git Bash Here</strong></li>
+<li>输入命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-helper-live2d --save</span><br></pre></td></tr></table></figure></li>
+<li>在网站配置文件或主题配置文件$\color{green}{_config.yml}$中添加：<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span>                                   <span class="comment">#开启看板娘</span></span><br><span class="line">  <span class="attr">scriptFrom:</span> <span class="string">local</span></span><br><span class="line">  <span class="attr">pluginRootPath:</span> <span class="string">live2dw/</span></span><br><span class="line">  <span class="attr">pluginJsPath:</span> <span class="string">lib/</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">tagMode:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">log:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-z16</span>     <span class="comment">#指定模型任务</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span>                              <span class="comment">#显示位置</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">200</span>                                   <span class="comment">#模型宽度</span></span><br><span class="line">    <span class="attr">height:</span> <span class="number">400</span>                                  <span class="comment">#模型高度</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">true</span>                                  <span class="comment">#是否在移动端显示</span></span><br></pre></td></tr></table></figure></li>
+<li>效果：见本站</li>
+</ul>
+<hr>
+<h3 id="遇到的坑及解决方法"><a href="#遇到的坑及解决方法" class="headerlink" title="遇到的坑及解决方法"></a>遇到的坑及解决方法</h3><ul>
+<li>..公式渲染问题</li>
+<li>..</li>
+<li>..</li>
+</ul>
+<p>$\color{green}{Waiting….for….update….}$</p>
+<hr>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://example.com/2019/04/29/Hexo+icarus%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="Hexo+icarus主题配置" target="_blank" rel="external">http://example.com/2019/04/29/Hexo+icarus主题配置/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/linnyh" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/linnyh" target="_blank"><span class="text-dark">张怀民</span><small class="ml-1x">Backend Developer &amp; NLPer</small></a></h3>
+        <div>虚怀若谷</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2019/04/30/Hexo%E7%94%A8MathJax%E6%B8%B2%E6%9F%93%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/" title="Hexo用MathJax渲染数学公式"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2019/03/17/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91DP%E6%9C%80%E5%A4%A7%E5%92%8C%E9%97%AE%E9%A2%98/" title="【算法】DP最大和问题"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <!-- <script>
+            var now = new Date(); 
+            function createtime() { 
+                var grt= new Date("02/17/2019 18:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+                now.setTime(now.getTime()+250); 
+                days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+            } 
+            setInterval("createtime()",250);
+          </script> -->
+      
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/linnyh" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/linnyh" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/echo_scottlin" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Drive by <a href="https://github.com/linnyh" target="_blank"> linnyh </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+        <div class="publishby">
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span class="post-meta-divider">|</span><span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
+        </div>
+        <!-- <div class="publishby">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+        </div> -->
+    </div>
+</footer>
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: true,
+    appId: 'oR2IQXqpGEFy4GHNDgdmfSMR-gzGzoHsz',
+    appKey: 'hwYfVGzICBlXGiokUXaNqJsx',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.3.5/dist/jquery.fancybox.min.js"></script>
+  <script>
+  //利用 FancyBox 实现点击图片放大
+  $(document).ready(function() {
+    $('article img').not('[hidden]').not('.panel-body img').each(function() {
+      var $image = $(this);
+      var imageCaption = $image.attr('alt');
+      var $imageWrapLink = $image.parent('a');
+      if ($imageWrapLink.length < 1) {
+        var src = this.getAttribute('src');
+        var idx = src.lastIndexOf('?');
+        if (idx != -1) {
+          src = src.substring(0, idx);
+        }
+        $imageWrapLink = $image.wrap('<a href="' + src + '"></a>').parent('a');
+      }
+      $imageWrapLink.attr('data-fancybox', 'images');
+      if (imageCaption) {
+        $imageWrapLink.attr('data-caption', imageCaption);
+      }
+    });
+    $().fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+    });
+  });
+  </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+</body>
+</html>
