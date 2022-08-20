@@ -81,7 +81,23 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(bp, s);
     })();
-    </script>    
+  </script>    
+  <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("02/17/2019 18:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+  </script>
   <!-- Canonical links -->
   <link rel="canonical" href="https://ccyh.xyz/2021/04/17/20210807%E6%B1%87%E6%8A%A5/index.html">
   
@@ -688,12 +704,12 @@ Z_t(s) = \bar{u}_t(s) \oplus \bar{a}_t(s)</script><h3 id="Hierarchical-Encoder">
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2021/04/17/20210731%E6%B1%87%E6%8A%A5/" title="【论文笔记】2019-ACL-SUMBT: Slot-Utterance Matching for Universal and Scalable Belief Tracking"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2021/04/17/20210417%E6%B1%87%E6%8A%A5/" title="【论文笔记】2020-ACL-Few-shot Slot Tagging with Collapsed Dependency Transfer and Label-enhanced Task-adaptive Projection Network"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2021/04/17/20210904%E6%B1%87%E6%8A%A5/" title="【论文笔记】A Graph-based and Copy-augmented Multi-domain Dialogue State Tracking"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/04/17/20210731%E6%B1%87%E6%8A%A5/" title="【论文笔记】2019-ACL-SUMBT: Slot-Utterance Matching for Universal and Scalable Belief Tracking"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -734,10 +750,16 @@ Z_t(s) = \bar{u}_t(s) \oplus \bar{a}_t(s)</script><h3 id="Hierarchical-Encoder">
         	Drive by <a href="https://github.com/linnyh" target="_blank"> linnyh </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
         </div>
         <div class="publishby">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+        </div>
+        <div class="publishby">
             <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span class="post-meta-divider">|</span><span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
         </div>
     </div>
 </footer>
+
+
+
   <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')

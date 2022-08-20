@@ -40,7 +40,23 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(bp, s);
     })();
-    </script>    
+  </script>    
+  <script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("02/17/2019 18:38:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+  </script>
   <!-- Canonical links -->
   <link rel="canonical" href="https://ccyh.xyz/categories/index.html">
   
@@ -405,9 +421,9 @@
           
           <li><a href="/categories/底层原理/">底层原理</a></li>
           
-          <li><a href="/categories/随笔/">随笔</a></li>
-          
           <li><a href="/categories/Math/">Math</a></li>
+          
+          <li><a href="/categories/随笔/">随笔</a></li>
           
           <li><a href="/categories/C/">C++</a></li>
           
@@ -488,6 +504,14 @@
 
               
                 
+<a href="/2021/04/17/20210710%E6%B1%87%E6%8A%A5/" class="collection-item"  target="_blank"   itemprop="url">
+  <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】Efficient Context and Schema Fusion Networks for Multi-Domain Dialogue State Tracking
+</a>
+
+
+              
+                
 <a href="/2021/04/17/20210605_%E6%B1%87%E6%8A%A5/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
   <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】Scalable End-to-End Dialogue State Tracking with Bidirectional Encoder Representations from Transformer
@@ -512,14 +536,6 @@
 
               
                 
-<a href="/2021/04/17/20210710%E6%B1%87%E6%8A%A5/" class="collection-item"  target="_blank"   itemprop="url">
-  <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】Efficient Context and Schema Fusion Networks for Multi-Domain Dialogue State Tracking
-</a>
-
-
-              
-                
 <a href="/2021/04/17/%E3%80%90%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%E3%80%91A-Contextual-Hierarchical-Attention-Network-with-Adaptive-Objective-for-Dialogue-State-Tracking/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
   <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】A Contextual Hierarchical Attention Network with Adaptive Objective for Dialogue State Tracking
@@ -536,17 +552,17 @@
 
               
                 
-<a href="/2021/04/17/20210731%E6%B1%87%E6%8A%A5/" class="collection-item"  target="_blank"   itemprop="url">
+<a href="/2021/04/17/20210807%E6%B1%87%E6%8A%A5/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】2019-ACL-SUMBT: Slot-Utterance Matching for Universal and Scalable Belief Tracking
+  <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】2020-ACL-Neural Dialogue State Tracking with Temporally Expressive Networks
 </a>
 
 
               
                 
-<a href="/2021/04/17/20210807%E6%B1%87%E6%8A%A5/" class="collection-item"  target="_blank"   itemprop="url">
+<a href="/2021/04/17/20210731%E6%B1%87%E6%8A%A5/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】2020-ACL-Neural Dialogue State Tracking with Temporally Expressive Networks
+  <span>&nbsp;&nbsp;&nbsp;</span> 【论文笔记】2019-ACL-SUMBT: Slot-Utterance Matching for Universal and Scalable Belief Tracking
 </a>
 
 
@@ -814,14 +830,6 @@
 
               
                 
-<a href="/2019/06/04/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" class="collection-item"  target="_blank"   itemprop="url">
-  <time datetime="2019-06-04T02:02:53.000Z" itemprop="datePublished">2019-06-04</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 人工神经网络学习笔记（2）
-</a>
-
-
-              
-                
 <a href="/2019/06/03/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E6%AF%94%E8%AE%B0%EF%BC%881%EF%BC%89/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2019-06-03T07:16:03.000Z" itemprop="datePublished">2019-06-03</time>
   <span>&nbsp;&nbsp;&nbsp;</span> 人工神经网络学习笔记（1）
@@ -833,6 +841,14 @@
 <a href="/2019/06/03/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%880%EF%BC%89/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2019-06-03T06:25:33.000Z" itemprop="datePublished">2019-06-03</time>
   <span>&nbsp;&nbsp;&nbsp;</span> 人工神经网络学习笔记（0）
+</a>
+
+
+              
+                
+<a href="/2019/06/04/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/" class="collection-item"  target="_blank"   itemprop="url">
+  <time datetime="2019-06-04T02:02:53.000Z" itemprop="datePublished">2019-06-04</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> 人工神经网络学习笔记（2）
 </a>
 
 
@@ -1066,14 +1082,6 @@
 
               
                 
-<a href="/2019/03/12/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%B4%A0%E6%95%B0%E7%AD%9B%E6%B3%95/" class="collection-item"  target="_blank"   itemprop="url">
-  <time datetime="2019-03-12T05:03:23.000Z" itemprop="datePublished">2019-03-12</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 【算法】素数筛法
-</a>
-
-
-              
-                
 <a href="/2019/02/28/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E5%A4%A7%E6%95%B0%E8%BF%90%E7%AE%97%E7%AE%97%E6%B3%95%E6%B1%87%E6%80%BB/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2019-02-28T13:19:31.000Z" itemprop="datePublished">2019-02-28</time>
   <span>&nbsp;&nbsp;&nbsp;</span> 【算法】String实现大数运算算法汇总
@@ -1093,6 +1101,14 @@
 <a href="/2019/03/14/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%9A%84DFS%E4%B8%8EDP%E8%A7%A3%E6%B3%95/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2019-03-14T12:03:54.000Z" itemprop="datePublished">2019-03-14</time>
   <span>&nbsp;&nbsp;&nbsp;</span> 【算法】背包问题的DFS与DP解法
+</a>
+
+
+              
+                
+<a href="/2019/03/12/%E3%80%90%E7%AE%97%E6%B3%95%E3%80%91%E7%B4%A0%E6%95%B0%E7%AD%9B%E6%B3%95/" class="collection-item"  target="_blank"   itemprop="url">
+  <time datetime="2019-03-12T05:03:23.000Z" itemprop="datePublished">2019-03-12</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> 【算法】素数筛法
 </a>
 
 
@@ -1226,33 +1242,6 @@
       <div class="panel panel-default b-no">
         <div class="panel-heading" role="tab">
           <h3 class="panel-title">
-            <a data-toggle="collapse" href="#collapse随笔" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              随笔
-            </a>
-            <small class="text-muted">(Total 1 articles)</small>
-          </h3>
-        </div>
-        <div id="collapse随笔" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading随笔">
-          <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/2020/03/30/%E5%8A%A0%E5%AF%86%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/" class="collection-item"  target="_blank"   itemprop="url">
-  <time datetime="2020-03-30T08:11:26.000Z" itemprop="datePublished">2020-03-30</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 论 TMD
-</a>
-
-
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="panel panel-default b-no">
-        <div class="panel-heading" role="tab">
-          <h3 class="panel-title">
             <a data-toggle="collapse" href="#collapseMath" aria-expanded="true">
               <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
               Math
@@ -1273,6 +1262,14 @@
 
               
                 
+<a href="/2020/03/06/%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA/" class="collection-item"  target="_blank"   itemprop="url">
+  <time datetime="2020-03-06T12:23:03.000Z" itemprop="datePublished">2020-03-06</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> 谓词演算的推理理论
+</a>
+
+
+              
+                
 <a href="/2020/03/06/%E8%B0%93%E8%AF%8D%E9%80%BB%E8%BE%91/" class="collection-item"  target="_blank"   itemprop="url">
   <time datetime="2020-03-06T05:55:13.000Z" itemprop="datePublished">2020-03-06</time>
   <span>&nbsp;&nbsp;&nbsp;</span> 谓词逻辑
@@ -1280,10 +1277,29 @@
 
 
               
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="panel panel-default b-no">
+        <div class="panel-heading" role="tab">
+          <h3 class="panel-title">
+            <a data-toggle="collapse" href="#collapse随笔" aria-expanded="true">
+              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
+              随笔
+            </a>
+            <small class="text-muted">(Total 1 articles)</small>
+          </h3>
+        </div>
+        <div id="collapse随笔" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading随笔">
+          <div class="panel-body">
+            <div class="collection">
+              
                 
-<a href="/2020/03/06/%E8%B0%93%E8%AF%8D%E6%BC%94%E7%AE%97%E7%9A%84%E6%8E%A8%E7%90%86%E7%90%86%E8%AE%BA/" class="collection-item"  target="_blank"   itemprop="url">
-  <time datetime="2020-03-06T12:23:03.000Z" itemprop="datePublished">2020-03-06</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 谓词演算的推理理论
+<a href="/2020/03/30/%E5%8A%A0%E5%AF%86%E6%96%87%E7%AB%A0%E6%B5%8B%E8%AF%95/" class="collection-item"  target="_blank"   itemprop="url">
+  <time datetime="2020-03-30T08:11:26.000Z" itemprop="datePublished">2020-03-30</time>
+  <span>&nbsp;&nbsp;&nbsp;</span> 论 TMD
 </a>
 
 
@@ -1344,10 +1360,16 @@
         	Drive by <a href="https://github.com/linnyh" target="_blank"> linnyh </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
         </div>
         <div class="publishby">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+        </div>
+        <div class="publishby">
             <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span><span class="post-meta-divider">|</span><span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>
         </div>
     </div>
 </footer>
+
+
+
   <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script>
 window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
