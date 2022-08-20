@@ -21,7 +21,7 @@
   <meta name="description" content="回顾&amp;emsp; 上偏文章我们了解到，权重迭代过程中可能遇到鞍点而阻断迭代过程，这是因为每一次迭代都以所有样本（故又称为批梯度下降算法）为依据（前后有直接联系），因此当梯度为零时相应增量也为零，导致新权重与不会改变。为了尽量避免这种情况出现，引入随机梯度下降算法，降低甚至消除权重前后权重间的联系，使得权重有可能从鞍点中‘跳脱’出来。  随机梯度下降（SGD）批梯度下降:  \text{更新方法：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Pytorch基础】梯度下降算法的改进">
-<meta property="og:url" content="https://ccyh.xyz/2020/04/24/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="https://www.ccyh.xyz/2020/04/24/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="虚怀若谷">
 <meta property="og:description" content="回顾&amp;emsp; 上偏文章我们了解到，权重迭代过程中可能遇到鞍点而阻断迭代过程，这是因为每一次迭代都以所有样本（故又称为批梯度下降算法）为依据（前后有直接联系），因此当梯度为零时相应增量也为零，导致新权重与不会改变。为了尽量避免这种情况出现，引入随机梯度下降算法，降低甚至消除权重前后权重间的联系，使得权重有可能从鞍点中‘跳脱’出来。  随机梯度下降（SGD）批梯度下降:  \text{更新方法：">
 <meta property="og:locale" content="zh_CN">
@@ -37,7 +37,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/20200424101051543.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://ccyh.xyz/2020/04/24/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
+  <link rel="canonical" href="https://www.ccyh.xyz/2020/04/24/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -308,21 +308,6 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
-              </p>
-              <p class="item-title">
                 <a href="/2021/04/17/20210424%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Transferable Multi-Domain State Generator for Task-Oriented Dialogue Systems</a>
               </p>
               <p class="item-date">
@@ -338,7 +323,7 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210515%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2018-ACL-Global-Locally Self-Attentive Dialogue State Tracker</a>
+                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -354,6 +339,21 @@
               </p>
               <p class="item-title">
                 <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210515%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2018-ACL-Global-Locally Self-Attentive Dialogue State Tracker</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -463,7 +463,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://ccyh.xyz/2020/04/24/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/" title="【Pytorch基础】梯度下降算法的改进" target="_blank" rel="external">https://ccyh.xyz/2020/04/24/【Pytorch基础】随机梯度下降算法/</a>
+      <a href="https://www.ccyh.xyz/2020/04/24/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/" title="【Pytorch基础】梯度下降算法的改进" target="_blank" rel="external">https://www.ccyh.xyz/2020/04/24/【Pytorch基础】随机梯度下降算法/</a>
     </li>
     
     <li class="post-copyright-license">
