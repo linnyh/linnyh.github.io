@@ -21,7 +21,7 @@
   <meta name="description" content="回顾&amp;emsp;上偏文章我们尝试用枚举法找到权重的最优取值，并限定区间为0到4.1，步长为0.1,显然我们很快就能找到最优的权重。这是因为未知权重只有一个，复杂度为线性的。但如果模型为$y &#x3D; f(w_1,w_2,w_3…,w_n,x)$, 有多个未知权重，如此一来即使你知道每个权重的取值在$[a,b]$内，枚举的时间复杂度也是$O((b-a)^n)$级别的。复杂度随权重数量指数级增长，这当然是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Pytorch基础】梯度下降算法">
-<meta property="og:url" content="https://www.ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="https://ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="虚怀若谷">
 <meta property="og:description" content="回顾&amp;emsp;上偏文章我们尝试用枚举法找到权重的最优取值，并限定区间为0到4.1，步长为0.1,显然我们很快就能找到最优的权重。这是因为未知权重只有一个，复杂度为线性的。但如果模型为$y &#x3D; f(w_1,w_2,w_3…,w_n,x)$, 有多个未知权重，如此一来即使你知道每个权重的取值在$[a,b]$内，枚举的时间复杂度也是$O((b-a)^n)$级别的。复杂度随权重数量指数级增长，这当然是">
 <meta property="og:locale" content="zh_CN">
@@ -36,8 +36,22 @@
 <meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89/20190604110727225.png">
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>    
   <!-- Canonical links -->
-  <link rel="canonical" href="https://www.ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -325,7 +339,7 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
+                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -340,7 +354,7 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+                <a href="/2021/04/17/20210522%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2017-ACL-Neural Belief Tracker: Data-Driven Dialogue State Tracking</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -461,7 +475,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://www.ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/" title="【Pytorch基础】梯度下降算法" target="_blank" rel="external">https://www.ccyh.xyz/2020/04/23/梯度下降算法/</a>
+      <a href="https://ccyh.xyz/2020/04/23/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95/" title="【Pytorch基础】梯度下降算法" target="_blank" rel="external">https://ccyh.xyz/2020/04/23/梯度下降算法/</a>
     </li>
     
     <li class="post-copyright-license">

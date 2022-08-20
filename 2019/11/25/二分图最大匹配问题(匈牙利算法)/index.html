@@ -21,7 +21,7 @@
   <meta name="description" content="二分图&amp;emsp;二分图是这样的一个图：其顶点可以划分为两个集合 $ X $ 和 $ Y $, 任何一条边所关联的两个顶点中，恰好有一个属于集合 $X$ , 另一个属于 $Y$。 同一个集合内的顶点必没有边相连。如果一个图是二分图，那么它一定没有 奇环 (边为奇数的环路)， 如果一个图没有 奇环 ,那么它就一定是 二分图。   二分图的匹配&amp;emsp;给定一个二分图 G , 在 G 的一个子图">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二分图最大匹配问题(匈牙利算法)">
-<meta property="og:url" content="https://www.ccyh.xyz/2019/11/25/%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98(%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95)/index.html">
+<meta property="og:url" content="https://ccyh.xyz/2019/11/25/%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98(%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95)/index.html">
 <meta property="og:site_name" content="虚怀若谷">
 <meta property="og:description" content="二分图&amp;emsp;二分图是这样的一个图：其顶点可以划分为两个集合 $ X $ 和 $ Y $, 任何一条边所关联的两个顶点中，恰好有一个属于集合 $X$ , 另一个属于 $Y$。 同一个集合内的顶点必没有边相连。如果一个图是二分图，那么它一定没有 奇环 (边为奇数的环路)， 如果一个图没有 奇环 ,那么它就一定是 二分图。   二分图的匹配&amp;emsp;给定一个二分图 G , 在 G 的一个子图">
 <meta property="og:locale" content="zh_CN">
@@ -37,8 +37,22 @@
 <meta property="article:tag" content="Graph">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/binaryGraph/bm.PNG#pic_center">
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>    
   <!-- Canonical links -->
-  <link rel="canonical" href="https://www.ccyh.xyz/2019/11/25/%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98(%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95)/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2019/11/25/%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98(%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95)/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -324,7 +338,7 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
+                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -339,7 +353,7 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+                <a href="/2021/04/17/20210522%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2017-ACL-Neural Belief Tracker: Data-Driven Dialogue State Tracking</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -484,7 +498,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://www.ccyh.xyz/2019/11/25/%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98(%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95)/" title="二分图最大匹配问题(匈牙利算法)" target="_blank" rel="external">https://www.ccyh.xyz/2019/11/25/二分图最大匹配问题(匈牙利算法)/</a>
+      <a href="https://ccyh.xyz/2019/11/25/%E4%BA%8C%E5%88%86%E5%9B%BE%E6%9C%80%E5%A4%A7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98(%E5%8C%88%E7%89%99%E5%88%A9%E7%AE%97%E6%B3%95)/" title="二分图最大匹配问题(匈牙利算法)" target="_blank" rel="external">https://ccyh.xyz/2019/11/25/二分图最大匹配问题(匈牙利算法)/</a>
     </li>
     
     <li class="post-copyright-license">

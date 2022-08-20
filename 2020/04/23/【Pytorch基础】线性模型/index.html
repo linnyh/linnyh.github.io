@@ -21,7 +21,7 @@
   <meta name="description" content="线性模型一般流程 准备数据集（训练集，开发集，测试集） 选择模型（泛化能力，防止过拟合） 训练模型 测试模型  例子学生每周学习时间与期末得分的关系     x(hours) y(points)     1 2    2 4   3 6   4 ?     设计模型 观察数据分布可得应采用线性模型: \hat y &#x3D; x * w + b其中 $\hat y$ 为预测值，不妨简化一下模型为: \h">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Pytorch基础】线性模型">
-<meta property="og:url" content="https://www.ccyh.xyz/2020/04/23/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:url" content="https://ccyh.xyz/2020/04/23/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="虚怀若谷">
 <meta property="og:description" content="线性模型一般流程 准备数据集（训练集，开发集，测试集） 选择模型（泛化能力，防止过拟合） 训练模型 测试模型  例子学生每周学习时间与期末得分的关系     x(hours) y(points)     1 2    2 4   3 6   4 ?     设计模型 观察数据分布可得应采用线性模型: \hat y &#x3D; x * w + b其中 $\hat y$ 为预测值，不妨简化一下模型为: \h">
 <meta property="og:locale" content="zh_CN">
@@ -32,8 +32,22 @@
 <meta property="article:tag" content="ML">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/20200423031602114.png">
+  <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script>    
   <!-- Canonical links -->
-  <link rel="canonical" href="https://www.ccyh.xyz/2020/04/23/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html">
+  <link rel="canonical" href="https://ccyh.xyz/2020/04/23/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/index.html">
   
     <link rel="alternate" href="/atom.xml" title="虚怀若谷" type="application/atom+xml">
   
@@ -319,7 +333,7 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
+                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -334,7 +348,7 @@
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+                <a href="/2021/04/17/20210522%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2017-ACL-Neural Belief Tracker: Data-Driven Dialogue State Tracking</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -529,7 +543,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://www.ccyh.xyz/2020/04/23/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="【Pytorch基础】线性模型" target="_blank" rel="external">https://www.ccyh.xyz/2020/04/23/【Pytorch基础】线性模型/</a>
+      <a href="https://ccyh.xyz/2020/04/23/%E3%80%90Pytorch%E5%9F%BA%E7%A1%80%E3%80%91%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B/" title="【Pytorch基础】线性模型" target="_blank" rel="external">https://ccyh.xyz/2020/04/23/【Pytorch基础】线性模型/</a>
     </li>
     
     <li class="post-copyright-license">
