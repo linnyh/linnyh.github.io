@@ -25,27 +25,27 @@
 <meta property="og:site_name" content="虚怀若谷">
 <meta property="og:description" content="BERT-DST: Scalable End-to-End Dialogue State Tracking with Bidirectional Encoder Representations from Transformer概要问题动机对话状态跟踪(DST)中一个重要但很少被解决的问题是动态ontology（如电影、餐馆）和unseen的插槽值的可扩展性。以前的方法通常依赖于n格枚举或槽标记输">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602091541787.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602094749824.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602094914746.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602095132186.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602091541787.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602094749824.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602094914746.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095132186.png">
 <meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602095157956.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602095216539.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602095416063.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602095635815.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602100010320.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602101548261.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602101948822.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602102306072.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602102435419.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602102351611.png">
-<meta property="og:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602102506386.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095216539.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095416063.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095635815.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602100010320.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602101548261.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602101948822.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102306072.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102435419.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102351611.png">
+<meta property="og:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102506386.png">
 <meta property="article:published_time" content="2021-04-17T00:25:49.000Z">
-<meta property="article:modified_time" content="2022-08-19T15:17:34.518Z">
+<meta property="article:modified_time" content="2022-08-21T05:44:50.861Z">
 <meta property="article:author" content="Daniel Lin">
 <meta property="article:tag" content="DST">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/yhlin/AppData/Roaming/Typora/typora-user-images/image-20210602091541787.png">
+<meta name="twitter:image" content="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602091541787.png">
   <script>
     (function(){
         var bp = document.createElement('script');
@@ -378,21 +378,6 @@ colortap(document.getElementById('colortap1'));
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
-              </p>
-              <p class="item-date">
-                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
-              </p>
-            </div>
-          </li>
-          
-          <li>
-            
-            <div class="item-inner">
-              <p class="item-category">
-                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
-              </p>
-              <p class="item-title">
                 <a href="/2021/04/17/20210501%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2020-acl-Dialogue State Tracking with Explicit Slot Connection Modeling</a>
               </p>
               <p class="item-date">
@@ -408,7 +393,22 @@ colortap(document.getElementById('colortap1'));
                 <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2021/04/17/20210515%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2018-ACL-Global-Locally Self-Attentive Dialogue State Tracker</a>
+                <a href="/2021/04/17/20210508%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2019-ACL-Dialog State Tracking: A Neural Reading Comprehension Approach</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/17/20210522%E6%B1%87%E6%8A%A5/" class="title">【论文笔记】2017-ACL-Neural Belief Tracker: Data-Driven Dialogue State Tracking</a>
               </p>
               <p class="item-date">
                 <time datetime="2021-04-17T00:25:49.000Z" itemprop="datePublished">2021-04-17</time>
@@ -489,7 +489,7 @@ colortap(document.getElementById('colortap1'));
 <p>此外，我们在所有插槽上使用编码器参数共享，具有两个优点：（1）参数的数量不会与本体呈线性增长。（2）语言表示知识可以在插槽之间传递。经验评估表明，具有跨槽参数共享的BERT-DST在基准可扩展的DST数据集Sim-M和Sim-R上优于之前的工作，并在标准DSTC2和WOZ2.0数据集上取得了具有竞争力的性能。</p>
 <p>再者，使用BERT作为对话上下文编码器提供了以下优点。上下文化的单词表示法适合于从上下文模式中提取插槽值。通过大规模语言模型的预训练，BERT的单词表示是一种很好的初始化方法，可以微调到我们的DST问题。</p>
 <h2 id="任务定义"><a href="#任务定义" class="headerlink" title="任务定义"></a>任务定义</h2><p>作者提出的将BERT应用于可扩展DST类似于斯坦福问题回答数据集(SQuAD)任务。在SQuAD中，输入是一个问题和一个阅读段落。如果阅读段落包含对问题的答案，则输出是该段落中的一段文本，由其跨度（开始和结束位置）表示。否则，该模型的输出应该是unanswerable的。同样，在可扩展DST的目标情况中，插槽的值可以是none、dontcare或span(对话上下文中的字段)。</p>
-<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602091541787.png" alt="image-20210602091541787"></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602091541787.png" alt="image-20210602091541787"></p>
 <p>​    对于每个用户回合，BERT-DST将最近的对话上下文作为输入，并输出回合级对话状态。</p>
 <ul>
 <li><p>首先，对话上下文输入由基于BERT的编码模块进行编码，以生成上下文化的句子级和token表示。</p>
@@ -498,29 +498,29 @@ colortap(document.getElementById('colortap1'));
 </li>
 <li>跨度预测模块收集token级别的表示，并输出插槽值的开始和结束位置。最后，使用一种更新机制来跟踪回合间的对话状态。</li>
 </ul>
-<h3 id="Dialogue-Context-Encoding-Module"><a href="#Dialogue-Context-Encoding-Module" class="headerlink" title="Dialogue Context Encoding Module"></a>Dialogue Context Encoding Module</h3><p>对话上下文编码模块基于BERT。我们使用前一个回合的系统话语和当前回合的用户话语作为对话上下文输入，以BERT的输入格式表示为一个令牌序列。第一个标记是[CLS]，后面是标记化的系统话语、[SEP]和标记化的用户话语。让 <img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602094749824.png" alt="image-20210602094749824" style="zoom:67%;" /> 表示输入token序列。BERT的输入层将每个令牌$x_i$嵌入到嵌入$e_i$中，这是三个嵌入的和：</p>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602094914746.png" alt="image-20210602094914746" style="zoom:67%;" /></p>
+<h3 id="Dialogue-Context-Encoding-Module"><a href="#Dialogue-Context-Encoding-Module" class="headerlink" title="Dialogue Context Encoding Module"></a>Dialogue Context Encoding Module</h3><p>对话上下文编码模块基于BERT。我们使用前一个回合的系统话语和当前回合的用户话语作为对话上下文输入，以BERT的输入格式表示为一个令牌序列。第一个标记是[CLS]，后面是标记化的系统话语、[SEP]和标记化的用户话语。让 <img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602094749824.png" alt="image-20210602094749824" style="zoom:67%;" /> 表示输入token序列。BERT的输入层将每个令牌$x_i$嵌入到嵌入$e_i$中，这是三个嵌入的和：</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602094914746.png" alt="image-20210602094914746" style="zoom:67%;" /></p>
 <p>分别表示词嵌入，段嵌入以及位置嵌入。</p>
-<p>经过嵌入的输入序列 <img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602095132186.png" alt="image-20210602095132186" style="zoom:67%;" /> 传递给BERT的双向转换编码器，其最终隐藏状态由 <img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602095157956.png" alt="image-20210602095157956" style="zoom:67%;" /> 表示。</p>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602095216539.png" alt="image-20210602095216539" style="zoom:67%;" /></p>
-<p>上下文化的句子级表示$t<em>0$，即与[CLS]标记对应的隐藏状态，被传递给分类模块。跨度预测模块使用了上下文化的token级表示<img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602095416063.png" alt="image-20210602095416063" style="zoom:67%;" />。对话上下文编码模块中的参数，由$Φ</em>{BERT}$表示，从一个预先训练好的BERT检查点进行初始化，然后在我们的DST数据集上进行微调。</p>
+<p>经过嵌入的输入序列 <img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095132186.png" alt="image-20210602095132186" style="zoom:67%;" /> 传递给BERT的双向转换编码器，其最终隐藏状态由 <img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602095157956.png" alt="image-20210602095157956" style="zoom:67%;" /> 表示。</p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095216539.png" alt="image-20210602095216539" style="zoom:67%;" /></p>
+<p>上下文化的句子级表示$t<em>0$，即与[CLS]标记对应的隐藏状态，被传递给分类模块。跨度预测模块使用了上下文化的token级表示<img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095416063.png" alt="image-20210602095416063" style="zoom:67%;" />。对话上下文编码模块中的参数，由$Φ</em>{BERT}$表示，从一个预先训练好的BERT检查点进行初始化，然后在我们的DST数据集上进行微调。</p>
 <h3 id="Classification-Module"><a href="#Classification-Module" class="headerlink" title="Classification Module"></a>Classification Module</h3><p>分类模块的输入是来自对话上下文编码模块的句子级表示$t_0$。对于所有可信息槽S集合中的每个槽∈，分类模块使用线性预测和软最大预测s的值为三类{none、dontcare、span}之一。</p>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602095635815.png" alt="image-20210602095635815" style="zoom:67%;" /></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602095635815.png" alt="image-20210602095635815" style="zoom:67%;" /></p>
 <p>每个插槽的分类参数，由$\Phi<em>{cls}^s = { W</em>{cls}^s,b_{cls} }$表示，在我们的DST数据集上从头开始训练。</p>
 <h3 id="Span-Prediction-Module"><a href="#Span-Prediction-Module" class="headerlink" title="Span Prediction Module"></a>Span Prediction Module</h3><p>对于每个插槽$s \in S$，跨度预测模块以对话上下文编码模块的token级表示、、作为输入。每个token表示$t_i$通过一个公共层线性投影，其输出值$α_i^s$和$β_i^s$分别对应于开始位置和结束位置。然后将Softmax应用于位置值，以生成所有token上的概率分布，这样可以确定$s$的槽值跨度（开始和结束位置）。</p>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602100010320.png" alt="image-20210602100010320" style="zoom:67%;" /></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602100010320.png" alt="image-20210602100010320" style="zoom:67%;" /></p>
 <p>每个插槽的预测参数，由$\Phi<em>{span}^s = { W</em>{span}^s,b_{span}^s }$表示，在我们的DST数据集上从头开始训练。</p>
 <h3 id="Dialogue-State-Update-Mechanism"><a href="#Dialogue-State-Update-Mechanism" class="headerlink" title="Dialogue State Update Mechanism"></a>Dialogue State Update Mechanism</h3><p>为了跟踪对话状态，作者使用了一种基于规则的更新机制。如果模型对槽的预测是dontcare或span（即none以外的任何值），它将用于更新对话状态。否则，插槽的对话状态将与上一回合保持相同。</p>
 <h3 id="Parameter-Sharing"><a href="#Parameter-Sharing" class="headerlink" title="Parameter Sharing"></a>Parameter Sharing</h3><p>虽然分类和跨度预测模块是特定于插槽的（每个槽相互独立），但对话上下文编码模块生成的上下文表示可以在插槽之间共享；也就是说，可以在所有插槽的对话上下文编码模块中应用参数共享。在所有插槽中共享对话上下文编码器参数$Φ_{BERT}$不仅大大减少了模型参数的数量，还允许插槽之间的知识转移，这可能会有利于上下文关系的理解。在下面的部分中，作者将特定于插槽的BERT-DST模型的联合架构称为BERT-DST_SS 以及 编码模块参数共享为BERT-DSTPS。</p>
 <h3 id="Slot-Value-Dropout"><a href="#Slot-Value-Dropout" class="headerlink" title="Slot Value Dropout"></a>Slot Value Dropout</h3><p>为了防止模型对某些富样本插槽训练过度导致过拟合，这会对OOV插槽值上的性能造成不利损害。为了提高unseen的槽值的鲁棒性，在训练阶段，我们用特定概率的特殊[UNK]令牌替换每个目标槽值token。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>本文在四个基准数据集上评估模型：Sim-M，Sim-R，DSTC2和WOZ2.0。这些数据集的统计数据见下表：</p>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602101548261.png" alt="image-20210602101548261" style="zoom:67%;" /></p>
-<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>使用预训练的[BERT-Base，Uncased]模型，它有12个768个单元的隐藏层和12个自注意头用于小写的输入文本。插槽的跨度预测损失设置为零。总损失定义为<img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602101948822.png" alt="image-20210602101948822" style="zoom:67%;" />，其中$\mathcal{L}^{xent}$表示相应预测目标的<strong>交叉熵损失</strong>。使用<strong>ADAM优化</strong>更新了模型中的所有层，其初始学习率为2e−5，并在验证集中进行早停止(Early stop)。在训练期间，对对话上下文编码器的输出使用30%的Dropout rate。</p>
-<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602102306072.png" alt="image-20210602102306072" style="zoom:67%;" /></p>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602102435419.png" alt="image-20210602102435419" style="zoom:67%;" /></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602101548261.png" alt="image-20210602101548261" style="zoom:67%;" /></p>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><p>使用预训练的[BERT-Base，Uncased]模型，它有12个768个单元的隐藏层和12个自注意头用于小写的输入文本。插槽的跨度预测损失设置为零。总损失定义为<img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602101948822.png" alt="image-20210602101948822" style="zoom:67%;" />，其中$\mathcal{L}^{xent}$表示相应预测目标的<strong>交叉熵损失</strong>。使用<strong>ADAM优化</strong>更新了模型中的所有层，其初始学习率为2e−5，并在验证集中进行早停止(Early stop)。在训练期间，对对话上下文编码器的输出使用30%的Dropout rate。</p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102306072.png" alt="image-20210602102306072" style="zoom:67%;" /></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102435419.png" alt="image-20210602102435419" style="zoom:67%;" /></p>
 <hr>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602102351611.png" alt="image-20210602102351611" style="zoom:67%;" /></p>
-<p><img src="C:\Users\yhlin\AppData\Roaming\Typora\typora-user-images\image-20210602102506386.png" alt="image-20210602102506386" style="zoom:67%;" /></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102351611.png" alt="image-20210602102351611" style="zoom:67%;" /></p>
+<p><img src="https://hexoblog-1257022783.cos.ap-chengdu.myqcloud.com/note/image-20210602102506386.png" alt="image-20210602102506386" style="zoom:67%;" /></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>BERT-DST，一个可扩展的端到端对话状态跟踪器，以处理未知的本体和unseen的插槽值。不需要候选值，而是BERT-DST直接从对话上下文预测槽值。关键组件是BERT对话上下文编码模块，它生成从上下文模式中提取插槽的有效值。对SimM和Sim-R数据集的经验评估表明，所提出的具有<strong>槽值Dropout技术</strong>和<strong>编码器参数共享</strong>的BERT-DST模型的有效性。</p>
 
       
@@ -580,7 +580,7 @@ colortap(document.getElementById('colortap1'));
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2021/04/17/20210529%E6%B1%87%E6%8A%A5/" title="【论文笔记】Efficient Dialogue State Tracking by Selectively Overwriting Memory"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2021/04/17/20210703%E6%B1%87%E6%8A%A5/" title="【论文笔记】An End-to-end Approach for Handling Unknown Slot Values in Dialogue State Tracking"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
